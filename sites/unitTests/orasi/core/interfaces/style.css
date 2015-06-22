@@ -1,0 +1,147 @@
+#simpletable
+{
+  width:540px;
+  margin: 8px 0;  
+  border-collapse:collapse;
+  border-spacing: 1pt;
+}
+#simpletable thead
+{
+	background-color: #aaa;
+	color: #fff;
+}
+#simpletable tbody tr td 
+{
+  background-color: #eee;
+}
+#simpletable tbody tr.odd  td 
+{
+  background-color: #fff;
+}
+
+.ajax-form {width:300px;float:left}
+.ajax-form label {width: 50px;}
+.ajax-form input {}
+#ajax_response {float:left;width: 250px; padding: 7px; background-color: #f1f1f1;font-size:9pt}
+
+input.calendar,
+select.calendar {
+	width: 99px;
+}
+
+button.calendar {
+	background: url(pictures/calendar.png);
+	border: 0;
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+	margin-bottom: 2px;
+}
+button.calendar:hover,
+button.calendar.active {
+	background-position: 0 20px;
+}
+
+div.calendar {
+	background-color: #f9f9f9;
+	height: 210px;
+	padding: 0 5px;
+	text-align: center;
+	width: 147px;
+}	
+	div.calendar div {
+		background: #f9f9f9 none !important;
+		cursor: move;
+		height: 200px;
+		overflow: hidden;
+		padding-top: 10px;
+		position: relative;
+		width: 147px;
+		border: 2px solid #dedede;
+	}	
+	
+	div.calendar caption {
+		color: #333;
+		font: normal 12px/16px Arial, Helvetica, sans-serif;
+		padding-top: 6px;
+		text-align: center;
+		width: 100%;
+	}
+	div.calendar caption a {
+		cursor: pointer;
+		display: block;
+		height: 12px;
+		overflow: hidden;
+		position: absolute;
+		text-indent: -100px;
+		top: 17px;
+		width: 11px;
+	}
+	div.calendar caption a.prev {
+		background-image: url(pictures/prev.gif);
+		left: 0;
+	}
+	div.calendar caption a.next {
+		background-image: url(pictures/next.gif);
+		right: 0;
+	}
+	div.calendar caption a:hover {
+		background-position: 0 12px;
+	}
+	div.calendar caption span {
+		height: 25px;
+		position: relative;
+		text-align: center;
+	}
+	div.calendar caption span.month {
+		padding-right: 8px;
+	}
+	div.calendar caption span.month:after {
+		content: ',';
+	}
+
+	div.calendar table {
+		background: #FFF;
+		border: 0;
+		border-collapse: collapse;
+		border-spacing: 0;
+		cursor: default;
+		margin: 0 auto;
+		overflow: hidden;
+		width: 147px;
+	}
+	div.calendar td,
+	div.calendar th {
+		border: 0;
+		color: #888;
+		font: normal 12px Arial, Helvetica, sans-serif;
+		height: 21px;
+		text-align: center;
+		width: 21px;
+	}
+	div.calendar td {
+		
+		color: #eee;
+		font-size: 11px;
+	}
+	div.calendar td.invalid {
+		color: #999;
+	}
+	div.calendar td.valid {
+		
+		color: #888;
+		cursor: pointer;
+	}
+	div.calendar td.hilite {
+		background: #eee;
+	}
+	div.calendar td.inactive {
+		
+		color: #eee;
+	}
+	div.calendar td.active,
+	div.calendar td.hover {
+		background: #eee;
+		color: #444;
+		cursor: pointer;
+	}

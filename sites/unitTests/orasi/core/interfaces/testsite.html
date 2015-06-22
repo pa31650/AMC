@@ -1,0 +1,162 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+		 
+	<title>Unit test site</title>
+
+<script type="text/javascript" src="./js/modalbox.js">
+</script>
+<link rel="stylesheet" href="./css/modalbox.css" type="text/css"> 
+
+</head>
+<body>
+
+<div id="page">
+    
+  <div id="Header">
+    
+    <div id="header-bottom"></div>
+ </div>
+<div id="container"> 
+<div id="Content">
+<h1>VIP Database Test Web Application</h1>
+
+  <table border="0">
+    <tbody><tr>
+      </tr><tr>
+        </tr><tr>
+          <td></td>
+          </tr><tr>
+            </tr><tr>
+              <td>
+                <form>
+                  <table width="400">
+                    <tbody><tr>
+                      <td>
+                        <table>
+                          <tbody><tr>
+                            <td>First Name:</td>
+                            <td>
+                              <input id="FirstName" type="text">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Last Name:</td>
+                            <td>
+                              <input id="LastName" type="text">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Category:</td>
+                            <td>
+                              <select id="Category" size="3">
+                                <option value="Other" selected="">Other</option>
+                                <option value="Music">Music</option>
+                                <option value="Movie">Movie</option>
+                                <option value="Science">Science</option>
+                                <option value="Sport">Sport</option>
+                                <option value="Politics">Politics</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </tbody></table>
+                      </td>
+                      <td id="gender">
+                        <table>
+                          <tbody><tr>
+                            <td>Gender:</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <input type="radio" name="Gender" id="Gender" value="female" checked="">Female
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <input type="radio" id="Gender" name="Gender" value="male">Male
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <input id="Add" type="button" value="Add" onclick="add()">
+                                <input id="Delete" disabled="" type="button" value="Delete" onclick="del()">
+                            </td>
+                          </tr>
+                        </tbody></table>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form id="form">
+                  <table id="VIPs" width="400">
+                    <tbody><tr id="heading">
+                      <td>&nbsp;</td>
+                      <td>
+                        <b>First Name</b>
+                      </td>
+                      <td>
+                        <b>Last Name</b>
+                      </td>
+                      <td>
+                        <b>Gender</b>
+                      </td>
+                      <td>
+                        <b>Category</b>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table width="400">
+                  <tbody><tr>
+                    <td>
+                      <center>
+                        <input id="Load" type="button" value="Load" onclick="load()">
+                      </center>
+                    </td>
+                    <td>
+                      <center>
+                        <input id="Save" type="button" value="Save" onclick="save()">
+                      </center>
+                    </td>
+                    <td>
+                      <center>
+                        <input id="Clear" type="button" value="Clear" onclick="clr()">
+                      </center>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <table width="400">
+                        <tbody><tr>
+                          <td width="50" %="" align="center" id="count">VIP count: 0</td>
+                        </tr>
+                      </tbody></table>
+                    </td>
+                  </tr>
+                </tbody></table>
+              </td></tr>
+          
+        
+      
+    
+  </tbody></table>
+            
+
+</div>
+
+<div id="LeftBar"></div>
+<div style="clear:both"></div>
+</div>
+
+</div>
+</body></html>
