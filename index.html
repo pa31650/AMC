@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Selenium-Java-Core by Orasi</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Selenium-Java-Core</h1>
+        <h2>Contains the source code and jars for core functionality of the Java Selenium UI and API frameworks.</h2>
+        <a href="https://github.com/Orasi/Selenium-Java-Core" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h2>
+<a id="orasi-selenium-core-project" class="anchor" href="#orasi-selenium-core-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Orasi Selenium Core Project</h2>
+
+<p>This is the homepage for the Orasi Selenium Core libraries. These libraries contain both original code created by Orasi developers
+and open source code from various other projects which are listed further down. With these libraries, consumers have access to extended 
+functionality for creating testing suites for Web Applications and API Web Services.</p>
+
+<h2>
+<a id="web-application-testing" class="anchor" href="#web-application-testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web Application Testing</h2>
+
+<p>The core code uses the Java-based Selenium webdriver for GUI testing. It takes the standard Selenium-defined WebElement and divides them into more consumer-friendly Elements, whose names are commonly found in HTML DOMs. The following are Elements, and the prefixes used in the code to identify them, as well as examples using the naming conventions:</p>
+
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Prefix</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button</td>
+<td>btn</td>
+<td>btnContinue</td>
+</tr>
+<tr>
+<td>Checkbox</td>
+<td>chk</td>
+<td>chkAgreeToTermsAndConditions</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>lbl</td>
+<td>lblHeader</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>lnk</td>
+<td>lnkCancel</td>
+</tr>
+<tr>
+<td>Listbox</td>
+<td>lst</td>
+<td>lstStates</td>
+</tr>
+<tr>
+<td>Radiogroup</td>
+<td>rad</td>
+<td>radYesOrNo</td>
+</tr>
+<tr>
+<td>Textbox</td>
+<td>txt</td>
+<td>txtUsername</td>
+</tr>
+<tr>
+<td>Webtable</td>
+<td>tab</td>
+<td>tabMemberNames</td>
+</tr>
+<tr>
+<td>Element (Generic Web Element)</td>
+<td>ele</td>
+<td>eleImage</td>
+</tr>
+</tbody>
+</table>
+
+<p>All elements utilize the Orasi-developed <a href="https://github.com/Orasi/Selenium-Toyota-POC/blob/master/src/main/java/com/orasi/utils/TestReporter.java">TestReporter</a> which extends the <a href="https://github.com/cbeust/testng">TestNG</a> Reporter by concatenating a timestamp and HTML formatting for use in viewing the report in a web browser. This allows for a functional audit which can ensure requirements are being met by the automated test, as well as provide steps to reproduce a defect when one occurs.</p>
+
+<h2>
+<a id="api-web-service-testing" class="anchor" href="#api-web-service-testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Web Service Testing</h2>
+
+<h3>
+<a id="soap-services" class="anchor" href="#soap-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>SOAP Services</h3>
+
+<p>These libraries contain a SOAP API testing solution which leverages Java and W3C functionalities to dynamically build requests at runtime, modify the requests, transmit and receive SOAP messages, and parse responses for field-level values with which validation can be performed. </p>
+
+<h3>
+<a id="rest-services" class="anchor" href="#rest-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>REST Services</h3>
+
+<p>These libraries contain a SOAP API testing solution which leverages the Apache HttpClient libraries. Full XML and JSON support is included to parse responses for field-level values with which validation can be performed. </p>
+
+<h2>
+<a id="jenkins-build-tool" class="anchor" href="#jenkins-build-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jenkins Build Tool</h2>
+
+<p>This project is designed to have a Jenkins CI instance hook into this repository and detect when changes are pushed to the Master branch. Ideally, this trigger will be changed to look for code changes pushed by developers, thereby triggering a new build to test the new application code.</p>
+
+<h2>
+<a id="sauce-labs-remote-vm-farm" class="anchor" href="#sauce-labs-remote-vm-farm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sauce Labs Remote VM Farm</h2>
+
+<p>The capabilities of the Sauce Labs VM farm are harnessed to test the OS-Browser configurations required by the project. The Jenkins instance uses a local VM to spin up a webdriver for a test and the webdriver sends the commands to the remote VM to be executed.</p>
+
+<h2>
+<a id="reporting" class="anchor" href="#reporting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reporting</h2>
+
+<ul>
+<li><p><strong>Test NG:</strong> Contains results for individual tests using the TestNG-extended Orasi reporter.</p></li>
+<li><p><strong>Jenkins CI:</strong> Contains results for individual tests using the TestNG-extended Orasi reporter.  Also, keeps a build history to show the relative stability of past builds.</p></li>
+<li><p><strong>Allure Reports:</strong> Contains results for individual tests using Allure Reporter. Reports generate can range from Automation issues, Application issues, grouping by Features and Stories as well is high level Steps giving high level Executive Reports.  </p></li>
+<li><p><strong>Sauce Labs:</strong> Contains results for individual tests as well as captures videos and screenshots.</p></li>
+</ul>
+
+<h2>
+<a id="testenvironmentjava" class="anchor" href="#testenvironmentjava" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/utils/TestEnvironment.java">TestEnvironment.java</a>
+</h2>
+
+<p>This is a crucial class for this framework. This class is designed to be extended by page classes and implemented by test classes. It houses test environment data and remote WebDrivers as well as page class methods used to sync page behavior.  The need for this arose due to the parallel behavior that indicated that WebDriver instances were crossing threads and testing on the wrong os/browser configurations.</p>
+
+<p>Also contained in this class is the determination as to whether the test should be executed locally or remotely based on a TestNG parameter. Once this is established, a webdriver is created and executed appropriately.</p>
+
+<h2>
+<a id="page-class" class="anchor" href="#page-class" aria-hidden="true"><span class="octicon octicon-link"></span></a>Page Class</h2>
+
+<p>The Page Object Model was utilized for this core. With this framework, a single GUI web application page and all of the objects and interactions contained therein, are mapped to a single Java class. Selenium web elements for a particular page are redefined using the user-defined elements such as button, link , etc. Below is an example:</p>
+
+<pre><code>@FindBy(xpath = "//*[@id=\"tcom-main-nav\"]/ul/li[3]/button")
+private Button btnYourLocation;
+</code></pre>
+
+<p>When a page class is instantiated, all <em><a href="https://github.com/FindBy" class="user-mention">@FindBy</a></em> elements are initialized as proxies, or skeletons, which are not full objects that can be manipulated or interacted with, but do inherit all properties of a the object type (here, btnYourLocation inherits all methods and fields from the Button class). When an element is actually invoked</p>
+
+<pre><code>btnYourLocation.click();
+</code></pre>
+
+<p>Selenium grabs the actual object to allow the test/user to interact with the element.</p>
+
+<h2>
+<a id="test-class" class="anchor" href="#test-class" aria-hidden="true"><span class="octicon octicon-link"></span></a>Test Class</h2>
+
+<p>A flow through an web application is represented by a test class. Each test class is comprised of:</p>
+
+<pre><code>* TestNG annotated methods (e.g. @BeforeMethod, @Test, @AfterMethod, etc.)
+* Creation of a DataProvider method to data-drive tests     
+* Instantiation of the TestEnvironment class (i.e. create the web driver)
+* Instantiation of Page Class objects and associated methods to carry out the 
+  automated flow
+</code></pre>
+
+<h2>
+<a id="testng-xmls" class="anchor" href="#testng-xmls" aria-hidden="true"><span class="octicon octicon-link"></span></a>TestNG XMLs</h2>
+
+<p>Execution of tests is conducted through the TestNG framework which, given our Test Class framework, requires a TestNG XML.
+An example XML follows:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"&gt;
+&lt;suite name="Suite" parallel="tests" thread-count="8"&gt;
+    &lt;parameter name="browserUnderTest" value="firefox" /&gt;
+    &lt;parameter name="environment" value="staging" /&gt;
+    &lt;parameter name="runLocation" value="local" /&gt;
+    &lt;parameter name="browserVersion" value="" /&gt;
+    &lt;parameter name="operatingSystem" value="windows" /&gt;
+    &lt;test name="Test"&gt;
+        &lt;classes&gt;
+            &lt;class name="com.orasi.bluesource.features.manageEmployees.AddEmployee" /&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt; &lt;!-- Test --&gt;
+&lt;/suite&gt; &lt;!-- Suite --&gt;
+</code></pre>
+
+<p>The various parts are described below:</p>
+
+<table>
+<thead>
+<tr>
+<th>Attributes</th>
+<th>Description</th>
+<th>Acceptable Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name="AddEmployee"</td>
+<td>Contains the test suite name used by TestNG reporting</td>
+<td>Any value that helps uniquely identify the suite</td>
+</tr>
+<tr>
+<td>parallel="false"</td>
+<td>Determines what, if anything, is to be executed in parallel</td>
+<td>false, methods, tests, classes, instances</td>
+</tr>
+<tr>
+<td>parameter name="browserUnderTest" value="chrome"</td>
+<td>parameter and value used to create the driver; here, the browser type is defined</td>
+<td>Sauce Labs: safari, chrome, firefox, iexplore</td>
+</tr>
+<tr>
+<td>parameter name="environment" value=""</td>
+<td>defines a particular environment to test</td>
+<td>User-defined in <a href="https://github.com/Orasi/Java-Automation-Framework/blob/justin/src/test/resources/EnvironmentURLs.properties">EnvironmentURLs.properties</a> file</td>
+</tr>
+<tr>
+<td>parameter name="runLocation" value="local"</td>
+<td>defines the run location</td>
+<td>local or remote</td>
+</tr>
+<tr>
+<td>parameter name="browserVersion" value=""</td>
+<td>defines the browser version to use</td>
+<td>Any value available is valid; with Sauce Labs, a blank value will trigger the latest version to be used</td>
+</tr>
+<tr>
+<td>parameter name="operatingSystem" value="windows"</td>
+<td>defines the operating system to use</td>
+<td>Sauce Labs: MAC OS X 10.10, MAC OS X 10.9, Windows 7, Windows 8.1</td>
+</tr>
+<tr>
+<td>test name="AddEmployee"</td>
+<td>Contains the test name used by TestNG reporting</td>
+<td>Any value that helps uniquely identify the test and is not used by another test in the same suite.</td>
+</tr>
+<tr>
+<td>class name="com.orasi.bluesource.features.manageEmployees.AddEmployee"</td>
+<td>Path of the class to be executed</td>
+<td>User-defined and dependent of the build path</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="third-party-resources" class="anchor" href="#third-party-resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Third Party Resources</h2>
+
+<p>These resources are being used directly, or have been extended upon.</p>
+
+<ul>
+<li>
+<a href="https://github.com/SeleniumHQ/selenium">Selenium 2.46.0</a>: The base library that allows for automation of web browsers.</li>
+<li>
+<a href="https://github.com/cbeust/testng/">TestNG 6.8.21</a>: Test execution framework that extends JUnit tests and allows more flexibility for testing.</li>
+<li>
+<a href="https://github.com/SmartBear/soapui">Smartbear SoapUI 4.5.0</a>: Allows consumer to build requests files at runtime and sends request through HTTPClient</li>
+<li>
+<a href="https://github.com/saucelabs/sauce-java">Sauce Labs 2.1.18</a>: Facilitates the use of using the Sauce Lab VM farm as a remote Selenium grid on which to execute tests.</li>
+<li>
+<a href="https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/index.html">Apache HttpClient 4.3.1</a> Used to transmit and receive SOAP and REST message requests and responses.</li>
+<li>
+<a href="http://allure.qatools.ru/">Allure Reports for TestNG 1.4.13</a>: Generates high level executive reporting</li>
+</ul>
+
+<h2>
+<a id="accessing-this-module" class="anchor" href="#accessing-this-module" aria-hidden="true"><span class="octicon octicon-link"></span></a>Accessing this module</h2>
+
+<ul>
+<li><p>Clone/Fork Git repository: This will be the preferred method if the consumer does not want all the functionality of the libraries,
+                        but still wants access to some. This also allows the consumer to control what Maven dependencies are used and what functionality he wants to keep or tweak.</p></li>
+<li><p>Link Git repository as Maven Module: This method will separate the core functionality from the consumers source code. The core module
+                                    can then be pulled at any time for general updates, and allows consumers to control what updates
+                                    are allowed. This is recommended for advanced Maven and GIT users.</p></li>
+<li><p>Add as Maven Dependency: By adding the Orasi Selenium Core Jar to the Maven POM file, the consumer will always have easy access to
+                        updated code. This also allows the option for versioning in the case the consumer needs to test the core
+                        updates before fully committing to them.</p></li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Orasi/Selenium-Java-Core/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Orasi/Selenium-Java-Core/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Orasi/Selenium-Java-Core"></a> is maintained by <a href="https://github.com/Orasi">Orasi</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
