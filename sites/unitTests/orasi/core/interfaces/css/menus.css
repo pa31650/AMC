@@ -19,7 +19,7 @@
   
   #nav LI:hover UL, #nav LI.sfhover UL { left:auto; }
   #nav A {  text-decoration:none;  }
-  html* #nav UL LI A {  width:100%;  }
+  html #nav UL LI A {  width:100%;  }
   html>body #nav UL LI A {  width:auto;  }
   #nav A:hover { text-decoration:none; background: url(../images/nav-active-bg.png)  repeat-x; }
   
