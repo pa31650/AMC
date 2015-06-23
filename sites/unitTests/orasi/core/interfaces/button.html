@@ -1,9 +1,4 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
-	<link rel="stylesheet" type="text/css" href="style.css">
-		 
 	<title>Unit test site</title>
 
 <script type="text/javascript" >
@@ -11,51 +6,17 @@ function testClick(element){
 document.getElementById(element).innerHTML = "Successful";
 }
 </script>
-<link rel="stylesheet" href="./css/modalbox.css" type="text/css"> 
 
 </head>
 <body>
-
-<div id="page">
-    
-  <div id="Header">
-    
-    <div id="header-bottom"></div>
- </div>
-<div id="container"> 
 <div id="Content">
-<h1>Button test page</h1>
-
-                <table width="200">
-                  <tbody><tr>
-                    <td>
-                      <center>
-                        <input id="Load" type="button" value="Click" onclick="testClick('testClick')">
-                      </center>
-                    </td>
-                    <td>
-                      <center>
-                        <input id="Clear" type="button" value="JSClick" onclick="testClick('testJsClick')">
-                      </center>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <table width="200">
-                        <tbody><tr>
-                          <td align="center" id="testClick">Testing Click</td>
-						  <td align="center" id="testJsClick">Testing Click</td>
-                        </tr>
-                      </tbody></table>
-                    </td>
-                  </tr>
-                </tbody></table>
-            
-</div>
-
-<div id="LeftBar"></div>
-<div style="clear:both"></div>
-</div>
-
+	<form id="clickForm">
+		<input id="click" type="button" value="Click" onclick="testClick('testClick')">
+		<p id="testClick">Testing Click</p>
+	</form>
+	<form id="jsClickForm">
+		<input id="jsClick" type="button" value="JSClick" onclick="testClick('testJsClick')">
+		<p id="testJsClick">Testing Click</p>
+	</form>
 </div>
 </body></html>
