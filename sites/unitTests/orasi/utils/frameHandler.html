@@ -3,13 +3,13 @@
 <head>
 <title>HTML Target Frames</title>
 </head>
-<frameset cols="200, *">
-   <frame src="./framesHtml/menu.htm" name="menu_page" />
-   <frame src="./framesHtml/test.html" name="main_page" />
-   <noframes>
-   <body>
-      Your browser does not support frames.
-   </body>
-   </noframes>
+
+
+<frameset rows="16%,84%">
+	<frame src="./framesHtml/top.htm" name="top_page" >
+	<frameset cols="50%,50%">
+		<frame src="./framesHtml/menu.htm" name="menu_page" >
+		<frame src="./framesHtml/test.html" name="main_page" >
+	</frameset>
 </frameset>
 </html>
