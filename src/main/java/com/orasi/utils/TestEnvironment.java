@@ -88,10 +88,8 @@ public class TestEnvironment {
      */
     
     protected SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
-	    Base64Coder.decodeString(appURLRepository
-		    .getString("SAUCELABS_USERNAME")),
-	    Base64Coder.decodeString(appURLRepository
-		    .getString("SAUCELABS_KEY")));
+	    Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_USERNAME")),
+	    Base64Coder.decodeString(appURLRepository.getString("SAUCELABS_KEY")));
     
     
     protected String sauceLabsURL = "http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub";
@@ -167,12 +165,10 @@ public class TestEnvironment {
      */
     protected void setBrowserVersion(String bv) {
 	if (bv.equalsIgnoreCase("jenkinsParameter")) {
-	    if (System.getProperty("jenkinsBrowserVersion") == null
-		    || System.getProperty("jenkinsBrowserVersion") == "null") {
+	    if (System.getProperty("jenkinsBrowserVersion") == null || System.getProperty("jenkinsBrowserVersion") == "null") {
 		this.browserVersion = "";
 	    } else {
-		this.browserVersion = System.getProperty(
-			"jenkinsBrowserVersion").trim();
+		this.browserVersion = System.getProperty("jenkinsBrowserVersion").trim();
 	    }
 	} else {
 	    this.browserVersion = bv;
@@ -188,8 +184,7 @@ public class TestEnvironment {
      */
     protected void setOperatingSystem(String os) {
 	if (os.equalsIgnoreCase("jenkinsParameter")) {
-	    this.operatingSystem = System.getProperty("jenkinsOperatingSystem")
-		    .trim();
+	    this.operatingSystem = System.getProperty("jenkinsOperatingSystem").trim();
 	} else {
 	    this.operatingSystem = os;
 	}
@@ -317,11 +312,9 @@ public class TestEnvironment {
 
     private void launchApplication() {
  	if (this.getTestEnvironment().isEmpty()) {
- 	   launchApplication(appURLRepository.getString(getApplicationUnderTest()
- 		    .toUpperCase()));
+ 	   launchApplication(appURLRepository.getString(getApplicationUnderTest().toUpperCase()));
  	} else {
- 	   launchApplication(appURLRepository.getString(getApplicationUnderTest()
- 		    .toUpperCase() + "_" + getTestEnvironment().toUpperCase()));
+ 	   launchApplication(appURLRepository.getString(getApplicationUnderTest().toUpperCase() + "_" + getTestEnvironment().toUpperCase()));
  	}
      }
     
@@ -418,24 +411,16 @@ public class TestEnvironment {
 
 	    switch (getOperatingSystem().toLowerCase().trim().replace(" ", "")) {
 	    case "windows":
-		if (getBrowserUnderTest().equalsIgnoreCase("Firefox")
-			|| getBrowserUnderTest().equalsIgnoreCase("FF")) {
+		if (getBrowserUnderTest().equalsIgnoreCase("Firefox")|| getBrowserUnderTest().equalsIgnoreCase("FF")) {
 		    caps =DesiredCapabilities.firefox();
 		}
 		// Internet explorer
-		else if (getBrowserUnderTest().equalsIgnoreCase("IE")
-			|| getBrowserUnderTest().replace(" ", "")
-				.equalsIgnoreCase("internetexplorer")) {
+		else if (getBrowserUnderTest().equalsIgnoreCase("IE")|| getBrowserUnderTest().replace(" ", "").equalsIgnoreCase("internetexplorer")) {
 		    caps = DesiredCapabilities.internetExplorer();
 		    caps.setCapability("ignoreZoomSetting", true);
 		    caps.setCapability("enablePersistentHover", false);
-		    file = new File(this
-			    .getClass()
-			    .getResource(
-				    Constants.DRIVERS_PATH_LOCAL
-					    + "IEDriverServer.exe").getPath());
-		    System.setProperty("webdriver.ie.driver",
-			    file.getAbsolutePath());
+		    file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL+ "IEDriverServer.exe").getPath());
+		    System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 		    caps =DesiredCapabilities.internetExplorer();
 			   
 		}
@@ -451,10 +436,10 @@ public class TestEnvironment {
 		    caps = DesiredCapabilities.htmlUnitWithJs();
 		}
 		else if (getBrowserUnderTest().equalsIgnoreCase("phantom")||getBrowserUnderTest().equalsIgnoreCase("phantomjs")) {
-			    caps = DesiredCapabilities.phantomjs();
-			    file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL+ "phantomjs.exe").getPath());
-			    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY , file.getAbsolutePath());
-			    driver = new OrasiDriver(caps);
+		    caps = DesiredCapabilities.phantomjs();
+		    file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL+ "phantomjs.exe").getPath());
+		    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY , file.getAbsolutePath());
+		    driver = new OrasiDriver(caps);
 			
 		}
 		// Safari
@@ -478,35 +463,23 @@ public class TestEnvironment {
 			   
 		}
 		// Internet explorer
-		else if (getBrowserUnderTest().equalsIgnoreCase("IE")
-			|| getBrowserUnderTest().replace(" ", "")
-				.equalsIgnoreCase("internetexplorer")) {
-		    throw new RuntimeException(
-			    "Currently there is no support for IE with Mac OS.");
+		else if (getBrowserUnderTest().equalsIgnoreCase("IE")|| getBrowserUnderTest().replace(" ", "").equalsIgnoreCase("internetexplorer")) {
+		    throw new RuntimeException("Currently there is no support for IE with Mac OS.");
 		}
 		// Chrome
 		else if (getBrowserUnderTest().equalsIgnoreCase("Chrome")) {
-		    file = new File(this
-			    .getClass()
-			    .getResource(
-				    Constants.DRIVERS_PATH_LOCAL
-					    + "mac/chromedriver").getPath());
-		    System.setProperty("webdriver.chrome.driver",
-			    file.getAbsolutePath());
+		    file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "mac/chromedriver").getPath());
+		    System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 		    try {
 			// Ensure the permission on the driver include
 			// executable permissions
-			Process proc = Runtime
-				.getRuntime()
-				.exec(new String[] { "/bin/bash", "-c",
-					"chmod 777 " + file.getAbsolutePath() });
+			Process proc = Runtime.getRuntime().exec(new String[] { "/bin/bash", "-c","chmod 777 " + file.getAbsolutePath() });
 			proc.waitFor();
 			 caps =DesiredCapabilities.chrome();
 			   
 		    } catch (IllegalStateException ise) {
 			ise.printStackTrace();
-			throw new IllegalStateException(
-				"This has been seen to occur when the chromedriver file does not have executable permissions. In a terminal, navigate to the directory to which Maven pulls the drivers at runtime (e.g \"/target/classes/drivers/\") and execute the following command: chmod +rx chromedriver");
+			throw new IllegalStateException("This has been seen to occur when the chromedriver file does not have executable permissions. In a terminal, navigate to the directory to which Maven pulls the drivers at runtime (e.g \"/target/classes/drivers/\") and execute the following command: chmod +rx chromedriver");
 		    } catch (IOException ioe) {
 			ioe.printStackTrace();
 		    } catch (InterruptedException ie) {
@@ -528,9 +501,8 @@ public class TestEnvironment {
 		break;
 	    case "linux":
 		if (getBrowserUnderTest().equalsIgnoreCase("html")) {
-			    caps =DesiredCapabilities.htmlUnitWithJs();		   
-		}else if (getBrowserUnderTest().equalsIgnoreCase("Firefox")
-			|| getBrowserUnderTest().equalsIgnoreCase("FF")) {
+		    caps =DesiredCapabilities.htmlUnitWithJs();		   
+		}else if (getBrowserUnderTest().equalsIgnoreCase("Firefox")|| getBrowserUnderTest().equalsIgnoreCase("FF")) {
 		    caps =DesiredCapabilities.firefox();
 		}
 	    default:
@@ -540,17 +512,13 @@ public class TestEnvironment {
 	    setDriver(new OrasiDriver(caps));
 	    // Code for running on the selenium grid
 	} else if ( getRunLocation().equalsIgnoreCase("grid")) {
-	    caps.setCapability(CapabilityType.BROWSER_NAME,
-		    getBrowserUnderTest());
+	    caps.setCapability(CapabilityType.BROWSER_NAME, getBrowserUnderTest());
 	    if (getBrowserVersion() != null) {
-		caps.setCapability(CapabilityType.VERSION,
-			getBrowserVersion());
+		caps.setCapability(CapabilityType.VERSION, getBrowserVersion());
 	    }
 	    
-	    caps.setCapability(CapabilityType.PLATFORM,
-		    getGridPlatformByOS(getOperatingSystem()));
-	    if (getBrowserUnderTest().toLowerCase().contains("ie")
-		    || getBrowserUnderTest().toLowerCase().contains("iexplore")) {
+	    caps.setCapability(CapabilityType.PLATFORM, getGridPlatformByOS(getOperatingSystem()));
+	    if (getBrowserUnderTest().toLowerCase().contains("ie") || getBrowserUnderTest().toLowerCase().contains("iexplore")) {
 		caps.setCapability("ignoreZoomSetting", true);
 	    }
 	    
@@ -564,17 +532,13 @@ public class TestEnvironment {
 	} else if (getRunLocation().equalsIgnoreCase("remote") | getRunLocation().equalsIgnoreCase("sauce")) {
 	
 	    caps = new DesiredCapabilities();
-	    caps.setCapability(CapabilityType.BROWSER_NAME,
-			    getBrowserUnderTest());
-		    if (getBrowserVersion() != null) {
-			caps.setCapability(CapabilityType.VERSION,
-				getBrowserVersion());
-		    }
-		    caps.setCapability(CapabilityType.PLATFORM,
-			    getOperatingSystem());
+	    caps.setCapability(CapabilityType.BROWSER_NAME, getBrowserUnderTest());
+	    if (getBrowserVersion() != null) {
+		caps.setCapability(CapabilityType.VERSION,getBrowserVersion());
+		}
+	    caps.setCapability(CapabilityType.PLATFORM, getOperatingSystem());
 	    
-	    if (getBrowserUnderTest().toLowerCase().contains("ie")
-		    || getBrowserUnderTest().toLowerCase().contains("iexplore")) {
+	    if (getBrowserUnderTest().toLowerCase().contains("ie") || getBrowserUnderTest().toLowerCase().contains("iexplore")) {
 		caps.setCapability("ignoreZoomSetting", true);
 	    }
 	    
