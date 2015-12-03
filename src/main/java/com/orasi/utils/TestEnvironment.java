@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 
 import org.json.simple.JSONArray;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
@@ -448,15 +450,13 @@ public class TestEnvironment {
 		else if (getBrowserUnderTest().equalsIgnoreCase("html")) {
 		    caps = DesiredCapabilities.htmlUnitWithJs();
 		}
-		/*else if (getBrowserUnderTest().equalsIgnoreCase("phantom")) {
+		else if (getBrowserUnderTest().equalsIgnoreCase("phantom")||getBrowserUnderTest().equalsIgnoreCase("phantomjs")) {
 			    caps = DesiredCapabilities.phantomjs();
-			    caps.setCapability("ignoreZoomSetting", true);
-			    caps.setCapability("enablePersistentHover", false);
 			    file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL+ "phantomjs.exe").getPath());
 			    caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY , file.getAbsolutePath());
-			    driver = new PhantomJSDriver(caps);
+			    driver = new OrasiDriver(caps);
 			
-		}*/
+		}
 		// Safari
 		else if (getBrowserUnderTest().equalsIgnoreCase("safari")) {
 		    caps =DesiredCapabilities.safari();
