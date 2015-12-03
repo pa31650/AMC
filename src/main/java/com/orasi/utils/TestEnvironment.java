@@ -577,6 +577,13 @@ public class TestEnvironment {
 		    || getBrowserUnderTest().toLowerCase().contains("iexplore")) {
 		caps.setCapability("ignoreZoomSetting", true);
 	    }
+	    
+	    if (getBrowserUnderTest().toLowerCase().contains("android") ){
+
+		caps.setCapability("appiumVersion", "1.4.15");
+		
+	    }
+	    
 	    caps.setCapability("name", getTestName());
 	    URL sauceURL = null;
 	    try {
