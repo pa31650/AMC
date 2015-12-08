@@ -58,6 +58,8 @@
 						<jenkinsBrowser>${browser}</jenkinsBrowser>
 						<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
 						<jenkinsRunLocation>${runLocation}</jenkinsRunLocation>
+						<jenkinsDeviceName>${deviceName}</jenkinsDeviceName>
+						<jenkinsDeviceOrientation>${deviceOrientation}</jenkinsDeviceOrientation>
 					</systemPropertyVariables>
 				</configuration>
 				<dependencies>

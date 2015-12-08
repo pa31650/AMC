@@ -45,6 +45,8 @@ public class TestEnvironment {
     protected String operatingSystem = "";
     protected String runLocation = "";
     protected String environment = "";
+    protected String deviceName = "";
+    protected String deviceOrientation = "";
     protected String testName = "";
     protected String pageUrl = "";
     /*
@@ -192,6 +194,26 @@ public class TestEnvironment {
 
     public String getOperatingSystem() {
 	return operatingSystem;
+    }
+    
+    public String getDeviceName(){
+	return deviceName;
+    }
+    
+    public void setDeviceName(String deviceName){
+	this.deviceName = deviceName;
+    }
+    
+    public String getDeviceOrientation(){
+	return deviceOrientation;
+    }
+    
+    public void setDeviceOrientation(String deviceOrientation){
+	if(deviceOrientation.equalsIgnoreCase("portrait") ||deviceOrientation.equalsIgnoreCase("landscape")) {
+	    this.deviceOrientation = deviceOrientation;
+	}else{
+	    throw new RuntimeException("Parameter deviceOrientation only accepts 'portrait' or 'landscape' as a value");
+	}
     }
 
     /*
@@ -543,9 +565,11 @@ public class TestEnvironment {
 	    }
 	    
 	    if (getBrowserUnderTest().toLowerCase().contains("android") ){
-
-		caps.setCapability("appiumVersion", "1.4.15");
-		
+		caps.setCapability("deviceName",getDeviceName());
+		caps.setCapability("deviceOrientation", getDeviceOrientation());
+		caps.setCapability("browserName", getBrowserUnderTest());
+		caps.setCapability("platform", "Linux");
+		caps.setCapability("version", getBrowserVersion());
 	    }
 	    
 	    caps.setCapability("name", getTestName());
@@ -566,11 +590,11 @@ public class TestEnvironment {
 		    "Parameter for run [Location] was not set to 'Local', 'Grid', 'Sauce', or 'Remote'");
 	}
  
-	getDriver().setElementTimeout(Constants.ELEMENT_TIMEOUT);
-	getDriver().setPageTimeout(Constants.PAGE_TIMEOUT);
-	getDriver().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
+	driver.setElementTimeout(Constants.ELEMENT_TIMEOUT);
+	driver.setPageTimeout(Constants.PAGE_TIMEOUT);
+	driver.setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
 	//setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
-	if (!getBrowserUnderTest().toLowerCase().contains("edge")){
+	if (!getBrowserUnderTest().toLowerCase().contains("edge") && !getBrowserUnderTest().toLowerCase().contains("android")){
 	    getDriver().manage().deleteAllCookies();
 	    getDriver().manage().window().maximize();
 	}

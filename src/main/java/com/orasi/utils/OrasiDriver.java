@@ -108,8 +108,8 @@ public class OrasiDriver implements WebDriver,   JavaScriptExecutor, TakesScreen
     }
     
     public void setPageTimeout(int timeout, TimeUnit timeUnit){
-	if (driver instanceof SafariDriver || driver.toString().contains("safari")){
-	    System.out.println("SafariDriver does not support pageLoadTimeout");
+	if (driver instanceof SafariDriver || driver.toString().contains("safari")|| driver.toString().contains("android")){
+	    System.out.println("This driver does not support pageLoadTimeout");
 	}else{
 	    this.currentPageTimeout = timeout;
 	    driver.manage().timeouts().pageLoadTimeout(timeout, timeUnit);
