@@ -17,15 +17,17 @@ public class TestTextbox extends TestEnvironment{
     
     @BeforeTest(groups ={"regression", "interfaces", "textbox", "dev"})
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+	    "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
 	setApplicationUnderTest("Test Site");
 	setBrowserUnderTest(browserUnderTest);
 	setBrowserVersion(browserVersion);
 	setOperatingSystem(operatingSystem);
 	setRunLocation(runLocation);
 	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
 	setPageURL("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/core/interfaces/textbox.html");
 	testStart("TestTextbox");
     }

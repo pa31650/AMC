@@ -1,45 +1,52 @@
 package com.orasi.utils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import com.orasi.core.by.angular.ByNG;
-import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.impl.ElementImpl;
+import com.orasi.utils.OrasiDriver;
+import com.orasi.utils.TestEnvironment;
+import com.orasi.utils.TestReporter;
 
 public class Sandbox2 extends TestEnvironment{
-
-    @BeforeTest(groups ={"regression", "utils", "dev"})
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
-    public void setup() {
-	setApplicationUnderTest("Test Site");
-	setBrowserUnderTest("firefox");
-	setBrowserVersion("");
-	setOperatingSystem("windows");
-	setRunLocation("local");
-	setTestEnvironment("");
-	setPageURL("http://bluesourcestaging.herokuapp.com");
-	testStart("TestAlert");
-    }
+    OrasiDriver driver = null;
     @Test
-    public void test(){
+    public void main() throws MalformedURLException{
 	TestReporter.setPrintToConsole(true);
-	System.out.println(driver.getDriverCapability().browserName());
-	System.out.println(driver.getDriverCapability().browserVersion());
-	System.out.println(driver.getDriverCapability().platformOS());
-	
-	Textbox username = driver.findTextbox(By.id("employee_username"));
-	username.set("company.admin");
-	
-	//new ElementImpl(getDriver().findElement(By.id("employee_username"))).sendKeys("TESTING");
-	driver.findTextbox(By.name("employee[password]")).syncEnabled();
-	driver.findTextbox(By.name("employee[password]")).set("test");
-	
-	driver.findButton(ByNG.buttonText("Login")).click();
-	
+	DesiredCapabilities caps = DesiredCapabilities.android();
+	caps.setCapability("deviceName","Samsung Galaxy Note 10.1 Emulator");
+	caps.setCapability("deviceOrientation", "portrait");
+	caps.setCapability("browserName", "Android");
+	caps.setCapability("platform", "Linux");
+	caps.setCapability("version", "4.1");
+	/*DesiredCapabilities caps = DesiredCapabilities.iphone();
+	caps.setCapability("appiumVersion", "1.4.15");
+	caps.setCapability("deviceName","iPad Air");
+	caps.setCapability("deviceOrientation", "portrait");
+	caps.setCapability("platformVersion","9.1");
+	caps.setCapability("platformName", "iOS");
+	caps.setCapability("browserName", "Safari");*/
+	    
+	    
+	    caps.setCapability("name", "Android - Samsung Galaxy Note 10.1 Emulator");
+	    driver = new OrasiDriver(caps, new URL(sauceLabsURL));
+	    driver.setElementTimeout(10);
+	    
+	    driver.get("https://bluesourcestaging.herokuapp.com/");
+	    
+	    driver.findTextbox(By.id("employee_username")).set("company.admin");
+	    driver.findTextbox(By.id("employee_password")).set("blah");
+	    driver.findButton(By.xpath("//input[@value='Login']")).click();
+	    
+	    driver.findLink(By.xpath("//a[text() = 'Logout']")).syncPresent();
+	    System.out.println();
+    }
+    @AfterTest
+    public void tearDown(){
 	driver.quit();
     }
 }

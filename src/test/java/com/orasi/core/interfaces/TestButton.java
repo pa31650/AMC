@@ -18,15 +18,17 @@ import com.orasi.utils.TestEnvironment;
 
 public class TestButton extends TestEnvironment{
     @BeforeTest(groups ={"regression", "interfaces", "button", "dev"})
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
-	setApplicationUnderTest("Test App");
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
+	setApplicationUnderTest("Test Site");
 	setBrowserUnderTest(browserUnderTest);
 	setBrowserVersion(browserVersion);
 	setOperatingSystem(operatingSystem);
 	setRunLocation(runLocation);
+	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
 	setPageURL("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/core/interfaces/button.html");	
 	setTestEnvironment(environment);
 	testStart("TestButton");

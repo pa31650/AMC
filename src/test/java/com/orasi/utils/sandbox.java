@@ -1,5 +1,7 @@
 package com.orasi.utils;
 
+import org.openqa.selenium.By;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
@@ -9,34 +11,33 @@ import org.testng.annotations.Test;
 public class sandbox extends TestEnvironment{
     @BeforeTest(groups ={"regression", "utils", "dev"})
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+	    "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, String deviceName, String deviceOrientation) {
 	setApplicationUnderTest("Test Site");
 	setBrowserUnderTest(browserUnderTest);
 	setBrowserVersion(browserVersion);
 	setOperatingSystem(operatingSystem);
 	setRunLocation(runLocation);
 	setTestEnvironment(environment);
-	//setPageURL("http://toyota-oss:changeit@origin.staging.toyota.com/");
-	setPageURL("http://origin.staging.toyota.com/");
-	testStart("TestAlert");
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
+	setPageURL("https://bluesourcestaging.herokuapp.com/");
+	testStart("TestAppium");
     }
     
     @AfterTest(groups ={"regression", "utils", "dev"})
-    public void close(){
-	endTest("TestAlert");
+    public void close(ITestContext context){
+	endTest("TestAppium",context);
     }
     
     @Test(groups ={"regression", "utils", "dev"})
     public void isAlertPresent(){
-	Sleeper.sleep(3000);
-/*	Actions action = new Actions(getDriver());
-	action.sendKeys("toyota-oss");
-	action.sendKeys(Keys.TAB);
-	action.sendKeys("changeit");
-	action.sendKeys(Keys.ENTER);*/
-	driver.switchTo().defaultContent();
-	System.out.println(AlertHandler.isAlertPresent(driver, 2));
+	
+	driver.findTextbox(By.id("employee_username")).set("company.admin");
+	driver.findTextbox(By.id("employee_password")).set("blah");
+	driver.findButton(By.xpath("//input[@value='Login']")).click();
+	   
+	driver.findLink(By.xpath("//a[text() = 'Logout']")).syncPresent();
     }
 }

@@ -57,12 +57,15 @@ public class TestOrasiDriver{
     String browserVersion = "";
     String operatingSystem = "";
     String environment = "";
+    String deviceName = "";
+    String deviceOrientation= "";
     
     @BeforeTest(groups ={"regression", "utils", "orasidriver"})
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+	    "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
+	
 	if (browserUnderTest.equalsIgnoreCase("jenkinsParameter")) {
 	    this.browserUnderTest = System.getProperty("jenkinsBrowser").trim();
 	} else{
@@ -87,6 +90,19 @@ public class TestOrasiDriver{
 	    this.runLocation = runLocation;
 	}    
 	
+
+	if (runLocation.equalsIgnoreCase("jenkinsParameter")) {
+	    deviceName = System.getProperty("jenkinsDeviceNameLocation").trim();
+	} else{
+	    this.deviceName = deviceName;
+	}    
+	
+
+	if (deviceOrientation.equalsIgnoreCase("jenkinsParameter")) {
+	    deviceOrientation = System.getProperty("jenkinsDeviceOrientationLocation").trim();
+	} else{
+	    this.runLocation = deviceOrientation;
+	}    
 	this.environment = environment;
 	caps = new DesiredCapabilities();
 	caps.setCapability("ignoreZoomSetting", true);

@@ -21,20 +21,21 @@ import com.orasi.utils.TestEnvironment;
 
 public class TestByAngular extends TestEnvironment{
 	@BeforeTest(groups ={"regression", "interfaces", "ByAngularModel", "dev"})
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, String deviceName, String deviceOrientation) {
+	setApplicationUnderTest("Test Site");
+	setBrowserUnderTest(browserUnderTest);
+	setBrowserVersion(browserVersion);
+	setOperatingSystem(operatingSystem);
+	
+	if(getBrowserUnderTest().toLowerCase().equals("html") || getBrowserUnderTest().isEmpty() ) throw new SkipException("Test not valid for HTMLUnitDriver");
 		
-		setApplicationUnderTest("Test App");
-		setBrowserUnderTest(browserUnderTest);
-		setBrowserVersion(browserVersion);
-		setOperatingSystem(operatingSystem);
-		if(getBrowserUnderTest().toLowerCase().equals("html") || getBrowserUnderTest().isEmpty() ) throw new SkipException("Test not valid for HTMLUnitDriver");
-		
-		setRunLocation(runLocation);
-		setPageURL("http://cafetownsend-angular-rails.herokuapp.com/login");	
-		setTestEnvironment(environment);
+	setRunLocation(runLocation);
+	setPageURL("http://cafetownsend-angular-rails.herokuapp.com/login");	
+	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
 		testStart("TestByAngularModel");
 	}
     
