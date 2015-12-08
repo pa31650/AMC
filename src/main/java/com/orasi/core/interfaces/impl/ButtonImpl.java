@@ -20,10 +20,12 @@ public class ButtonImpl extends ElementImpl implements Button {
      */
     public ButtonImpl(WebElement element) {
         super(element);
+        this.elementType = "Button";
     }
     
     public ButtonImpl(WebElement element, OrasiDriver driver) {
         super(element, driver);
+        this.elementType = "Button";
     }
     
     

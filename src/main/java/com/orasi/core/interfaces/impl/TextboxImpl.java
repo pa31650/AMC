@@ -22,10 +22,12 @@ public class TextboxImpl extends ElementImpl implements Textbox {
      */
     public TextboxImpl(WebElement element) {
     	super(element);
+    	 this.elementType = "Textbox";
     }
     
     public TextboxImpl(WebElement element, OrasiDriver driver) {
         super(element, driver);
+        this.elementType = "Textbox";
     }
 
     /**
@@ -56,8 +58,9 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 			try {
 				getWrappedElement().clear();
 				getWrappedElement().sendKeys(text);
+				TestReporter.interfaceLog("Set string [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b>  ]");
 				} catch (RuntimeException rte) {
-				TestReporter.interfaceLog("Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b>  ]", true);
+				TestReporter.interfaceLog("Set string [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b>  ]", true);
 				throw rte;
 			}
 		} else {

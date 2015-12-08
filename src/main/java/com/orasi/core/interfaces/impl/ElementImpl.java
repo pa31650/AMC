@@ -41,6 +41,7 @@ public class ElementImpl implements Element {
 
     protected WebElement element;
     protected OrasiDriver driver;
+    protected String elementType;
     private java.util.Date date = new java.util.Date();
     private java.util.Date dateAfter = new java.util.Date();
     private StopWatch stopwatch = new StopWatch();
@@ -64,12 +65,9 @@ public class ElementImpl implements Element {
 	try {
 	    getWrappedElement().click();
 	} catch (RuntimeException rte) {
-	    TestReporter
-		    .interfaceLog("Clicked [ <font size = 2 color=\"red\"><b>@FindBy: "
-			    + getElementLocatorInfo() + " </font></b>]");
+	    TestReporter.interfaceLog("Clicked [ <font size = 2 color=\"red\"><b>@FindBy: " + getElementLocatorInfo() + " </font></b>]");
 	}
-	TestReporter.interfaceLog("Clicked [ <b>@FindBy: "
-		+ getElementLocatorInfo() + " </b>]");
+	TestReporter.interfaceLog("Clicked [ <b>@FindBy: "+ getElementLocatorInfo() + " </b>]");
     }
 
     public void jsClick() {
@@ -211,7 +209,7 @@ public class ElementImpl implements Element {
     @Override
     public void clear() {
     	getWrappedElement().clear();
-	TestReporter.interfaceLog(" Clear text from Element [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]");
+    	TestReporter.interfaceLog(" Clear text from " + elementType + " [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]");
     }
 
     /**
@@ -221,7 +219,7 @@ public class ElementImpl implements Element {
     public void sendKeys(CharSequence... keysToSend) {
 	if (keysToSend.toString() != "") {
 		getWrappedElement().sendKeys(keysToSend);
-	    TestReporter.interfaceLog(" Send Keys [ <b>"   + keysToSend[0].toString()  + "</b> ] to Textbox [ <b>@FindBy: "   + getElementLocatorInfo() + " </b> ]");
+	     TestReporter.interfaceLog(" Send Keys [ <b>"   + keysToSend[0].toString()  + "</b> ] to " + elementType + " [ <b>@FindBy: "   + getElementLocatorInfo() + " </b> ]");
 	}
     }
 
