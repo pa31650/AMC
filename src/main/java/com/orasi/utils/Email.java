@@ -1,6 +1,8 @@
 package com.orasi.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -17,7 +19,10 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.search.ComparisonTerm;
 import javax.mail.search.FlagTerm;
+import javax.mail.search.ReceivedDateTerm;
+import javax.mail.search.SentDateTerm;
 
 /**
  * This class is used to send and receive email messages
@@ -41,22 +46,28 @@ public class Email {
 	 * @param toAddress String - The Email address the message will be sent to.
 	 * @param subjectLine String - The Subject Line of the email.
 	 * @param messageBody String - The body of the email.  Supports basic html formatting.
-	 * @return
+	 * @return boolean - Whether or not the email was sent.
+	 * @author michael.simpkins
 	 */
 	public boolean Send(String toAddress,String subjectLine,String messageBody){
 		
-    	getMailSession = Session.getInstance(SMTPServerProperties, null);
-
+    	Transport transport = null;
+		try {
+	    	getMailSession = Session.getInstance(SMTPServerProperties, null);
+			transport = getMailSession.getTransport("smtp");
+	        transport.connect(smtpServer,emailUsername,emailPassword);
+		} catch (Exception e1) {
+				e1.printStackTrace();
+		}
+        
         try {
             Message msg = new MimeMessage(getMailSession);
             msg.setFrom(new InternetAddress(emailUsername, "Orasi Selenium"));
             msg.addRecipient(Message.RecipientType.TO,new InternetAddress(toAddress, "User"));
             msg.setSubject(subjectLine);
+            msg.setSentDate(new Date());
             msg.setContent(messageBody, "text/html");
             
-            Transport transport = getMailSession.getTransport("smtp");
-            
-            transport.connect(smtpServer,emailUsername,emailPassword);
             transport.sendMessage(msg,msg.getAllRecipients());
             transport.close();
         } catch (AddressException e) {
@@ -73,22 +84,58 @@ public class Email {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This Method is used to get all unread e-mails from the server.
+	 * @return Message[] - An array of message objects
+	 * @author michael.simpkins
 	 */
-	public boolean Receive(){
+	public Message[] getUnreadEmails(){
 		
 		Store store = null;
+		Message[] messages = null;
 		//Create connection
 		try {
-			//IMAPServerProperties.setProperty("mail.store.protocol", "imaps");
-			getMailSession = Session.getInstance(IMAPServerProperties, null);
+			getMailSession = Session.getDefaultInstance(IMAPServerProperties, null);
 			store = getMailSession.getStore("imaps");
 	        store.connect(imapServer,emailUsername,emailPassword);
 		} catch (Exception e) {
-			//POP3ServerProperties.setProperty("mail.store.protocol", "pop3s");
-			getMailSession = Session.getInstance(POP3ServerProperties, null);
 			try {
+				getMailSession = Session.getDefaultInstance(POP3ServerProperties, null);
+				store = getMailSession.getStore("pop3");
+				store.connect(pop3Server,emailUsername,emailPassword);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		//Get Unread Emails
+        try {
+            Folder inbox = store.getFolder("INBOX");
+            inbox.open(Folder.READ_ONLY);
+            //Get unread messages
+            messages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
+        } catch (Exception mex) {
+            mex.printStackTrace();
+            return null;
+        }
+        return messages;
+	}
+	/**
+	 * This Method is used to get all e-mails sent in the last x minutes.
+	 * @param minutesAgo int - The number of minutes in the past you wish to retrieve e-mails for.
+	 * @return Message[] - An array of message objects
+	 * @author michael.simpkins
+	 */
+	public Message[] getEmailsByTime(int minutesAgo){
+		
+		Store store = null;
+		Message[] messages = null;
+		//Create connection
+		try {
+			getMailSession = Session.getDefaultInstance(IMAPServerProperties, null);
+			store = getMailSession.getStore("imaps");
+	        store.connect(imapServer,emailUsername,emailPassword);
+		} catch (Exception e) {
+			try {
+				getMailSession = Session.getDefaultInstance(POP3ServerProperties, null);
 				store = getMailSession.getStore("pop3");
 				store.connect(pop3Server,emailUsername,emailPassword);
 			} catch (Exception e1) {
@@ -96,27 +143,25 @@ public class Email {
 			}
 	        
 		}
-		//Read Emails
+		//Get Inbox Emails
         try {
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_ONLY);
             //Get unread messages
-            Message messages[] = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
-            //for (Message unreadMessage : messages) {
-                
-           // }
+            messages = inbox.search(new SentDateTerm(ComparisonTerm.GT,new Date(new Date().getTime() - minutesAgo * 60 * 1000)));
 
         } catch (Exception mex) {
             mex.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+        return messages;
 	}
 	/**
 	 * The Method is used to configure the SMTP connection settings
 	 * @param port Int - The port to connect to (eg. 25,465,587) 
 	 * @param auth Boolean - If the server requires user to authenticate before sending a message. (Usually true)
 	 * @param tlsEnabled Boolean - Whether to enable TLS 
+	 * @author michael.simpkins
 	 */
 	public void configureSMTPProperties(int port, boolean auth, boolean tlsEnabled){
 		SMTPServerProperties = System.getProperties();
@@ -130,6 +175,7 @@ public class Email {
 	 * @param port Int - The port to connect to (eg. 25,465,587) 
 	 * @param auth Boolean - If the server requires user to authenticate before sending a message. (Usually true)
 	 * @param tlsEnabled Boolean - Whether to enable TLS 
+	 * @author michael.simpkins
 	 */
 	public void configureIMAPProperties(int port, boolean auth, boolean tlsEnabled){
 		IMAPServerProperties = System.getProperties();
@@ -143,6 +189,7 @@ public class Email {
 	 * @param port Int - The port to connect to (eg. 25,465,587) 
 	 * @param auth Boolean - If the server requires user to authenticate before sending a message. (Usually true)
 	 * @param tlsEnabled Boolean - Whether to enable TLS 
+	 * @author michael.simpkins
 	 */
 	public void configurePOP3Properties(int port, boolean auth, boolean tlsEnabled){
 		POP3ServerProperties = System.getProperties();
