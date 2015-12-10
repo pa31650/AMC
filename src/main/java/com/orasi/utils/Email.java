@@ -1,7 +1,6 @@
 package com.orasi.utils;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
@@ -19,8 +18,10 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.search.AddressTerm;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.FlagTerm;
+import javax.mail.search.FromTerm;
 import javax.mail.search.ReceivedDateTerm;
 import javax.mail.search.SentDateTerm;
 
@@ -33,8 +34,8 @@ public class Email {
 	public String smtpServer = "mailtrap.io";
 	public String imapServer = "mailtrap.io";
 	public String pop3Server = "mailtrap.io";
-	public String emailUsername = "";
-	public String emailPassword = "";
+	public String emailUsername = "5254711ebee58d518";
+	public String emailPassword = "168b1bb87288b2";
 	
 	static Properties SMTPServerProperties;
 	static Properties IMAPServerProperties;
@@ -112,6 +113,8 @@ public class Email {
             inbox.open(Folder.READ_ONLY);
             //Get unread messages
             messages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
+			inbox.close(true);
+			store.close();
         } catch (Exception mex) {
             mex.printStackTrace();
             return null;
@@ -149,12 +152,128 @@ public class Email {
             inbox.open(Folder.READ_ONLY);
             //Get unread messages
             messages = inbox.search(new SentDateTerm(ComparisonTerm.GT,new Date(new Date().getTime() - minutesAgo * 60 * 1000)));
-
+			inbox.close(true);
+			store.close();
         } catch (Exception mex) {
             mex.printStackTrace();
             return null;
         }
         return messages;
+	}
+	/**
+	 * This method retrieves messages sent from a given address.
+	 * @param sender String - Email address to search for.
+	 * @return Message[] - An array of message objects
+	 * @author michael.simpkins
+	 */
+	public Message[] getEmailsBySender(String sender){
+		
+		Store store = null;
+		Message[] messages = null;
+		//Create connection
+		try {
+			getMailSession = Session.getDefaultInstance(IMAPServerProperties, null);
+			store = getMailSession.getStore("imaps");
+	        store.connect(imapServer,emailUsername,emailPassword);
+		} catch (Exception e) {
+			try {
+				getMailSession = Session.getDefaultInstance(POP3ServerProperties, null);
+				store = getMailSession.getStore("pop3");
+				store.connect(pop3Server,emailUsername,emailPassword);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+	        
+		}
+		//Get Inbox Emails
+        try {
+            Folder inbox = store.getFolder("INBOX");
+            inbox.open(Folder.READ_ONLY);
+            //Get unread messages
+            messages = inbox.search(new FromTerm(new InternetAddress(sender)));
+			inbox.close(true);
+			store.close();
+        } catch (Exception mex) {
+            mex.printStackTrace();
+            return null;
+        }
+        return messages;
+	}
+	/**
+	 * This method will delete multiple message from the inbox.
+	 * @param message Message[] - An array of messages to be deleted.
+	 * @author michael.simpkins
+	 */
+	public void deleteMessages(Message[] message){
+		for(Message msg:message){
+			deleteMessage(msg);
+		}
+	}
+	/**
+	 * This method will delete single message from the inbox.
+	 * @param message Message - The message to be deleted.
+	 * @author michael.simpkins
+	 */
+	public void deleteMessage(Message message){
+		
+		Store store = null;
+		//Create connection
+		try {
+			getMailSession = Session.getDefaultInstance(IMAPServerProperties, null);
+			store = getMailSession.getStore("imaps");
+	        store.connect(imapServer,emailUsername,emailPassword);
+		} catch (Exception e) {
+			try {
+				getMailSession = Session.getDefaultInstance(POP3ServerProperties, null);
+				store = getMailSession.getStore("pop3");
+				store.connect(pop3Server,emailUsername,emailPassword);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		try {
+			Folder inbox = store.getFolder("INBOX");
+			inbox.open(Folder.READ_WRITE);
+			inbox.getMessage(message.getMessageNumber()).setFlag(Flags.Flag.DELETED, true);
+			inbox.close(true);
+			store.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * This method deletes all messages from the Inbox folder.
+	 * @author michael.simpkins
+	 */
+	public void ClearInbox(){
+		Store store = null;
+		Message[] messages = null;
+		//Create connection
+		try {
+			getMailSession = Session.getDefaultInstance(IMAPServerProperties, null);
+			store = getMailSession.getStore("imaps");
+	        store.connect(imapServer,emailUsername,emailPassword);
+		} catch (Exception e) {
+			try {
+				getMailSession = Session.getDefaultInstance(POP3ServerProperties, null);
+				store = getMailSession.getStore("pop3");
+				store.connect(pop3Server,emailUsername,emailPassword);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+	        
+		}
+		//Get Inbox Emails
+        try {
+            Folder inbox = store.getFolder("INBOX");
+            inbox.open(Folder.READ_WRITE);
+            messages = inbox.getMessages();
+			inbox.close(true);
+			store.close();
+        	deleteMessages(messages);
+        } catch (Exception mex) {
+            mex.printStackTrace();
+        }
 	}
 	/**
 	 * The Method is used to configure the SMTP connection settings
@@ -194,7 +313,7 @@ public class Email {
 	public void configurePOP3Properties(int port, boolean auth, boolean tlsEnabled){
 		POP3ServerProperties = System.getProperties();
 		POP3ServerProperties.put("mail.pop3.host", pop3Server);
-		POP3ServerProperties.put("mail.pop3.port", "1100");
+		POP3ServerProperties.put("mail.pop3.port", port);
 		POP3ServerProperties.put("mail.pop3.auth", auth);
 		POP3ServerProperties.put("mail.pop3.starttls.enable", tlsEnabled);
 	}
