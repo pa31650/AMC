@@ -12,15 +12,15 @@ public class EmailTest {
 	  
 	@Test
 	public void SendEmail() {
-		int msgBeforeCount = email.getEmailsBySender(email.emailUsername).length;
-		email.Send("michael.simpkins@orasi.com","Test 1","It worked.");
-		Message[] messages = email.getEmailsBySender(email.emailUsername);
+		int msgBeforeCount = email.getEmailsBySender(email.getEmailAddress()).length;
+		email.Send("michael.simpkins@orasi.com","Send Test","It worked.");
+		Message[] messages = email.getEmailsBySender(email.getEmailAddress());
 		Assert.assertTrue(messages.length>msgBeforeCount);
-		}
+	}
 	  
 	@Test
 	public void DeleteEmails(){
-		email.Send("michael.simpkins@orasi.com","Test 1","It worked.");
+		email.Send("michael.simpkins@orasi.com","Delete Test","It worked.");
 		Message[] messages = email.getEmailsByTime(5);
 		email.deleteMessages(messages);
 		messages = email.getEmailsByTime(5);
@@ -29,8 +29,6 @@ public class EmailTest {
 	
 	@BeforeClass
 	public void ConfigureEmailServers(){
-		email.configureSMTPProperties(465, true, true);
-		email.configurePOP3Properties(1100, true, true); 
 		email.ClearInbox();
 	}
 }
