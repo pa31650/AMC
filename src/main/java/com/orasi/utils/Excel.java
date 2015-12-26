@@ -39,6 +39,11 @@ public class Excel {
         sh = wb.getSheetAt(0);
     }
 
+    public Excel(String filePath, String sheetName){
+        this.filePath = filePath;
+        this.sheetName = sheetName;
+    }
+
     public String GetCellString (int cellrow, int cellcol){
         //Sheet mySheet = wb.getSheet("Sheet1");
         FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
@@ -46,13 +51,14 @@ public class Excel {
         Row row = sh.getRow(cellReference.getRow());
         Cell cell = row.getCell(cellReference.getCol());
         return cell.getStringCellValue();
-
     }
 
-    public Excel(String filePath, String sheetName){
-        this.filePath = filePath;
-        this.sheetName = sheetName;
 
+    //ToDo Finish Method
+    public int GetCellInt (int cellrow, int cellcol){
 
+        return 0;
     }
+
+
 }
