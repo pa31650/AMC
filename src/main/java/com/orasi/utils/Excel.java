@@ -3,12 +3,16 @@ package com.orasi.utils;
 
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 //import org.apache.xpath.operations.String;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 
@@ -22,6 +26,7 @@ public class Excel {
     private static String sheetName;
     private static Workbook wb;
     private static Sheet sh;
+    private static  FileOutputStream fileOut = null;
 
     //Opens a workbook and uses the first sheet (Usually Sheet1)
     public Excel(String filePath){
@@ -43,8 +48,6 @@ public class Excel {
 
     private void SetSheet(String SheetName){};
 
-
-
     //Opens  a specific sheet within a workbook
     public Excel(String filePath, String sheetName){
         this.filePath = filePath;
@@ -53,14 +56,35 @@ public class Excel {
         SetSheet(sheetName);
     }
 
-
     //Creates a workbook
     public Excel(String filePath, String sheetName, boolean CreateNewWorkbook){
         this.filePath = filePath;
         this.sheetName = sheetName;
+
+        if (filePath.toUpperCase().indexOf(".XLSX") > 0) {
+            wb = new XSSFWorkbook(); //XLSX
+        }
+        else {
+            wb = new HSSFWorkbook(); //XLS
+        }
+        Sheet sheet1 = wb.createSheet(sheetName);
+        fileOut = null;
+        try {
+            fileOut = new FileOutputStream(filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            wb.write(fileOut);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-
 
     public String GetCellString (int cellrow, int cellcol){
         //Sheet mySheet = wb.getSheet("Sheet1");
@@ -79,9 +103,22 @@ public class Excel {
         return cell.getNumericCellValue();
     }
 
-
-
-
+    //ToDo Create method to: Set cell string
+    //ToDo Create method to: Set cell double
+    //ToDo Create method to: Find in range
+    //ToDo Create method to: Return range of values
+    //ToDo Create method to: Find first empty row
+    //ToDo Create method to: Find first empty column
+    //ToDo Create method to: Get column by name
+    //ToDo Create method to: Compare Columns
+    //ToDo Create method to: Compare Row
+    //ToDo Create method to: Compare Sheet
+    //ToDo Create method to: Get Sheet Names
+    //ToDo Create method to: Convert to Letter
+    //ToDo Create method to: Convert to number
+    //ToDo Create method to: Color Row
+    //ToDo Create method to: Color Column
+    //ToDo Create method to: Color Cell
 
 }
 
