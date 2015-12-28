@@ -23,10 +23,15 @@ public class Excel {
     private static Workbook wb;
     private static Sheet sh;
 
-
+    //Opens a workbook and uses the first sheet (Usually Sheet1)
     public Excel(String filePath){
         this.filePath = filePath;
+        GetWorkBook();
+        //setting default sheet.
+        sh = wb.getSheetAt(0);
+    }
 
+    private void GetWorkBook(){
         try {
             wb = WorkbookFactory.create(new File(filePath));
         } catch (IOException e) {
@@ -34,15 +39,28 @@ public class Excel {
         } catch (InvalidFormatException e) {
             e.printStackTrace();
         }
+    };
 
-        //setting default sheet.
-        sh = wb.getSheetAt(0);
-    }
+    private void SetSheet(String SheetName){};
 
+
+
+    //Opens  a specific sheet within a workbook
     public Excel(String filePath, String sheetName){
         this.filePath = filePath;
         this.sheetName = sheetName;
+        GetWorkBook();
+        SetSheet(sheetName);
     }
+
+
+    //Creates a workbook
+    public Excel(String filePath, String sheetName, boolean CreateNewWorkbook){
+        this.filePath = filePath;
+        this.sheetName = sheetName;
+    }
+
+
 
     public String GetCellString (int cellrow, int cellcol){
         //Sheet mySheet = wb.getSheet("Sheet1");
@@ -53,12 +71,18 @@ public class Excel {
         return cell.getStringCellValue();
     }
 
-
-    //ToDo Finish Method
-    public int GetCellInt (int cellrow, int cellcol){
-
-        return 0;
+    public double GetCellDouble (int cellrow, int cellcol){
+        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        CellReference cellReference = new CellReference(cellrow,cellcol);
+        Row row = sh.getRow(cellReference.getRow());
+        Cell cell = row.getCell(cellReference.getCol());
+        return cell.getNumericCellValue();
     }
 
 
+
+
+
 }
+
+
