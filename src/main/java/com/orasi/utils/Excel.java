@@ -36,26 +36,6 @@ public class Excel {
         sh = wb.getSheetAt(0);
     }
 
-    private void GetWorkBook(){
-        try {
-            wb = WorkbookFactory.create(new File(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidFormatException e) {
-            e.printStackTrace();
-        }
-    };
-
-    private void SetSheet(String SheetName){};
-
-    //Opens  a specific sheet within a workbook
-    public Excel(String filePath, String sheetName){
-        this.filePath = filePath;
-        this.sheetName = sheetName;
-        GetWorkBook();
-        SetSheet(sheetName);
-    }
-
     //Creates a workbook
     public Excel(String filePath, String sheetName, boolean CreateNewWorkbook){
         this.filePath = filePath;
@@ -86,26 +66,139 @@ public class Excel {
         }
     }
 
-    public String GetCellString (int cellrow, int cellcol){
-        //Sheet mySheet = wb.getSheet("Sheet1");
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+    public void SaveWorkbook(){
+        // Write the output to a file
+        FileOutputStream fileOut = null;
+        try {
+            fileOut = new FileOutputStream(this.filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            wb.write(fileOut);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+        
+    private void GetWorkBook(){
+        try {
+            wb = WorkbookFactory.create(new File(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        }
+    };
+
+    private Cell GetCell(int cellrow, int cellcol){ //accepts row and column numbers, starting at 1
         CellReference cellReference = new CellReference(cellrow,cellcol);
-        Row row = sh.getRow(cellReference.getRow());
-        Cell cell = row.getCell(cellReference.getCol());
-        return cell.getStringCellValue();
+        Row row = sh.getRow(cellReference.getRow() - 1);
+        Cell cell = row.getCell(cellReference.getCol() - 1);
+        return cell;
+    };
+
+    private void SetSheet(String SheetName){
+       sh = wb.getSheet(SheetName);
+    };
+
+    //Opens  a specific sheet within a workbook
+    public Excel(String filePath, String sheetName){
+        this.filePath = filePath;
+        this.sheetName = sheetName;
+        GetWorkBook();
+        SetSheet(sheetName);
+    }
+
+    public String GetCellString (int cellrow, int cellcol){
+        Cell tmpcl = GetCell(cellrow, cellcol);
+        tmpcl.setCellType(Cell.CELL_TYPE_STRING);
+        return tmpcl.getStringCellValue();
     }
 
     public double GetCellDouble (int cellrow, int cellcol){
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
-        CellReference cellReference = new CellReference(cellrow,cellcol);
-        Row row = sh.getRow(cellReference.getRow());
-        Cell cell = row.getCell(cellReference.getCol());
-        return cell.getNumericCellValue();
+        return GetCell(cellrow, cellcol).getNumericCellValue();
     }
 
-    //ToDo Create method to: Set cell string
-    //ToDo Create method to: Set cell double
-    //ToDo Create method to: Find in range
+    public void SetCellString(int cellrow, int cellcol, String SetToString){
+        GetCell(cellrow, cellcol).setCellValue(SetToString);
+    }
+
+    public void SetCellDouble(int cellrow, int cellcol, double SetToDouble){
+        GetCell(cellrow, cellcol).setCellValue(SetToDouble);
+    }
+
+    private Cell FindInRange(String Range, String SearchText){
+
+        boolean foundVal = false;
+        String[] parts = Range.split(":");
+        CellReference startCR = new CellReference(parts[0]);
+        CellReference endCR = new CellReference(parts[1]);
+        int starRow = startCR.getRow() + 1;
+        int startCol = startCR.getCol() + 1;
+        int endRow = endCR.getRow() + 2;
+        int endCol = endCR.getCol() + 2;
+        int foundRow = 0;
+        int foundCol = 0;
+
+        for (int r = 1; r < endRow; r++) {
+            if (foundVal) {
+                break;
+            }
+            for (int c = 1; c < endCol; c++) {
+                if (SearchText.equals(GetCellString(r, c))) {
+
+                    foundVal = true;
+                    foundRow = r;
+                    foundCol = c;
+                    break;
+                }
+            }
+        }
+
+        if (foundVal){
+            return GetCell(foundRow,foundCol);
+        }
+        return null;
+    }
+
+    public int FindRow(String Range, String SearchText){
+        Cell cl = FindInRange(Range, SearchText);
+        return cl.getRowIndex() + 1;
+    }
+
+    public int FindColumn(String Range, String SearchText){
+        Cell cl = FindInRange(Range, SearchText);
+        return cl.getColumnIndex() + 1;
+    }
+
+    public int Find (String Range, String SearchText, ReturnType returnType){
+
+        int foundOn = 0;
+
+        switch (returnType) {
+            case ROW:
+                foundOn = FindRow(Range,SearchText);
+                break;
+
+            case COLUMN:
+                foundOn = FindColumn(Range,SearchText);
+                break;
+        }
+        return foundOn;
+    }
+
+    public enum ReturnType {
+        ROW, COLUMN
+    }
+
+
     //ToDo Create method to: Return range of values
     //ToDo Create method to: Find first empty row
     //ToDo Create method to: Find first empty column
@@ -114,8 +207,6 @@ public class Excel {
     //ToDo Create method to: Compare Row
     //ToDo Create method to: Compare Sheet
     //ToDo Create method to: Get Sheet Names
-    //ToDo Create method to: Convert to Letter
-    //ToDo Create method to: Convert to number
     //ToDo Create method to: Color Row
     //ToDo Create method to: Color Column
     //ToDo Create method to: Color Cell
