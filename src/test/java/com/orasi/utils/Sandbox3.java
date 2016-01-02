@@ -26,7 +26,7 @@ public class Sandbox3 {
         System.out.println("Should be TestRevert: " + MyExcel.GetCellString(4,3));
 
 
-       // MyExcel.SaveWorkbook();
+        MyExcel.SaveWorkbook();
         int i = 0;
     }
 }

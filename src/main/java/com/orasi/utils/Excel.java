@@ -5,15 +5,13 @@ package com.orasi.utils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 //import org.apache.xpath.operations.String;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 
 /**
@@ -27,6 +25,9 @@ public class Excel {
     private static Workbook wb;
     private static Sheet sh;
     private static  FileOutputStream fileOut = null;
+    private static FileInputStream inputStream = null;
+    private static OPCPackage opc = null;
+    private static File inputFile = null;
 
     //Opens a workbook and uses the first sheet (Usually Sheet1)
     public Excel(String filePath){
@@ -68,9 +69,8 @@ public class Excel {
 
     public void SaveWorkbook(){
         // Write the output to a file
-        FileOutputStream fileOut = null;
         try {
-            fileOut = new FileOutputStream(this.filePath);
+            fileOut = new FileOutputStream(inputFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -79,20 +79,27 @@ public class Excel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
         
     private void GetWorkBook(){
+        inputFile = new File(filePath);
         try {
-            wb = WorkbookFactory.create(new File(filePath));
+            inputStream = new FileInputStream(inputFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            opc = OPCPackage.open(inputStream);
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InvalidFormatException e) {
+        }
+        try {
+            wb = WorkbookFactory.create(opc);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     };
