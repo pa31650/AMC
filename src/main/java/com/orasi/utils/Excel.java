@@ -65,6 +65,15 @@ public class Excel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+            wb.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        GetWorkBook();
+        SetSheet(sheetName);
     }
 
     public void SaveWorkbook(){
@@ -104,10 +113,28 @@ public class Excel {
         }
     };
 
+    private Cell CreateCell(int cellrow, int cellcol) {
+        Row row = sh.createRow((short)cellrow - 1);
+        Cell cell = row.createCell(cellcol - 1);
+        return cell;
+    }
+
     private Cell GetCell(int cellrow, int cellcol){ //accepts row and column numbers, starting at 1
         CellReference cellReference = new CellReference(cellrow,cellcol);
+        Cell cell = null;
         Row row = sh.getRow(cellReference.getRow() - 1);
-        Cell cell = row.getCell(cellReference.getCol() - 1);
+
+        if (row == null) {
+            cell = CreateCell(cellrow, cellcol);
+        }
+        else {
+            cell = row.getCell(cellReference.getCol() - 1);
+        }
+
+        if (cell == null) {
+            cell = CreateCell(cellrow, cellcol);
+        }
+
         return cell;
     };
 
