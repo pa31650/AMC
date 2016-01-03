@@ -47,5 +47,7 @@ public class Sandbox3 {
 
         MyNewExcel.SaveWorkbook();
         int i = 0;
+
+        FileSystem.DeleteFile("C:\\Temp\\MyExcel17.xlsx");
     }
 }

@@ -16,6 +16,8 @@ import java.io.*;
 
 /**
  * Created by Adam on 12/22/2015.
+ * This class works with XLS and XLSX files.
+ * It uses the Apache POI Project: poi.apache.org
  */
 public class Excel {
 
@@ -28,8 +30,10 @@ public class Excel {
     private static FileInputStream inputStream = null;
     private static OPCPackage opc = null;
     private static File inputFile = null;
+    public static  int ParameterRow = 1;
+    public static  int KeyColumn = 1;
 
-    //Opens a workbook and uses the first sheet (Usually Sheet1)
+    //Opens a workbook while using the first sheet (Usually Sheet1)
     public Excel(String filePath){
         this.filePath = filePath;
         GetWorkBook();
@@ -37,7 +41,15 @@ public class Excel {
         sh = wb.getSheetAt(0);
     }
 
-    //Creates a workbook
+    //Opens a workbook while opening a specific sheet within a workbook
+    public Excel(String filePath, String sheetName){
+        this.filePath = filePath;
+        this.sheetName = sheetName;
+        GetWorkBook();
+        SetSheet(sheetName);
+    }
+
+    //Creates a workbook and sheet
     public Excel(String filePath, String sheetName, boolean CreateNewWorkbook){
         this.filePath = filePath;
         this.sheetName = sheetName;
@@ -141,14 +153,6 @@ public class Excel {
     private void SetSheet(String SheetName){
        sh = wb.getSheet(SheetName);
     };
-
-    //Opens  a specific sheet within a workbook
-    public Excel(String filePath, String sheetName){
-        this.filePath = filePath;
-        this.sheetName = sheetName;
-        GetWorkBook();
-        SetSheet(sheetName);
-    }
 
     public String GetCellString (int cellrow, int cellcol){
         Cell tmpcl = GetCell(cellrow, cellcol);
