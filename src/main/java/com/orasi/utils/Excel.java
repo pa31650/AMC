@@ -22,16 +22,16 @@ import java.io.*;
 public class Excel {
 
     //Variables
-    private static String filePath;
-    private static String sheetName;
-    private static Workbook wb;
-    private static Sheet sh;
-    private static  FileOutputStream fileOut = null;
-    private static FileInputStream inputStream = null;
-    private static OPCPackage opc = null;
-    private static File inputFile = null;
-    public static  int ParameterRow = 1;
-    public static  int KeyColumn = 1;
+    private String filePath;
+    private String sheetName;
+    private Workbook wb;
+    private Sheet sh;
+    private FileOutputStream fileOut = null;
+    private FileInputStream inputStream = null;
+    private OPCPackage opc = null;
+    private File inputFile = null;
+    public int ParameterRow = 1;
+    public int KeyColumn = 1;
 
     //Opens a workbook while using the first sheet (Usually Sheet1)
     public Excel(String filePath){
