@@ -7,7 +7,6 @@
 	<title>Unit test site</title>
 
 <script type="text/javascript" >
-
 </script>
 <link rel="stylesheet" href="./css/modalbox.css" type="text/css"> 
 <link rel="stylesheet" href="./css/modalbox.css" type="text/css"> 
@@ -63,6 +62,22 @@
 						<p><-- There is a disabled element here!</p>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<input type="button" id="disappear" value="I am going to disappear!" disabled></input>
+					</td>
+					<td>
+						<p><-- This element will disappear!</p>
+					</td>
+				</tr>
+				<tr>
+					<td id='appear-here'>
+
+					</td>
+					<td>
+						<p><-- An Element will appear here!</p>
+					</td>
+				</tr>
                 </tbody></table>
             
 </div>
@@ -72,4 +87,11 @@
 </div>
 
 </div>
+<script>
+
+	setTimeout(function(){
+		document.getElementById('disappear').remove()
+		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" disabled></input>'
+	}, 3000);
+</script>
 </body></html>
