@@ -101,7 +101,7 @@
 <!--REMOVING ADDING TO DOM-->
 				<tr>
 					<td>
-						<input type="button" id="disappear" value="I am going to disappear!" disabled></input>
+						<input type="button" id="disappear" value="I am going to disappear!" ></input>
 					</td>
 					<td>
 						<p><-- This element will disappear!</p>
@@ -125,7 +125,7 @@
 				</tr>
 				<tr>
 					<td>
-						<input type='button' id="change-value" value="a"></input>
+						<input type='button' id="change-value" value="a" disabled></input>
 					</td>
 					<td>
 						<p><-- An Element will change value here!</p>
@@ -147,7 +147,7 @@
 		document.getElementById('hidden-unhide').hidden = false;
 		document.getElementById('shown-hidden').hidden = true;
 		document.getElementById('disappear').remove();
-		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" disabled></input>';
+		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" ></input>';
 	}, 3000);
 	var changeText = function(){
 		if (document.getElementById('change-text').innerText.length < 10){
@@ -157,10 +157,13 @@
 	}
 	var changeValue = function(){
 		if (document.getElementById('change-value').value.length < 10){
-			document.getElementById('change-value').value = document.getElementById('change-text').value + 'a';
+			document.getElementById('change-value').value = document.getElementById('change-value').value + 'a';
 
+		}else{
+			document.getElementById('change-value').disabled = false;
 		}
 	}
 	setInterval(changeText, 500)
+	setInterval(changeValue, 500)
 </script>
 </body></html>
