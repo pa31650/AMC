@@ -64,6 +64,22 @@
 				</tr>
 				<tr>
 					<td>
+						<input type="button"  id="hidden-unhide" hidden value="I am not hidden!"></input>
+					</td>
+					<td>
+						<p><-- There is a hidden element here that will appear!</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" id="disable-enable" value="I am going to be enabled!" disabled></input>
+					</td>
+					<td>
+						<p><-- There is a disabled element here that will enable!</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<input type="button" id="disappear" value="I am going to disappear!" disabled></input>
 					</td>
 					<td>
@@ -73,6 +89,14 @@
 				<tr>
 					<td id='appear-here'>
 
+					</td>
+					<td>
+						<p><-- An Element will appear here!</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" id="change-text" value="a" disabled></input>
 					</td>
 					<td>
 						<p><-- An Element will appear here!</p>
@@ -90,8 +114,17 @@
 <script>
 
 	setTimeout(function(){
-		document.getElementById('disappear').remove()
-		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" disabled></input>'
+		document.getElementById('disable-enable').disabled = false;
+		document.getElementById('hidden-unhide').hidden = false;
+		document.getElementById('disappear').remove();
+		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" disabled></input>';
 	}, 3000);
+	var changeText = function(){
+		if (document.getElementById('change-text').value.length < 10){	
+			document.getElementById('change-text').value = document.getElementById('change-text').value + 'a';
+	
+		}
+	}
+	setInterval(changeText, 500)
 </script>
 </body></html>
