@@ -120,8 +120,8 @@
 		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" disabled></input>';
 	}, 3000);
 	var changeText = function(){
-		if (document.getElementById('change-text').text.length < 10){	
-			document.getElementById('change-text').text = document.getElementById('change-text').text + 'a';
+		if (document.getElementById('change-text').innerText.length < 10){	
+			document.getElementById('change-text').innerText = document.getElementById('change-text').innerText + 'a';
 	
 		}
 	}
