@@ -96,7 +96,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p id="change-text">a></p>
+						<p id="change-text">a</p>
 					</td>
 					<td>
 						<p><-- An Element will appear here!</p>
@@ -120,7 +120,7 @@
 		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" disabled></input>';
 	}, 3000);
 	var changeText = function(){
-		if (document.getElementById('change-text').value.length < 10){	
+		if (document.getElementById('change-text').text.length < 10){	
 			document.getElementById('change-text').text = document.getElementById('change-text').text + 'a';
 	
 		}
