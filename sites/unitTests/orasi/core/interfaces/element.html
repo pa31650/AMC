@@ -100,7 +100,7 @@
 				</tr>
 <!--REMOVING ADDING TO DOM-->
 				<tr>
-					<td>
+					<td id='disappear-here'>
 						<input type="button" id="disappear" value="I am going to disappear!" ></input>
 					</td>
 					<td>
@@ -146,7 +146,8 @@
 		document.getElementById('enable-disable').disabled = true;
 		document.getElementById('hidden-unhide').hidden = false;
 		document.getElementById('shown-hidden').hidden = true;
-		document.getElementById('disappear').remove();
+		var elem = document.getElementById('disappear');
+		document.getElementById('disappear-here').removeChild(elem);
 		document.getElementById('appear-here').innerHTML = '<input type="button" id="appear" value="Suprise!" ></input>';
 	}, 3000);
 	var changeText = function(){
