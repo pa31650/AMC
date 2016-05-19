@@ -1,4 +1,4 @@
-package com.orasi.utils;
+package com.orasi.utils.debugging;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,18 +15,33 @@ import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 import org.testng.xml.XmlSuite;
 
+import com.orasi.utils.Constants;
+import com.orasi.utils.Mustard;
+import com.orasi.utils.OrasiDriver;
+import com.orasi.utils.TestEnvironment;
+
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class Screenshot extends TestListenerAdapter implements IReporter{
-
+	private OrasiDriver driver = null;
+	private String runLocation = "";
+	private boolean reportToMustard = true;
+	private void init(ITestResult result){
+	    try{
+		Object currentClass = result.getInstance();
+		driver = ((TestEnvironment) currentClass).getDriver();
+		runLocation = ((TestEnvironment) currentClass).getRunLocation().toLowerCase();		
+		reportToMustard = ((TestEnvironment) currentClass).isReportingToMustard();
+	    }catch (Exception e){}
+	    
+	}
+	
 	@Override
 	public void onTestFailure(ITestResult result) {
+		init(result);
+		if (driver == null) return;
 		String slash = Constants.DIR_SEPARATOR;
 		File directory = new File(".");
-		Object currentClass = result.getInstance();
-		WebDriver driver = ((TestEnvironment) currentClass).getDriver();
-		String runLocation = ((TestEnvironment) currentClass).getRunLocation()
-				.toLowerCase();		
 		
 		String destDir = null;
 		try {
@@ -35,8 +50,9 @@ public class Screenshot extends TestListenerAdapter implements IReporter{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		WebDriver augmentDriver= null;
 		if (runLocation == "remote"){
-			driver = new Augmenter().augment(driver);
+			augmentDriver = new Augmenter().augment(driver.getWebDriver());
 		}
 		Reporter.setCurrentTestResult(result);
 
@@ -49,17 +65,24 @@ public class Screenshot extends TestListenerAdapter implements IReporter{
 		//TestReporter.logScreenshot(driver, destDir + slash + destFile, slash, runLocation);
 		
 		//Capture a screenshot for Allure reporting
-		FailedScreenshot(driver);
+	//	FailedScreenshot(augmentDriver);
+		if(reportToMustard) Mustard.postResultsToMustard(driver, result, runLocation );
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		// will be called after test will be skipped
+		init(result);
+		if (driver == null) return;
+		if(reportToMustard) Mustard.postResultsToMustard(driver, result, runLocation );
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		// will be called after test will pass
+		init(result);
+		if (driver == null) return;
+		if(reportToMustard) Mustard.postResultsToMustard(driver, result, runLocation );
 	}
 
 	@Attachment(type = "image/png")

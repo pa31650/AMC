@@ -9,12 +9,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 
 import com.orasi.core.interfaces.Element;
+import com.orasi.utils.debugging.Highlight;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
 
@@ -66,7 +68,7 @@ public class TestEnvironment {
 	/*
 	 * Selenium Hub Field
 	 */
-	protected String seleniumHubURL = "http://10.238.242.50:4444/wd/hub";
+	protected String seleniumHubURL = "http://40.122.51.143:4444/wd/hub";
 
 	/*
 	 * Sauce Labs Fields
@@ -86,7 +88,7 @@ public class TestEnvironment {
 
 	protected String sauceLabsURL = "http://" + authentication.getUsername() + ":" + authentication.getAccessKey()
 			+ "@ondemand.saucelabs.com:80/wd/hub";
-
+	protected boolean reportToMustard = false;
 	/*
 	 * Constructors for TestEnvironment class
 	 */
@@ -237,6 +239,14 @@ public class TestEnvironment {
 		return Integer.parseInt(System.getProperty(Constants.TEST_DRIVER_TIMEOUT));
 	}
 
+	public boolean isReportingToMustard() {
+	    return reportToMustard;
+	}
+
+	public void setReportToMustard(boolean reportToMustard) {
+	    this.reportToMustard = reportToMustard;
+	}
+
 	/*
 	 * Getter and setter for the Selenium Hub URL
 	 */
@@ -264,7 +274,7 @@ public class TestEnvironment {
 	/*
 	 * Getter and setter for the actual WebDriver
 	 */
-	private void setDriver(OrasiDriver driverSession) {
+	protected void setDriver(OrasiDriver driverSession) {
 		if (isThreadedDriver())
 			threadedDriver.set(driverSession);
 		else
@@ -337,6 +347,8 @@ public class TestEnvironment {
 		// Uncomment the following line to have TestReporter outputs output to
 		// the console
 		TestReporter.setPrintToConsole(true);
+		Highlight.setDebugMode(true);
+		//setThreadDriver(true);
 		setTestName(testName);
 		driverSetup();
 		if (getPageURL().isEmpty())
@@ -416,8 +428,18 @@ public class TestEnvironment {
 
 			switch (getOperatingSystem().toLowerCase().trim().replace(" ", "")) {
 			case "windows":
+			case "win10":
+			case "windows10":
 				if (getBrowserUnderTest().equalsIgnoreCase("Firefox") || getBrowserUnderTest().equalsIgnoreCase("FF")) {
 					caps = DesiredCapabilities.firefox();
+				}
+				else if (getBrowserUnderTest().equalsIgnoreCase("Marionette")) {
+					caps = DesiredCapabilities.firefox();
+					caps.setCapability("marionette", true);
+					file = new File(
+						this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "marionette.exe").getPath());
+				System.setProperty("webdriver.gecko.driver", file.getAbsolutePath());
+				
 				}
 				// Internet explorer
 				else if (getBrowserUnderTest().equalsIgnoreCase("IE")
@@ -425,10 +447,12 @@ public class TestEnvironment {
 					caps = DesiredCapabilities.internetExplorer();
 					caps.setCapability("ignoreZoomSetting", true);
 					caps.setCapability("enablePersistentHover", false);
+					caps.setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);
+					caps.setCapability(InternetExplorerDriver.IE_SWITCHES, "-private");
 					file = new File(
 							this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "IEDriverServer.exe").getPath());
 					System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-					caps = DesiredCapabilities.internetExplorer();
+					//caps = DesiredCapabilities.internetExplorer();
 
 				}
 				// Chrome
@@ -460,7 +484,7 @@ public class TestEnvironment {
 				else if (getBrowserUnderTest().equalsIgnoreCase("safari")) {
 					caps = DesiredCapabilities.safari();
 
-				} else if (getBrowserUnderTest().equalsIgnoreCase("microsoftedge")) {
+				} else if (getBrowserUnderTest().replace(" ", "").equalsIgnoreCase("microsoftedge")) {
 					file = new File(this.getClass().getResource(Constants.DRIVERS_PATH_LOCAL + "MicrosoftWebDriver.exe")
 							.getPath());
 					System.setProperty("webdriver.edge.driver", file.getAbsolutePath());
@@ -581,10 +605,10 @@ public class TestEnvironment {
 		getDriver().setElementTimeout(Constants.ELEMENT_TIMEOUT);
 		getDriver().setPageTimeout(Constants.PAGE_TIMEOUT);
 		getDriver().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
+		getDriver().manage().window().maximize();
 		// setDefaultTestTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
 		if (!getBrowserUnderTest().toLowerCase().contains("edge")) {
 			getDriver().manage().deleteAllCookies();
-			getDriver().manage().window().maximize();
 		}
 	}
 

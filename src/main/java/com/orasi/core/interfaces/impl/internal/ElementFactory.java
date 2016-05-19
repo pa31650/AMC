@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
+import com.orasi.exception.automation.PageInitialization;
+
 /**
  * Element factory for wrapped elements. Similar to {@link org.openqa.selenium.support.PageFactory}
  */
@@ -18,7 +20,7 @@ public class ElementFactory {
     public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy) {
         T page = instantiatePage(driver, pageClassToProxy);
         final WebDriver driverRef = driver;
-        PageFactory.initElements(new ElementDecorator(new CustomElementLocatorFactory(driverRef),driverRef), page);
+        PageFactory.initElements(new ElementDecorator(new CustomElementLocatorFactory(driverRef)), page);
         return page;
     }
 
@@ -27,7 +29,7 @@ public class ElementFactory {
      */
     public static void initElements(WebDriver driver, Object page) {
         final WebDriver driverRef = driver;
-        PageFactory.initElements(new ElementDecorator(new CustomElementLocatorFactory(driverRef),driverRef), page);
+        PageFactory.initElements(new ElementDecorator(new CustomElementLocatorFactory(driverRef)), page);
     }
 
     /**
@@ -54,10 +56,14 @@ public class ElementFactory {
                 Constructor<T> constructor = pageClassToProxy.getConstructor(WebDriver.class);
                 return constructor.newInstance(driver);
             } catch (NoSuchMethodException e) {
-                return pageClassToProxy.newInstance();
+        	try{            		
+        		return pageClassToProxy.newInstance();
+        	}catch(InstantiationException ie){ 
+        		throw new PageInitialization("Failed to create instance of: " + pageClassToProxy.getName(), driver);
+        	}
             }
         } catch (InstantiationException e) {
-            throw new RuntimeException(e);
+            throw new PageInitialization("Failed to create instance of: " + pageClassToProxy.getName(), driver);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {

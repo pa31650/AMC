@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Core-Regression" parallel="methods" thread-count="20">
+<suite name="Core-Regression" parallel="methods" thread-count="50">
+	<listeners>
+		<listener class-name="com.orasi.utils.debugging.Screenshot" />
+	</listeners>
 	<parameter name="browserUnderTest" value="firefox" />
 	<parameter name="environment" value="staging" />
 	<parameter name="runLocation" value="local" />
@@ -8,11 +11,7 @@
 	<parameter name="operatingSystem" value="windows" />
  	<test name="TestEnvironment">
 		<classes>
-<<<<<<< HEAD
-			<class name="com.orasi.utils.TestFrameHandler" />
-=======
-			<class name="com.orasi.core.angular.TestByAngularModel" />
->>>>>>> stage
+			<class name="com.orasi.core.interfaces.TestElement" />
 		</classes>
 	</test> 
 </suite> <!-- Suite -->

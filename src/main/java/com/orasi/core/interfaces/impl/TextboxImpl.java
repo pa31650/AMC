@@ -1,6 +1,7 @@
 package com.orasi.core.interfaces.impl;
 
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.orasi.core.interfaces.Textbox;
@@ -22,13 +23,11 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 		super(element);
 	}
 
-	public TextboxImpl(WebElement element, OrasiDriver driver) {
-		super(element, driver);
-	}
+
 
 	/**
 	 * @summary - Gets the value of an input field. Overrides default clear().
-	 * @see org.openqa.selenium.WebElement.clear()
+	 * @see org.openqa.selenium.WebElement#clear()
 	 */
 	@Override
 	public void clear() {
@@ -62,11 +61,41 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 				throw rte;
 			}
 		} else {
-			TestReporter
-					.interfaceLog(" Skipping input to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]");
+			TestReporter.interfaceLog(" Skipping input to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b> ]");
 		}
 	}
 
+
+	/**
+	 * @summary - If the text parameter is not an empty string, this method
+	 *          clears any existing values and performs a "sendKeys(text)" to
+	 *          simulate typing the value. If the text parameter is an empty
+	 *          string, this step is skipped.
+	 * @param text
+	 *            - text to enter into the field
+	 */
+
+	@Override
+	public void jsSet( String text) {
+	    if (text == null) text = "";
+	    if (!text.isEmpty()){
+		if (text.equalsIgnoreCase("<blank>") || text.equalsIgnoreCase("(blank)")){
+		    TestReporter.log(" Request to blank text field sent. Clearing Textbox [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+		    getWrappedElement().clear();
+		}else{
+		    TestReporter.log(" Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+		    try{
+			getWrappedDriver().executeJavaScript("arguments[0].scrollIntoView(true);arguments[0].setAttribute('value', arguments[1])", getWrappedElement(), text);
+		    }catch(WebDriverException wde){
+			getWrappedElement().clear();
+			getWrappedElement().sendKeys(text);
+		    }
+		}
+	    }else{
+		TestReporter.log(" Skipping input to Textbox [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+	    }
+	}
+	
 	/**
 	 * @summary - Overloads overridden set() method. If the text parameter is
 	 *          not an empty string, this method uses a JavascriptExecutor to
@@ -74,8 +103,6 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 	 *          uses Selenium to clear any existing values and performs a
 	 *          "sendKeys(text)" to simulate typing the value. If the text
 	 *          parameter is an empty string, this step is skipped.
-	 * @param driver
-	 *            - Current active WebDriver object
 	 * @param text
 	 *            - text to enter into the field
 	 */
@@ -83,15 +110,15 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 	public void scrollAndSet(String text) {
 		if (!text.isEmpty()) {
 			try {
-				driver.executeJavaScript("arguments[0].scrollIntoView(true);arguments[0].click();",
+				getWrappedDriver().executeJavaScript("arguments[0].scrollIntoView(true);arguments[0].click();",
 						getWrappedElement());
 				getWrappedElement().clear();
 				getWrappedElement().sendKeys(text);
-				TestReporter.interfaceLog(" Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: "
+				TestReporter.interfaceLog(" Send Keys [ <b>" + text + "</b> ] to Textbox [ <b>@FindBy: "
 						+ getElementLocatorInfo() + " </b> ]");
 
 			} catch (RuntimeException rte) {
-				TestReporter.interfaceLog("Send Keys [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: "
+				TestReporter.interfaceLog("Send Keys [ <b>" + text + "</b> ] to Textbox [ <b>@FindBy: "
 						+ getElementLocatorInfo() + " </b> ]", true);
 				throw rte;
 			}
