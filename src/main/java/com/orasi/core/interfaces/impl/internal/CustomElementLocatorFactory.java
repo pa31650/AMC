@@ -9,6 +9,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.orasi.core.by.angular.AngularElementLocator;
 import com.orasi.core.by.angular.FindByNG;
+import com.orasi.core.by.mobile.FindByMobile;
+import com.orasi.core.by.mobile.MobileElementLocator;
 
 public class CustomElementLocatorFactory implements ElementLocatorFactory {
 	  private final WebDriver driver;
@@ -20,6 +22,8 @@ public class CustomElementLocatorFactory implements ElementLocatorFactory {
 	  public ElementLocator createLocator(final Field field) {
 	    if (field.isAnnotationPresent(FindByNG.class)) {
 	      return new AngularElementLocator(driver, field);
+	    } else if (field.isAnnotationPresent(FindByMobile.class)) {
+	      return new MobileElementLocator(driver, field);
 	    } else {
 	      return new DefaultElementLocator(driver, field);
 	    }
