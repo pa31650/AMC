@@ -566,6 +566,74 @@ public class ElementImpl implements Element {
 	public <X> X getScreenshotAs(OutputType<X> target) {
 		return ((TakesScreenshot) driver.getWebDriver()).getScreenshotAs(target);
 	}
+	
+
+	/**
+	 * Used to determine if the desired element is present in the HTML DOM
+	 * Will wait for default element timeout unless new timeout is passed in 
+	 * If object is not present within the time, handle the error based default handler 
+	 * or by boolean passed in
+	 *
+	 * @author Justin
+	 * @param args
+	 *  		Optional arguments </br>
+	 *  		&nbsp;&nbsp;&nbsp;&nbsp;<b>timeout</b> - the maximum time in seconds the method should try to sync. Called 
+	 *  							 with syncPresent(10)</br>
+	 *  		&nbsp;&nbsp;&nbsp;&nbsp;<b>failTestOnSyncFailure </b>- if TRUE, the test will throw an exception and 
+	 *  					fail the script. If FALSE, the script will 
+	 *  					not fail, instead a FALSE will be returned 
+	 *  					to the calling function. Called with 
+	 *  					syncPresent(10, false)
+	 */
+	public boolean syncPresent(Object... args){
+	    TestReporter.logTrace("Entering ElementImpl#syncPresent");
+		int timeout = getWrappedDriver().getElementTimeout();
+		boolean failTestOnSync = Constants.defaultSyncHandler;
+		try{
+			if(args[0] != null) timeout = Integer.valueOf(args[0].toString());
+			if(args[1] != null) failTestOnSync = Boolean.parseBoolean(args[1].toString());
+		}catch(ArrayIndexOutOfBoundsException aiobe){}
+
+		TestReporter.interfaceLog("<i>Syncing to element [<b>" + getElementLocatorInfo()
+		+ "</b> ] to be <b>PRESENT</b> within [ <b>" + timeout + "</b> ] seconds.</i>");
+
+		StopWatch stopwatch = new StopWatch();
+		boolean found = false;
+		long timeLapse;
+
+		WebDriverWait wait = new WebDriverWait(driver, 1);
+		stopwatch.start();
+		while(((stopwatch.getTime()) / 1000.0) < timeout && !found){
+    		try {
+    			element = wait.pollingEvery(Constants.millisecondsToPollForElement, TimeUnit.MILLISECONDS).until(ExpectedConditions.presenceOfElementLocated(by));
+    			found = true;
+    		} catch (NoSuchElementException | ClassCastException | StaleElementReferenceException | TimeoutException te){}
+		}
+		stopwatch.stop();
+		timeLapse = stopwatch.getTime();
+		stopwatch.reset();
+
+		if (!found && failTestOnSync) {
+			TestReporter.logTrace("Element not <b>PRESENT</b> and failTestOnSync is [ TRUE ]");
+			TestReporter.interfaceLog("<i>Element [<b>" + getElementLocatorInfo()
+			+ " </b>] is not <b>PRESENT</b> on the page after [ "
+			+ (timeLapse) / 1000.0 + " ] seconds.</i>");
+			throw new ElementNotVisibleException(
+					"Element [ " + getElementLocatorInfo() + " ] is not PRESENT on the page after [ "
+							+ (timeLapse) / 1000.0 + " ] seconds.", driver);
+		} else if (!found){
+			TestReporter.interfaceLog("<i>Element [<b>" + getElementLocatorInfo()
+					+ " </b>] is not <b>PRESENT</b> on the page after [ "
+					+ (timeLapse) / 1000.0 + " ] seconds.</i>");
+			TestReporter.logTrace("Exiting ElementImpl#syncPresent");
+			return found;
+		}
+		
+		TestReporter.interfaceLog("<i>Element [<b>" + getElementLocatorInfo()   + " </b>] is <b>PRESENT</b> on the page after [ " + (timeLapse) / 1000.0 + " ] seconds.</i>");
+		if(Highlight.getDebugMode()) Highlight.highlightSuccess(driver, reload());
+		TestReporter.logTrace("Exiting ElementImpl#syncPresent");
+		return found;
+	}
 
 	/**
 	 * Used to determine if the desired element is visible on the screen 

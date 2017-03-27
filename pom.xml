@@ -14,6 +14,16 @@
 			<id>maven</id>
 			<url>http://repo.maven.apache.org/maven2/</url>
 		</repository>
+		<repository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>
+        https://oss.sonatype.org/content/repositories/snapshots
+      </url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<distributionManagement>
 		<repository>
@@ -47,7 +57,7 @@
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 					</argLine>
 					<suiteXmlFiles>
-				 		<suiteXmlFile>${testNGSourceDirectory}/regression.xml</suiteXmlFile> 
+						<suiteXmlFile>${testNGSourceDirectory}/regression.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<systemPropertyVariables>
 						<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
@@ -110,11 +120,22 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
 	<dependencies>
+		<dependency>
+			<groupId>com.versionone</groupId>
+			<artifactId>VersionOne.SDK.Java.APIClient</artifactId>
+			<version>16.0.0</version>
+		</dependency>
 		<!-- Start Selenium requirements -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
 			<version>3.3.1</version>
 		</dependency>
 		<dependency>
@@ -131,11 +152,6 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
 			<version>2.23.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-support</artifactId>
-			<version>3.3.1</version>
 		</dependency>
 
 		<!-- End Selenium requirements -->
@@ -187,7 +203,7 @@
 		<!-- End Sauce Labs requirements -->
 
 		<!-- Start HTML Unit Driver requirements: Up-to-date as of 10-20-2015 -->
-		
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
@@ -218,7 +234,7 @@
 			<artifactId>htmlunit</artifactId>
 			<version>2.25</version>
 		</dependency>
-		
+
 		<!-- End HTML Unit Driver requirements: Up-to-date as of 6-11-2015 -->
 
 		<!-- Start General requirements -->
@@ -273,7 +289,7 @@
 		<!-- End REST Core requirements -->
 
 		<!-- Start Soap Core requirements: Up-to-date as of 6-11-2015 -->
-	
+
 		<dependency>
 			<groupId>com.fifesoft</groupId>
 			<artifactId>languagesupport</artifactId>

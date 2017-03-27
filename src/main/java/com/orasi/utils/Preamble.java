@@ -14,12 +14,13 @@ import java.lang.annotation.Target;
  *
  */
 @Documented
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD,ElementType.CONSTRUCTOR,ElementType.TYPE})
 public @interface Preamble {
     String author();
     String date();
     String summary();
+    String testId();
     String[] reviewers() default "N/A";
     String[] steps() default "N/A";
     String precondition() default "N/A";

@@ -5,6 +5,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.orasi.api.restServices.v1.VersionOne;
 import com.orasi.utils.Randomness;
 import com.orasi.utils.TestReporter;
 
@@ -35,7 +36,8 @@ public class Headers {
 	public static enum HeaderType {
 	  	AUTH,
 	    BASIC_CONVO,
-	    JSON;
+	    JSON,
+	    V1;
 	}
 	/*  private Header[] getHeaders(){
 		  return headers;
@@ -66,12 +68,20 @@ public class Headers {
 		    	   		};
 		        	break;   
 		        case JSON:
-	        			TestReporter.logDebug("Creating headers for [JSON]");
-			        	headers = new Header[] {
-			    	   		     new BasicHeader("Content-type", "application/json")
-			    	   		    
-			    	   		};
-			        	break;
+    			TestReporter.logDebug("Creating headers for [JSON]");
+		        	headers = new Header[] {
+		    	   		     new BasicHeader("Content-type", "application/json")
+		    	   		    
+		    	   		};
+		        	break;   
+		        case V1:
+    			TestReporter.logDebug("Creating headers for [V1]");
+		        	headers = new Header[] {
+		    	   		     new BasicHeader("Authorization", "Bearer " + VersionOne.authtoken),
+		    	   		     new BasicHeader("Content-type", "application/xml")
+		    	   		    
+		    	   		};
+		        	break;
 	            default:
 	                break;
 	        }

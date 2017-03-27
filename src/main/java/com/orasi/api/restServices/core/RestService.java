@@ -117,7 +117,7 @@ public class RestService {
 		    }
 			
 			if(json !=  null){
-				TestReporter.logInfo("Adding json " + json );
+				TestReporter.logInfo("Adding body " + json );
 				httppost.setEntity( new ByteArrayEntity(json.getBytes("UTF-8")));
 			}
 

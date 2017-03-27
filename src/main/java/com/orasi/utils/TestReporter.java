@@ -17,6 +17,8 @@ import com.orasi.api.soapServices.core.exceptions.SoapException;
 import com.orasi.exception.AutomationException;
 import com.orasi.utils.date.SimpleDate;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 public class TestReporter {
 	private static boolean printToConsole = true;
 	private static boolean printClassPath= true;
@@ -121,6 +123,9 @@ public class TestReporter {
 		if(getPrintToConsole()) System.out.println(step);
 	}
 
+	@Step("https://www16.v1host.com/api-examples/Test.mvc/Summary?oidToken=Test%3A\"{0}\"")
+	public static void logAllureUrl(String testId) {}
+	
 	public static void logScenario(String scenario) {
 		Reporter.log("<br/><b><font size = 4>Data Scenario: " + scenario
 				+ "</font></b><br/>");
