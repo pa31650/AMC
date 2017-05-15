@@ -1,6 +1,7 @@
 package com.orasi.utils.dataHelpers;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import com.orasi.exception.automation.KeyExistsException;
 import com.orasi.exception.automation.NoKeyFoundException;
@@ -8,13 +9,13 @@ import com.orasi.utils.TestReporter;
 
 public class DataWarehouse {
 
-	private HashMap<String, Object> dataMap;
+	private LinkedHashMap<String, Object> dataMap;
 	
 	/*
 	 * Constructor for OutputDataWarehouse
 	 */
 	public DataWarehouse () {
-	    dataMap = new HashMap<String, Object>();
+	    dataMap = new LinkedHashMap<String, Object>();
 	}
 
 	/*
