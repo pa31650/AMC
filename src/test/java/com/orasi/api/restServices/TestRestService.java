@@ -1,5 +1,7 @@
 package com.orasi.api.restServices;
 
+import static com.orasi.api.restServices.ResponseCodes.OK;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class TestRestService {
     @Test
     public void sendGetRequestOnlyURL() {
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendGetRequest(basePostsUrl).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendGetRequest(basePostsUrl).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -43,7 +45,7 @@ public class TestRestService {
     @Test(expectedExceptions = RestException.class)
     public void sendGetRequestInvalidURL() {
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendGetRequest("ht://jsplaceholder.typicode.com/posts").getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendGetRequest("ht://jsplaceholder.typicode.com/posts").getStatusCode() == OK);
     }
 
     @Features("API")
@@ -52,7 +54,7 @@ public class TestRestService {
     @Test
     public void sendGetRequestURLAndHeader() {
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendGetRequest(basePostsUrl, HeaderType.BASIC_CONVO).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendGetRequest(basePostsUrl, HeaderType.BASIC_CONVO).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -63,7 +65,7 @@ public class TestRestService {
         RestService rest = new RestService();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
-        Assert.assertTrue(rest.sendGetRequest(basePostsUrl, HeaderType.JSON, params).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendGetRequest(basePostsUrl, HeaderType.JSON, params).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -125,7 +127,7 @@ public class TestRestService {
     @Test
     public void sendPutRequestURLAndHeader() {
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.AUTH).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.AUTH).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -139,7 +141,7 @@ public class TestRestService {
         request.setBody("blah");
 
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.AUTH, RestService.getJsonFromObject(request)).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.AUTH, RestService.getJsonFromObject(request)).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -153,7 +155,7 @@ public class TestRestService {
         request.setBody("blah");
 
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", RestService.getJsonFromObject(request)).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", RestService.getJsonFromObject(request)).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -164,7 +166,7 @@ public class TestRestService {
         RestService rest = new RestService();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
-        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", params).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", params).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -175,7 +177,7 @@ public class TestRestService {
         RestService rest = new RestService();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
-        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.JSON, params).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.JSON, params).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -192,7 +194,7 @@ public class TestRestService {
         params.add(new BasicNameValuePair("userId", "2"));
 
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.BASIC_CONVO, params, RestService.getJsonFromObject(request)).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPutRequest(basePostsUrl + "/1", HeaderType.BASIC_CONVO, params, RestService.getJsonFromObject(request)).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -207,7 +209,7 @@ public class TestRestService {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", params, RestService.getJsonFromObject(request)).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", params, RestService.getJsonFromObject(request)).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -221,7 +223,7 @@ public class TestRestService {
         request.setBody("blah");
 
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", HeaderType.AUTH, RestService.getJsonFromObject(request)).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", HeaderType.AUTH, RestService.getJsonFromObject(request)).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -232,7 +234,7 @@ public class TestRestService {
         RestService rest = new RestService();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
-        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", params).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", params).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -243,7 +245,7 @@ public class TestRestService {
         RestService rest = new RestService();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
-        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", HeaderType.JSON, params).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", HeaderType.JSON, params).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -260,7 +262,7 @@ public class TestRestService {
         params.add(new BasicNameValuePair("userId", "2"));
 
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", HeaderType.BASIC_CONVO, params, RestService.getJsonFromObject(request)).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendPatchRequest(basePostsUrl + "/1", HeaderType.BASIC_CONVO, params, RestService.getJsonFromObject(request)).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -269,7 +271,7 @@ public class TestRestService {
     @Test
     public void sendDeleteRequestURL() {
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendDeleteRequest(basePostsUrl + "/1").getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendDeleteRequest(basePostsUrl + "/1").getStatusCode() == OK);
     }
 
     @Features("API")
@@ -278,7 +280,7 @@ public class TestRestService {
     @Test
     public void sendDeleteRequestURLAndHeader() {
         RestService rest = new RestService();
-        Assert.assertTrue(rest.sendDeleteRequest(basePostsUrl + "/1", HeaderType.JSON).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendDeleteRequest(basePostsUrl + "/1", HeaderType.JSON).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -289,7 +291,7 @@ public class TestRestService {
         RestService rest = new RestService();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("userId", "2"));
-        Assert.assertTrue(rest.sendDeleteRequest(basePostsUrl + "/1", HeaderType.JSON, params).getStatusCode() == ResponseCodes.OK);
+        Assert.assertTrue(rest.sendDeleteRequest(basePostsUrl + "/1", HeaderType.JSON, params).getStatusCode() == OK);
     }
 
     @Features("API")
@@ -309,4 +311,5 @@ public class TestRestService {
         RestService rest = new RestService();
         RestService.getJsonFromObject(rest);
     }
+
 }

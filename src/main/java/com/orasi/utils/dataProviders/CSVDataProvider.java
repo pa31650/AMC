@@ -8,8 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.orasi.exception.AutomationException;
-import com.orasi.exception.automation.DataProviderInputFileNotFound;
+import com.orasi.AutomationException;
+import com.orasi.utils.exceptions.DataProviderInputFileNotFoundException;
 import com.orasi.utils.io.FileLoader;
 
 public class CSVDataProvider {
@@ -38,7 +38,7 @@ public class CSVDataProvider {
         if (!filePath.contains(":")) {
             URL file = CSVDataProvider.class.getResource(filePath);
             if (file == null) {
-                throw new DataProviderInputFileNotFound("No file was found on path [ " + filePath + " ]");
+                throw new DataProviderInputFileNotFoundException("No file was found on path [ " + filePath + " ]");
             }
             filePath = file.getPath();
         }

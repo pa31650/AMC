@@ -3,7 +3,7 @@ package com.orasi.utils.dataProviders;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.orasi.exception.automation.DataProviderInputFileNotFound;
+import com.orasi.utils.exceptions.DataProviderInputFileNotFoundException;
 
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
@@ -31,7 +31,7 @@ public class TestCSVDataProvider {
     @Features("Utilities")
     @Stories("CSVDataProvider")
     @Title("getDataWithDelimiter")
-    @Test(groups = { "regression", "utils", "dataProviders" }, expectedExceptions = DataProviderInputFileNotFound.class)
+    @Test(groups = { "regression", "utils", "dataProviders" }, expectedExceptions = DataProviderInputFileNotFoundException.class)
     public void getDataNoFileFound() {
         Object[][] data = CSVDataProvider.getData("blah");
         Assert.assertNotNull(data);

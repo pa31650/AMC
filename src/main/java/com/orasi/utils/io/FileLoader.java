@@ -10,7 +10,7 @@ import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 
-import com.orasi.exception.automation.InvalidFileException;
+import com.orasi.utils.exceptions.InvalidFileException;
 
 public class FileLoader {
 
@@ -18,15 +18,10 @@ public class FileLoader {
         logTrace("Entering FileLoader#loadFileFromProjectAsString");
 
         logTrace("Attempting to load file from path [ " + filePath + " ]");
-        BufferedReader resource;
-        resource = openTextFileFromProject(filePath);
-
-        logTrace("Attempting to read file as String");
         String text;
-        try {
+        try (BufferedReader resource = openTextFileFromProject(filePath)) {
+            logTrace("Attempting to read file as String");
             text = IOUtils.toString(resource);
-        } finally {
-            resource.close();
         }
         logTrace("Exiting FileLoader#loadFileFromProjectAsString");
         return text;
@@ -61,7 +56,7 @@ public class FileLoader {
         logTrace("Validating file from path [ " + filePath + " ] is readable");
         boolean readable = false;
         File file = new File(filePath);
-        if (!file.isDirectory() && file.exists() && file.canRead()) {
+        if (file != null && !file.isDirectory() && file.exists() && file.canRead()) {
             readable = true;
         } else if (null != FileLoader.class.getResource(filePath)) {
             readable = true;

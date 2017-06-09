@@ -20,10 +20,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orasi.api.restServices.exceptions.RestException;
+import com.orasi.utils.io.JsonHelper;
 
 public class RestResponse {
     private ObjectMapper mapper = new ObjectMapper(); // .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -138,27 +138,8 @@ public class RestResponse {
      * @throws IOException
      */
     public <T> T mapJSONToObject(Class<T> clazz) {
-        return mapJSONToObject(responseAsString, clazz);
+        return JsonHelper.mapJSONToObject(responseAsString, clazz);
 
-    }
-
-    /**
-     * Can pass in any json as a string and map to object
-     *
-     * @param clazz
-     * @return
-     * @throws IOException
-     */
-    public <T> T mapJSONToObject(String stringResponse, Class<T> clazz) {
-        T map = null;
-        try {
-            map = mapper.readValue(stringResponse, clazz);
-        } catch (JsonParseException e) {
-            throw new RestException("Failed to parse JSON", e);
-        } catch (IOException e) {
-            throw new RestException("Failed to Map JSON", e);
-        }
-        return map;
     }
 
     /**

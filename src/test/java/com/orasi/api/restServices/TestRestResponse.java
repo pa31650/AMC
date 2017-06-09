@@ -164,26 +164,6 @@ public class TestRestResponse {
 
     @Features("API")
     @Stories("RestServices")
-    @Title("mapJSONToObjectInvalidJson")
-    @Test(expectedExceptions = RestException.class)
-    public void mapJSONToObjectInvalidJson() {
-        RestService rest = new RestService();
-        response = rest.sendGetRequest(basePostsUrl + "/1");
-        response.mapJSONToObject("{{blah:1}", PostsResponse.class);
-    }
-
-    @Features("API")
-    @Stories("RestServices")
-    @Title("mapJSONToObjectIncorrectJson")
-    @Test(expectedExceptions = RestException.class)
-    public void mapJSONToObjectIncorrectJson() {
-        RestService rest = new RestService();
-        response = rest.sendGetRequest(basePostsUrl + "/1");
-        response.mapJSONToObject("{\"userId\":1,\"id\":1,\"blah\":1}", PostsResponse.class);
-    }
-
-    @Features("API")
-    @Stories("RestServices")
     @Title("mapJSONToTree")
     @Test
     public void mapJSONToTree() {

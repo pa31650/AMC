@@ -34,7 +34,7 @@ public class Base64Coder {
     private static final String systemLineSeparator = System.getProperty("line.separator");
 
     public static void main(String[] args) {
-        byte[] toEncode = "Test5120.user".getBytes();
+        // byte[] toEncode = "Test5120.user".getBytes();
         System.out.println(decodeString("NDI2NjkwMjAzNjI1MDY0Mw==")); // Display the string.
     }
 

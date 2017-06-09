@@ -10,11 +10,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import com.orasi.AutomationException;
 import com.orasi.api.restServices.RestResponse;
 import com.orasi.api.restServices.exceptions.RestException;
 import com.orasi.api.soapServices.SoapService;
 import com.orasi.api.soapServices.exceptions.SoapException;
-import com.orasi.exception.AutomationException;
 import com.orasi.utils.date.SimpleDate;
 
 public class TestReporter {

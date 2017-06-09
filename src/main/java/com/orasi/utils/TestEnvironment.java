@@ -15,7 +15,8 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 
-import com.orasi.exception.AutomationException;
+import com.orasi.AutomationException;
+import com.orasi.selenium.OrasiDriver;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
 

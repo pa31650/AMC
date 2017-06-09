@@ -3,7 +3,6 @@ package com.orasi.api.restServices;
 import static com.orasi.utils.TestReporter.logInfo;
 import static com.orasi.utils.TestReporter.logTrace;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -24,15 +23,10 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orasi.api.restServices.Headers.HeaderType;
 import com.orasi.api.restServices.exceptions.RestException;
-import com.orasi.exception.automation.DataProviderInputFileNotFound;
-import com.orasi.utils.io.FileLoader;
 
 public class RestService {
     private HttpClient httpClient = null;
@@ -345,43 +339,6 @@ public class RestService {
         logTrace("Returning RestResponse to calling method");
         logTrace("Exiting RestService#sendRequest");
         return response;
-    }
-
-    public static <T> T readJsonFromFile(String filePath, Class<T> clazz) {
-        logTrace("Entering RestService#readJsonFromFile");
-        logTrace("Loading resource [ " + clazz.getClass().getResourceAsStream(filePath) + " ]");
-        String json = null;
-
-        try {
-            json = FileLoader.loadFileFromProjectAsString(filePath);
-        } catch (FileNotFoundException fnfe) {
-            throw new DataProviderInputFileNotFound("Failed to locate json file in path [ " + filePath + " ]");
-        } catch (IOException ioe) {
-            throw new RestException("Failed to read json file", ioe);
-        }
-        return mapJSONToObject(json, clazz);
-    }
-
-    /**
-     * Can pass in any json as a string and map to object
-     *
-     * @param clazz
-     * @return
-     * @throws IOException
-     */
-    private static <T> T mapJSONToObject(String stringResponse, Class<T> clazz) {
-        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        T map = null;
-        try {
-            map = mapper.readValue(stringResponse, clazz);
-        } catch (JsonParseException e) {
-            throw new RestException("Failed to parse JSON", e);
-        } catch (JsonMappingException e) {
-            throw new RestException("Failed to Map JSON", e);
-        } catch (IOException e) {
-            throw new RestException("Failed to output JSON", e);
-        }
-        return map;
     }
 
     private String createQueryParamUrl(String url, List<NameValuePair> params) {

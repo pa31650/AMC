@@ -9,11 +9,11 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.testng.ITestResult;
 
 import com.orasi.api.restServices.Headers.HeaderType;
+import com.orasi.selenium.OrasiDriver;
+import com.orasi.Beta;
 import com.orasi.api.restServices.RestService;
-import com.orasi.core.Beta;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
-import com.orasi.utils.OrasiDriver;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 
 @Beta

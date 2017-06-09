@@ -10,8 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.orasi.api.restServices.exceptions.RestException;
-import com.orasi.exception.automation.DataProviderInputFileException;
-import com.orasi.exception.automation.DataProviderInputFileNotFound;
+import com.orasi.utils.exceptions.DataProviderInputFileException;
+import com.orasi.utils.exceptions.DataProviderInputFileNotFoundException;
 import com.orasi.utils.io.FileLoader;
 
 public class JsonDataProvider {
@@ -89,7 +89,7 @@ public class JsonDataProvider {
         try {
             json = FileLoader.loadFileFromProjectAsString(filePath);
         } catch (FileNotFoundException fnfe) {
-            throw new DataProviderInputFileNotFound("Failed to locate json file in path [ " + filePath + " ]");
+            throw new DataProviderInputFileNotFoundException("Failed to locate json file in path [ " + filePath + " ]");
         } catch (IOException ioe) {
             throw new RestException("Failed to read json file", ioe);
         }

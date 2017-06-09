@@ -8,10 +8,10 @@ import com.orasi.api.soapServices.exceptions.MissingFunctionParameterValueExcept
 import com.orasi.api.soapServices.exceptions.SoapException;
 import com.orasi.api.soapServices.helpers.GetInfoByZip;
 import com.orasi.api.soapServices.helpers.USZipService;
-import com.orasi.exception.automation.XPathInvalidExpression;
-import com.orasi.exception.automation.XPathNotFoundException;
-import com.orasi.exception.automation.XPathNullNodeValueException;
 import com.orasi.utils.Sleeper;
+import com.orasi.utils.exceptions.XPathInvalidExpression;
+import com.orasi.utils.exceptions.XPathNotFoundException;
+import com.orasi.utils.exceptions.XPathNullNodeValueException;
 
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;

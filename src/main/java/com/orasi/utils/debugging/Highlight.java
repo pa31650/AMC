@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.orasi.utils.OrasiDriver;
+import com.orasi.selenium.OrasiDriver;
 import com.orasi.utils.Sleeper;
 
 public class Highlight {

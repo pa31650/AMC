@@ -2,8 +2,8 @@ package com.orasi.utils.dataProviders;
 
 import java.net.URL;
 
-import com.orasi.exception.automation.DataProviderInputFileNotFound;
-import com.orasi.utils.ExcelDocumentReader;
+import com.orasi.utils.exceptions.DataProviderInputFileNotFoundException;
+import com.orasi.utils.io.ExcelDocumentReader;
 
 public class ExcelDataProvider {
     private String filePath;
@@ -17,7 +17,7 @@ public class ExcelDataProvider {
     public ExcelDataProvider(String filePath, String sheetName, int rowToRead) {
         URL file = getClass().getResource(filePath);
         if (file == null) {
-            throw new DataProviderInputFileNotFound("Failed to find a file in path [ " + filePath + " ]");
+            throw new DataProviderInputFileNotFoundException("Failed to find a file in path [ " + filePath + " ]");
         }
 
         this.filePath = file.getPath();

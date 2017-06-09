@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.xml.soap.SOAPConstants;
 
-import com.orasi.utils.XMLTools;
+import com.orasi.utils.io.XMLTools;
 
 public class GetInfoByZip extends USZipService {
     public GetInfoByZip() {
