@@ -9,8 +9,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.interfaces.Webtable;
-import com.orasi.selenium.interfaces.impl.WebtableImpl;
+import com.orasi.selenium.elements.Table;
+import com.orasi.selenium.web.webelements.WebtableImpl;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;
@@ -66,7 +66,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("clickCell")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void clickCell() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         webtable.clickCell(1, 1);
         // Assert.assertTrue(getDriver().findElement(By.id("LastName")).getAttribute("value").equals("clicked"));
     }
@@ -76,7 +76,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getCell")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getCell() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getCell(2, 2).getText().equals("Office Supplies"));
 
     }
@@ -86,7 +86,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getCellDate")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getCellData() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getCellData(2, 2).equals("Office Supplies"));
     }
 
@@ -95,7 +95,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getColumnCount")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getColumnCount() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getColumnCount(1) == 3);
     }
 
@@ -104,7 +104,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getColumnWithCellText")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getColumnWithCellText() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getColumnWithCellText("Supplies and Expenses") == 1);
     }
 
@@ -113,7 +113,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getColumnWithCellTextUsingRow")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getColumnWithCellTextUsingRow() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getColumnWithCellText("$xx,xxx", 7) == 3);
     }
 
@@ -122,7 +122,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getColumnWithCellTextNothingFound")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getColumnWithCellTextNothingFound() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getColumnWithCellText("Blah") == 0);
     }
 
@@ -131,7 +131,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowCount")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowCount() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowCount() == 7);
     }
 
@@ -140,7 +140,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowWithCellText")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowWithCellText() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowWithCellText("Mailing") == 5);
     }
 
@@ -149,7 +149,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowWithCellTextSpecifiedColumn")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowWithCellTextSpecifiedColumn() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowWithCellText("13.", 1) == 5);
     }
 
@@ -158,7 +158,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowWithCellTextSpecifiedRowAndColumn")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowWithCellTextSpecifiedRowAndColumn() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowWithCellText("14.", 1, 2) == 6);
     }
 
@@ -167,7 +167,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowWithCellTextNotExact")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowWithCellTextNotExact() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowWithCellText("duplICatING", 2, 2, false) == 4);
     }
 
@@ -176,7 +176,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowWithCellTextNothingFound")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowWithCellTextNothingFound() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowWithCellText("NOTHING!", 2, 2, true) == 0);
     }
 
@@ -185,7 +185,7 @@ public class TestWebtable extends TestEnvironment {
     @Title("getRowWithCellTextNoColumn")
     @Test(groups = { "regression", "interfaces", "webtable" })
     public void getRowWithCellTextNoColumn() {
-        Webtable webtable = getDriver().findWebtable(By.xpath(xpath));
+        Table webtable = getDriver().findWebtable(By.xpath(xpath));
         Assert.assertTrue(webtable.getRowWithCellText("Supplies and Expenses", -1, 2, false) == 7);
     }
 }

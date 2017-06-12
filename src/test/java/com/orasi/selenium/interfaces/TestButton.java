@@ -9,7 +9,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.interfaces.Button;
+import com.orasi.selenium.elements.Button;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;

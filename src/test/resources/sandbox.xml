@@ -4,15 +4,14 @@
 	<listeners>
 		<listener class-name="com.orasi.utils.debugging.Screenshot" />
 	</listeners>
-	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="staging" />
 	<parameter name="runLocation" value="local" />
-	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="windows 10" />
+	<parameter name="logLevel" value="TRACE" />
+	<parameter name="reportToMustard" value="True" />
  
 	<test name="Textbox" parallel="methods" thread-count="20">
 		<classes>
-			<class name="com.orasi.core.interfaces.TestElement" />
+			<class name="com.orasi.Sandbox" />
 		</classes>
 	</test>
 </suite> <!-- Suite -->

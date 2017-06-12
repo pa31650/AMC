@@ -10,7 +10,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.interfaces.Checkbox;
+import com.orasi.selenium.elements.Checkbox;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;

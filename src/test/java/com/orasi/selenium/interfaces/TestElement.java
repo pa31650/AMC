@@ -10,6 +10,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.orasi.selenium.elements.Element;
+import com.orasi.selenium.elements.Textbox;
 import com.orasi.selenium.exceptions.ElementAttributeValueNotMatchingException;
 import com.orasi.selenium.exceptions.ElementCssValueNotMatchingException;
 import com.orasi.selenium.exceptions.ElementNotDisabledException;
@@ -17,8 +19,6 @@ import com.orasi.selenium.exceptions.ElementNotEnabledException;
 import com.orasi.selenium.exceptions.ElementNotHiddenException;
 import com.orasi.selenium.exceptions.ElementNotVisibleException;
 import com.orasi.selenium.exceptions.TextInElementNotPresentException;
-import com.orasi.selenium.interfaces.Element;
-import com.orasi.selenium.interfaces.Textbox;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;

@@ -22,18 +22,17 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.OrasiDriver;
-import com.orasi.selenium.PageLoaded;
-import com.orasi.selenium.by.angular.ByNG;
-import com.orasi.selenium.interfaces.Button;
-import com.orasi.selenium.interfaces.Checkbox;
-import com.orasi.selenium.interfaces.Element;
-import com.orasi.selenium.interfaces.Label;
-import com.orasi.selenium.interfaces.Link;
-import com.orasi.selenium.interfaces.Listbox;
-import com.orasi.selenium.interfaces.RadioGroup;
-import com.orasi.selenium.interfaces.Textbox;
-import com.orasi.selenium.interfaces.Webtable;
+import com.orasi.selenium.elements.Button;
+import com.orasi.selenium.elements.Checkbox;
+import com.orasi.selenium.elements.Element;
+import com.orasi.selenium.elements.Label;
+import com.orasi.selenium.elements.Link;
+import com.orasi.selenium.elements.Listbox;
+import com.orasi.selenium.elements.RadioGroup;
+import com.orasi.selenium.elements.Table;
+import com.orasi.selenium.elements.Textbox;
+import com.orasi.selenium.web.PageLoaded;
+import com.orasi.selenium.web.by.angular.ByNG;
 import com.orasi.utils.Base64Coder;
 import com.orasi.utils.Constants;
 import com.orasi.utils.Sleeper;
@@ -302,7 +301,7 @@ public class TestOrasiDriver extends TestEnvironment {
     @Title("findWebtable")
     @Test(groups = { "regression", "utils", "orasidriver" }, dependsOnMethods = "findTextbox")
     public void findWebtable() {
-        Webtable webtable = driver.findWebtable(By.id("VIPs"));
+        Table webtable = driver.findWebtable(By.id("VIPs"));
         Assert.assertNotNull(webtable);
     }
 

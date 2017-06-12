@@ -27,30 +27,31 @@ import org.openqa.selenium.safari.SafariDriver;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.DefaultJavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
-import com.orasi.selenium.by.angular.ByNG;
-import com.orasi.selenium.by.angular.ByNG.ByNGButton;
-import com.orasi.selenium.by.angular.ByNG.ByNGController;
-import com.orasi.selenium.by.angular.ByNG.ByNGModel;
-import com.orasi.selenium.by.angular.ByNG.ByNGRepeater;
-import com.orasi.selenium.by.angular.internal.ByAngular;
-import com.orasi.selenium.interfaces.Button;
-import com.orasi.selenium.interfaces.Checkbox;
-import com.orasi.selenium.interfaces.Element;
-import com.orasi.selenium.interfaces.Label;
-import com.orasi.selenium.interfaces.Link;
-import com.orasi.selenium.interfaces.Listbox;
-import com.orasi.selenium.interfaces.RadioGroup;
-import com.orasi.selenium.interfaces.Textbox;
-import com.orasi.selenium.interfaces.Webtable;
-import com.orasi.selenium.interfaces.impl.ButtonImpl;
-import com.orasi.selenium.interfaces.impl.CheckboxImpl;
-import com.orasi.selenium.interfaces.impl.ElementImpl;
-import com.orasi.selenium.interfaces.impl.LabelImpl;
-import com.orasi.selenium.interfaces.impl.LinkImpl;
-import com.orasi.selenium.interfaces.impl.ListboxImpl;
-import com.orasi.selenium.interfaces.impl.RadioGroupImpl;
-import com.orasi.selenium.interfaces.impl.TextboxImpl;
-import com.orasi.selenium.interfaces.impl.WebtableImpl;
+import com.orasi.selenium.elements.Button;
+import com.orasi.selenium.elements.Checkbox;
+import com.orasi.selenium.elements.Element;
+import com.orasi.selenium.elements.Label;
+import com.orasi.selenium.elements.Link;
+import com.orasi.selenium.elements.Listbox;
+import com.orasi.selenium.elements.RadioGroup;
+import com.orasi.selenium.elements.Table;
+import com.orasi.selenium.elements.Textbox;
+import com.orasi.selenium.web.PageLoaded;
+import com.orasi.selenium.web.by.angular.ByNG;
+import com.orasi.selenium.web.by.angular.ByNG.ByNGButton;
+import com.orasi.selenium.web.by.angular.ByNG.ByNGController;
+import com.orasi.selenium.web.by.angular.ByNG.ByNGModel;
+import com.orasi.selenium.web.by.angular.ByNG.ByNGRepeater;
+import com.orasi.selenium.web.by.angular.internal.ByAngular;
+import com.orasi.selenium.web.webelements.WebButton;
+import com.orasi.selenium.web.webelements.WebCheckbox;
+import com.orasi.selenium.web.webelements.WebLabel;
+import com.orasi.selenium.web.webelements.WebLink;
+import com.orasi.selenium.web.webelements.WebListbox;
+import com.orasi.selenium.web.webelements.WebRadioGroup;
+import com.orasi.selenium.web.webelements.WebTextbox;
+import com.orasi.selenium.web.webelements.Webelement;
+import com.orasi.selenium.web.webelements.WebtableImpl;
 import com.orasi.utils.Constants;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataHelpers.DataWarehouse;
@@ -302,7 +303,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      */
     @Override
     public Element findElement(By by) {
-        return new ElementImpl(this, by);
+        return new Webelement(this, by);
     }
 
     /**
@@ -316,7 +317,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Element findElement(ByNG by) {
-        return new ElementImpl(this, getByNGType(by));
+        return new Webelement(this, getByNGType(by));
     }
 
     /**
@@ -330,7 +331,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/TextboxImpl.java
      */
     public Textbox findTextbox(By by) {
-        return new TextboxImpl(this, by);
+        return new WebTextbox(this, by);
     }
 
     /**
@@ -344,7 +345,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Textbox findTextbox(ByNG by) {
-        return new TextboxImpl(this, getByNGType(by));
+        return new WebTextbox(this, getByNGType(by));
     }
 
     /**
@@ -358,7 +359,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/ButtonImpl.java
      */
     public Button findButton(By by) {
-        return new ButtonImpl(this, by);
+        return new WebButton(this, by);
     }
 
     /**
@@ -372,7 +373,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Button findButton(ByNG by) {
-        return new ButtonImpl(this, getByNGType(by));
+        return new WebButton(this, getByNGType(by));
     }
 
     /**
@@ -386,7 +387,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/CheckboxImpl.java
      */
     public Checkbox findCheckbox(By by) {
-        return new CheckboxImpl(this, by);
+        return new WebCheckbox(this, by);
     }
 
     /**
@@ -400,7 +401,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Checkbox findCheckbox(ByNG by) {
-        return new CheckboxImpl(this, getByNGType(by));
+        return new WebCheckbox(this, getByNGType(by));
     }
 
     /**
@@ -414,7 +415,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/LabelImpl.java
      */
     public Label findLabel(By by) {
-        return new LabelImpl(this, by);
+        return new WebLabel(this, by);
     }
 
     /**
@@ -428,7 +429,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Label findLabel(ByNG by) {
-        return new LabelImpl(this, getByNGType(by));
+        return new WebLabel(this, getByNGType(by));
     }
 
     /**
@@ -442,7 +443,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/LinkImpl.java
      */
     public Link findLink(By by) {
-        return new LinkImpl(this, by);
+        return new WebLink(this, by);
     }
 
     /**
@@ -456,7 +457,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Link findLink(ByNG by) {
-        return new LinkImpl(this, getByNGType(by));
+        return new WebLink(this, getByNGType(by));
     }
 
     /**
@@ -470,7 +471,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/ListboxImpl.java
      */
     public Listbox findListbox(By by) {
-        return new ListboxImpl(this, by);
+        return new WebListbox(this, by);
     }
 
     /**
@@ -484,7 +485,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public Listbox findListbox(ByNG by) {
-        return new ListboxImpl(this, getByNGType(by));
+        return new WebListbox(this, getByNGType(by));
     }
 
     /**
@@ -498,7 +499,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/RadioGroupImpl.java
      */
     public RadioGroup findRadioGroup(By by) {
-        return new RadioGroupImpl(this, by);
+        return new WebRadioGroup(this, by);
     }
 
     /**
@@ -512,7 +513,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
     public RadioGroup findRadioGroup(ByNG by) {
-        return new RadioGroupImpl(this, getByNGType(by));
+        return new WebRadioGroup(this, getByNGType(by));
     }
 
     /**
@@ -525,7 +526,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://selenium.googlecode.com/git/docs/api/java/org/openqa/selenium/WebDriver.html#findElement-org.openqa.selenium.By-
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/WebtableImpl.java
      */
-    public Webtable findWebtable(By by) {
+    public Table findWebtable(By by) {
         return new WebtableImpl(this, by);
     }
 
@@ -539,7 +540,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/interfaces/impl/WebtableImpl.java
      * @see http://github.com/Orasi/Selenium-Java-Core/blob/master/src/main/java/com/orasi/core/by/angular/ByNG.java
      */
-    public Webtable findWebtable(ByNG by) {
+    public Table findWebtable(ByNG by) {
         return new WebtableImpl(this, getByNGType(by));
     }
 

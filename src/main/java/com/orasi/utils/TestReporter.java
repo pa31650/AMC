@@ -43,7 +43,7 @@ public class TestReporter {
     private static int debugLevel = 0;
 
     /**
-     * 
+     *
      * @param level
      *            - Options below <br/>
      *            TestReporter.NONE : (Default) - No additional info printed to console <br/>
@@ -140,9 +140,9 @@ public class TestReporter {
     }
 
     public static void log(String message) {
-        Reporter.log(getTimestamp() + " <i><b>" + getClassPath() + message + "</b></i><br />");
+        Reporter.log(getTimestamp() + "  LOG :: " + getClassPath() + message + "<br />");
         if (getPrintToConsole()) {
-            System.out.println(getTimestamp() + getClassPath() + trimHtml(message));
+            System.out.println(getTimestamp() + "  LOG :: " + getClassPath() + trimHtml(message));
         }
     }
 
@@ -155,7 +155,7 @@ public class TestReporter {
 
     /**
      * Use to output low-level granular steps
-     * 
+     *
      * @param message
      */
     public static void logTrace(String message) {
@@ -167,7 +167,7 @@ public class TestReporter {
 
     /**
      * Use to output useful information such as URL's, parameters, and RQ/RS
-     * 
+     *
      * @param message
      */
     public static void logInfo(String message) {
@@ -179,7 +179,7 @@ public class TestReporter {
 
     /**
      * Use to output useful information such as URL's, parameters, and RQ/RS
-     * 
+     *
      * @param message
      */
     public static void logDebug(String message) {

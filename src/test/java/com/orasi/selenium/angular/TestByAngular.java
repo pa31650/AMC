@@ -10,13 +10,13 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.by.angular.ByNG;
-import com.orasi.selenium.by.angular.WaitForAngularRequestsToFinish;
-import com.orasi.selenium.by.angular.internal.ByAngular;
-import com.orasi.selenium.by.angular.internal.ByAngularButtonText;
-import com.orasi.selenium.by.angular.internal.ByAngularController;
-import com.orasi.selenium.by.angular.internal.ByAngularModel;
-import com.orasi.selenium.by.angular.internal.ByAngularRepeater;
+import com.orasi.selenium.web.by.angular.ByNG;
+import com.orasi.selenium.web.by.angular.WaitForAngularRequestsToFinish;
+import com.orasi.selenium.web.by.angular.internal.ByAngular;
+import com.orasi.selenium.web.by.angular.internal.ByAngularButtonText;
+import com.orasi.selenium.web.by.angular.internal.ByAngularController;
+import com.orasi.selenium.web.by.angular.internal.ByAngularModel;
+import com.orasi.selenium.web.by.angular.internal.ByAngularRepeater;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;

@@ -9,8 +9,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.interfaces.Textbox;
-import com.orasi.selenium.interfaces.impl.TextboxImpl;
+import com.orasi.selenium.elements.Textbox;
+import com.orasi.selenium.web.webelements.WebTextbox;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;
@@ -44,7 +44,7 @@ public class TestTextbox extends TestEnvironment {
     @Title("constructor")
     @Test(groups = { "regression", "interfaces", "textbox" })
     public void constructorWithElement() {
-        Assert.assertNotNull((new TextboxImpl(getDriver().findWebElement((By.id("text1"))))));
+        Assert.assertNotNull((new WebTextbox(getDriver().findWebElement((By.id("text1"))))));
     }
 
     @Features("Element Interfaces")
@@ -52,7 +52,7 @@ public class TestTextbox extends TestEnvironment {
     @Title("constructorWithElement")
     @Test(groups = { "regression", "interfaces", "textbox" })
     public void constructorWithElementAndDriver() {
-        Assert.assertNotNull(new TextboxImpl(getDriver(), By.id("text1")));
+        Assert.assertNotNull(new WebTextbox(getDriver(), By.id("text1")));
     }
 
     @Features("Element Interfaces")

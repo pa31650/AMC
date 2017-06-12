@@ -11,9 +11,9 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.orasi.selenium.elements.Listbox;
 import com.orasi.selenium.exceptions.OptionNotInListboxException;
-import com.orasi.selenium.interfaces.Listbox;
-import com.orasi.selenium.interfaces.impl.ListboxImpl;
+import com.orasi.selenium.web.webelements.WebListbox;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;
@@ -50,7 +50,7 @@ public class TestListbox extends TestEnvironment {
     @Title("constructor")
     @Test(groups = { "regression", "interfaces", "listbox" })
     public void constructorWithElement() {
-        Assert.assertNotNull((new ListboxImpl(getDriver().findWebElement((By.id("singleSelect"))))));
+        Assert.assertNotNull((new WebListbox(getDriver().findWebElement((By.id("singleSelect"))))));
     }
 
     /*

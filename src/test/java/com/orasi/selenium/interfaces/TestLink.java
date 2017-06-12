@@ -10,8 +10,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.interfaces.Link;
-import com.orasi.selenium.interfaces.impl.LinkImpl;
+import com.orasi.selenium.elements.Link;
+import com.orasi.selenium.web.webelements.WebLink;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;
@@ -45,8 +45,8 @@ public class TestLink extends TestEnvironment {
     @Title("constructor")
     @Test(groups = { "regression", "interfaces", "link" })
     public void constructorWithElement() {
-        Assert.assertNotNull((new LinkImpl(getDriver().findWebElement(By.xpath("//a[@href='testLinks.html']")))));
-        Assert.assertNotNull((new LinkImpl(getDriver().findLink(By.xpath("//a[@href='testLinks.html']")))));
+        Assert.assertNotNull((new WebLink(getDriver().findWebElement(By.xpath("//a[@href='testLinks.html']")))));
+        Assert.assertNotNull((new WebLink(getDriver().findLink(By.xpath("//a[@href='testLinks.html']")))));
     }
 
     @Features("Element Interfaces")

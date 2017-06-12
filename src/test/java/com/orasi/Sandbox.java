@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import com.orasi.utils.dataProviders.JsonDataProvider;
 
-public class Sandbox {
+public class Sandbox extends BaseTest {
 
     @DataProvider(name = "dp")
     public Object[][] dp() {
@@ -14,10 +14,6 @@ public class Sandbox {
 
     @Test(dataProvider = "dp")
     public void test(String iterationName, String username, String password, String role) {
-        System.out.println(iterationName);
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(role);
-        System.out.println();
+
     }
 }

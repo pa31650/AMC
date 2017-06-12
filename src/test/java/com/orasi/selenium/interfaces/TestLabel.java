@@ -9,8 +9,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.orasi.selenium.interfaces.Label;
-import com.orasi.selenium.interfaces.impl.LabelImpl;
+import com.orasi.selenium.elements.Label;
+import com.orasi.selenium.web.webelements.WebLabel;
 import com.orasi.utils.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;
@@ -44,7 +44,7 @@ public class TestLabel extends TestEnvironment {
     @Title("constructor")
     @Test(groups = { "regression", "interfaces", "label" })
     public void constructorWithElement() {
-        Assert.assertNotNull((new LabelImpl(getDriver().findWebElement((By.xpath("//*[@id='radioForm']/label[1]"))))));
+        Assert.assertNotNull((new WebLabel(getDriver().findWebElement((By.xpath("//*[@id='radioForm']/label[1]"))))));
     }
 
     @Features("Element Interfaces")
