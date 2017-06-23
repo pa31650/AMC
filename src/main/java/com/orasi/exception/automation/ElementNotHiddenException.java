@@ -1,7 +1,7 @@
 package com.orasi.exception.automation;
 
 import com.orasi.exception.AutomationException;
-import com.orasi.utils.OrasiDriver;
+import com.orasi.selenium.web.OrasiDriver;
 
 public class ElementNotHiddenException extends AutomationException {
 

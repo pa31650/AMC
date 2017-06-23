@@ -21,7 +21,7 @@ import org.openqa.selenium.internal.BuildInfo;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.orasi.utils.OrasiDriver;
+import com.orasi.selenium.web.OrasiDriver;
 
 @SuppressWarnings("deprecation")
 public class AutomationException extends RuntimeException {

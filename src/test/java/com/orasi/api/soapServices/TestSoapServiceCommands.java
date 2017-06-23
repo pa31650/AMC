@@ -3,7 +3,7 @@ package com.orasi.api.soapServices;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.orasi.utils.TestEnvironment;
+import com.orasi.selenium.web.TestEnvironment;
 
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
