@@ -30,7 +30,7 @@ public class TicketPurchaseFlow extends TestEnvironment{
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment" })
     public void setup(@Optional String runLocation, String browserUnderTest,
 	    String browserVersion, String operatingSystem, String environment) {
-    	setApplicationUnderTest("BLUESOURCE");
+    	setApplicationUnderTest("AMC");
 		setBrowserUnderTest(browserUnderTest);
 		setBrowserVersion(browserVersion);
 		setOperatingSystem(operatingSystem);
@@ -47,6 +47,15 @@ public class TicketPurchaseFlow extends TestEnvironment{
         
     @Test
     public void ticketPurchaseFlow(){
+    	//[Home] Open AMC website
+    	
+    	//[Home] Click Get Tickets for movie
+    	//[Movie] Choose time for same day/tomorrow if no more times
+    	//[Ticket Type] Select Adult/Child/Senior tickets
+    	//[Ticket Type] Continue
+    	//[Confirm Purchase] Enter contact info
+    	//[Confirm Purchase] Enter payment info
+    	//[Confirm Purchase] Click purchase
     	
     }
     

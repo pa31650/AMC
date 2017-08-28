@@ -16,6 +16,7 @@ public class Homepage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
+	
 		
 	/**Constructor**/
 	public Homepage(OrasiDriver driver){
@@ -24,5 +25,4 @@ public class Homepage {
 	}
 	
 	/**Page Interactions**/
-
 }
