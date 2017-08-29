@@ -1,8 +1,6 @@
 package com.orasi.utils;
 
 import java.io.File;
-import java.util.Calendar;
-
 
 public class Constants {
 
@@ -25,12 +23,6 @@ public class Constants {
     /** Location of tnsnames in project */
     final static public String TNSNAMES_PATH = "/database/";
     		
-    /** An alias for File.separator */
-    final static public String DIR_SEPARATOR = File.separator;
-    
-    /** The current path of the project */ 
-    final static public String CURRENT_DIR = determineCurrentPath();
-
     /** The location screenshots are to be stored */
     final static public String SCREENSHOT_FOLDER = CURRENT_DIR + "selenium-reports" + DIR_SEPARATOR + "html" + DIR_SEPARATOR + "screenshots"  ;
     
@@ -42,41 +34,44 @@ public class Constants {
     
     /** The default timeout in seconds, should be a generous default time */
     final static public int DEFAULT_GLOBAL_DRIVER_TIMEOUT = 10;
+    /*
+     * File system info
+     */
+    public final static String DIR_SEPARATOR = File.separator;
+    public final static String CURRENT_DIR = determineCurrentPath()
 
-    /** The timeout (seconds) for finding web elements on a page, shouldn't be too long */
-    static public int ELEMENT_TIMEOUT = 3;
-    
-    /** The timeout (seconds) for page/DOM/transitions, should also be a generous */
-    static public int PAGE_TIMEOUT = 10;
-   
-	public static boolean defaultSyncHandler = true;
-	public static int millisecondsToPollForElement = 250;
+    /*
+     * Selenium Constants
+     */
+    public final static String DRIVERS_PATH_LOCAL = "/drivers/";
+    public final static String DRIVERS_PATH_REMOTE = "C:\\Selenium\\WebDrivers\\";
+    public final static String SCREENSHOT_FOLDER = CURRENT_DIR + "selenium-reports" + DIR_SEPARATOR + "html" + DIR_SEPARATOR + "screenshots";
+    public final static int DEFAULT_GLOBAL_DRIVER_TIMEOUT = 10;
+    public final static int ELEMENT_TIMEOUT = 3;
+    public final static int PAGE_TIMEOUT = 10;
+    public final static int MILLISECONDS_TO_POLL_FOR_ELEMENT = 250;
 
-	/**
-	 * Set on how to handle element sync failures. True will cause the sync to throw an exception  while false will just have the element sync return a boolean
-	 * 
-	 * @param syncHandler True/False 
-	 * @version 1/14/2016
-	 * @author Justin Phlegar
-	 */
-	public static void setSyncToFailTest(boolean syncHandler) {
-		defaultSyncHandler = syncHandler;
-	}
-	/**
+    /*
+     * Test constants
+     */
+    public final static String ENVIRONMENT_URL_PATH = "EnvironmentURLs";
+    public final static String USER_CREDENTIALS_PATH = "UserCredentials";
+    public final static String SANDBOX_PATH = "/sandbox/";
+    public final static String TNSNAMES_PATH = "/database/";
+
+    /**
      * Defaults to "./" if there's an exception of any sort.
+     *
      * @warning Exceptions are swallowed.
      * @return Constants.DIR_SEPARATOR
      */
     final private static String determineCurrentPath() {
         try {
-            return (new File(".").getCanonicalPath()) + Constants.DIR_SEPARATOR; 
+            return (new File(".").getCanonicalPath()) + Constants.DIR_SEPARATOR;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return "." + Constants.DIR_SEPARATOR;
     }
 
-
-
 }
-
