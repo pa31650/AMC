@@ -1,0 +1,13 @@
+{
+  "testData": [
+    {
+      "iterationName": "Login with Admin Role",
+      "data": [
+        {
+          "name": "MovieTitle",
+          "value": "Logan Lucky"
+        }
+      ]
+    }
+  ]
+}

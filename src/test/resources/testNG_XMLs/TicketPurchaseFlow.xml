@@ -15,7 +15,7 @@
  	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
 
 		<classes>
-			<class name="com.ameCapitalization" />
+			<class name="com.amc.TicketPurchaseFlow" />
 		</classes>
 	</test> 
 </suite> <!-- Suite -->

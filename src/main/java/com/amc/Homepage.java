@@ -16,13 +16,17 @@ public class Homepage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
+	@FindBy(xpath="//*[@class='PosterContent']//*[text()='" + getMovieTitle() + "']/following::a[1]") private Button btnGetTickets;
 	
-		
+	
 	/**Constructor**/
 	public Homepage(OrasiDriver driver){
 		this.driver = driver;
 		ElementFactory.initElements(driver, this);
 	}
-	
+
 	/**Page Interactions**/
+	public void GetTickets(){
+		btnGetTickets.click();
+	}
 }
