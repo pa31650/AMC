@@ -16,7 +16,7 @@ public class Homepage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
-	@FindBy(xpath="//*[@class='PosterContent']//*[text()='" + getMovieTitle() + "']/following::a[1]") private Button btnGetTickets;
+	//@FindBy(xpath="//*[@class='PosterContent']//*[text()='" + getMovieTitle() + "']/following::a[1]") private Button btnGetTickets;
 	
 	
 	/**Constructor**/
@@ -26,7 +26,7 @@ public class Homepage {
 	}
 
 	/**Page Interactions**/
-	public void GetTickets(){
+	/*public void GetTickets(){
 		btnGetTickets.click();
-	}
+	}*/
 }

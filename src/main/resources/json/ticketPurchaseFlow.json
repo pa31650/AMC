@@ -1,10 +1,10 @@
 {
   "testData": [
     {
-      "iterationName": "Login with Admin Role",
+      "iterationName": "Get tickets to Logan Lucky",
       "data": [
         {
-          "name": "MovieTitle",
+          "name": "movieTitle",
           "value": "Logan Lucky"
         }
       ]

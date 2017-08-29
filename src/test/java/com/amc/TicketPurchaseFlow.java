@@ -11,6 +11,7 @@ import com.orasi.utils.Randomness;
 import com.orasi.utils.Sleeper;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.dataProviders.CSVDataProvider;
 import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.orasi.utils.dataProviders.JsonDataProvider;
 import com.orasi.utils.date.SimpleDate;
@@ -25,9 +26,9 @@ public class TicketPurchaseFlow extends TestEnvironment{
 	// ************* *
 	// Data Provider
 	// **************
-	@DataProvider(name = "TicketPurchaseFlow", parallel=true)
+	@DataProvider(name = "munkycheez", parallel=true)
 	public Object[][] scenarios() {
-		return new JsonDataProvider().getData("/json/TicketPurchaseFlow.json");
+		return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
 		//return new ExcelDataProvider("/testdata/sample.xlsx", "Data").getTestData();
 	}
 	
@@ -50,13 +51,14 @@ public class TicketPurchaseFlow extends TestEnvironment{
     	endTest("TestAlert", testResults);
     }
         
-    @Test(dataProvider = "TicketPurchaseFlow")
-    public void ticketPurchaseFlow(){
+    @Test(dataProvider = "munkycheez")
+    public void ticketPurchaseFlow(String movieTitle){
     	//[Home] Open AMC website
     	Homepage homepage = new Homepage(getDriver());
     	
-    	String xpathExpression = "//*[@class='PosterContent']//*[text()='" + MovieTitle + "']/following::a[1]";
+    	String xpathExpression = "//*[@class='PosterContent']//*[text()='" + movieTitle + "']/following::a[1]";
 		//click Get Tickets button
+    	
     	Button btnGetTickets = getDriver().findButton(By.xpath(xpathExpression));
     	
     	btnGetTickets.click();
