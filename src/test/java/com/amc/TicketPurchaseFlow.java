@@ -5,6 +5,7 @@ import java.sql.Array;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
@@ -57,22 +58,32 @@ public class TicketPurchaseFlow extends TestEnvironment{
     }
         
     @Test(dataProvider = "Sample")
-    public void ticketPurchaseFlow(String iterationName,String movieTitle,String theatre,String date, int tickets, String creditCard){
+    public void ticketPurchaseFlow(String iterationName,String movieTitle,String theatre,String date, String tickets, String creditCard){
     	    	
     	//[Home] Open AMC website
     	Homepage homepage = new Homepage(getDriver());
 
+    	//[Home] Click on Showtimes element
+    	homepage.ClickShowtimes();
+    	
     	//[Home] Click Get Tickets for movie
-		String xpathExpression = "//*[@class='PosterContent']//*[text()='" + movieTitle + "']/following::a[1]";
+		/*String xpathExpression = "//*[@class='PosterContent']//*[text()='" + movieTitle + "']/following::a[1]";
     	
     	Button btnGetTickets = getDriver().findButton(By.xpath(xpathExpression));
     	
-    	btnGetTickets.click();
+    	btnGetTickets.click();*/
 
     	//[Showtimes] Choose theatre
     	Showtimes showtimes = new Showtimes(getDriver());
-    	    	 	
+    	
     	showtimes.TheatreSearch(theatre);
+    	
+    	TestReporter.log("Theatre: " + theatre + " was searched for.");
+    	
+    	//showtimes.SelectTheatre(theatre);
+    	
+    	//[Showtimes] Choose Movie
+    	showtimes.ChooseMovie(movieTitle);
     	
     	//[Showtimes] Choose Day - "Today" or "YYYY-MM-DD"
     	showtimes.ChooseDay(date);
@@ -115,15 +126,11 @@ public class TicketPurchaseFlow extends TestEnvironment{
 			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
 			break;
 		}
-    	
-    	confirmPurchase.EnterCCInfo(creditCards.VISA_EXPIRED());
-    	
+    	    	
     	//[Confirm Purchase] Click purchase
     	confirmPurchase.ClickPurchaseButton();
     	
     	//[Confirm Purchase] Check for Error (and output message?)
     	TestReporter.assertTrue(confirmPurchase.ErrorExist(), "Ensuring that the Error label is present after clicking Purchase button with bad cc data.");
-    }
-    
-    
+    }    
 }

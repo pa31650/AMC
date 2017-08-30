@@ -17,7 +17,7 @@ public class Homepage {
 	
 	/**Page Elements**/
 	//@FindBy(xpath="//*[@class='PosterContent']//*[text()='" + getMovieTitle() + "']/following::a[1]") private Button btnGetTickets;
-	
+	@FindBy(xpath="//a[@href='/showtimes']") private Link lnkShowtimes;
 	
 	/**Constructor**/
 	public Homepage(OrasiDriver driver){
@@ -29,4 +29,7 @@ public class Homepage {
 	/*public void GetTickets(){
 		btnGetTickets.click();
 	}*/
+	public void ClickShowtimes(){
+		lnkShowtimes.click();
+	}
 }

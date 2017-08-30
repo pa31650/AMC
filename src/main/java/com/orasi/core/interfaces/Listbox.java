@@ -71,4 +71,6 @@ public interface Listbox extends Element {
     boolean isSelected(String option);
 
     boolean isMultiple();
+    
+    
 }

@@ -12,18 +12,23 @@ import com.orasi.core.interfaces.Webtable;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
 import com.orasi.utils.PageLoaded;
+import com.orasi.utils.TestReporter;
+import com.orasi.utils.date.DateTimeConversion;
 import com.orasi.utils.date.SimpleDate;
+
+import groovyjarjarantlr.collections.List;
 
 public class Showtimes {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
 	@FindBy(xpath="//div[@class='Showtimes-Action-Wrapper'][1]//*[@class='Showtimes-Action-Dropdown']") private Listbox lstTheatreDropdown;
-	@FindBy(className="TheatreSearchField-input txt--regular") private Textbox txtTheatreSearch;
-	@FindBy(className="Btn Btn--secondary TheatreFinder-searchFooter-selectBtn") private Button btnTheatreSearch;
-	@FindBy(className="Btn Btn--secondary TheatreFinder-searchFooter-selectBtn") private Button btnTheatreSelect;
+	@FindBy(xpath="//input") private Textbox txtTheatreSearch;
+	@FindBy(xpath="//button[contains(text(),'Search')]") private Button btnTheatreSearch;
+	@FindBy(xpath="//button[contains(text(),'Select')]") private Button btnTheatreSelect;
 	@FindBy(xpath="//div[@class='Showtimes-Action-Wrapper'][2]//*[@class='Showtimes-Action-Dropdown']") private Listbox lstDate;
-	@FindBy(xpath="//div[@class='Theatre-Wrapper-First'][1]//section//div[@class='Showtime'][1]//a[@class='Btn Btn--default']") private Button btnFirstShowtime;
+	@FindBy(xpath="//div[@class='Showtimes-Action-Wrapper'][3]//*[@class='Showtimes-Action-Dropdown']") private Listbox lstMovies;
+	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')]//div[@class='Showtime'][1]//a[@class='Btn Btn--default']") private Button btnFirstShowtime;
 		
 	/**Constructor**/
 	public Showtimes(OrasiDriver driver){
@@ -43,10 +48,13 @@ public class Showtimes {
 	public void TheatreSearch(String strSearch){
 		FindAnotherTheatre();
 		
+		txtTheatreSearch.syncVisible(3);
 		txtTheatreSearch.set(strSearch);
 		
+		btnTheatreSearch.syncVisible(3);
 		btnTheatreSearch.click();
 		
+		btnTheatreSelect.syncVisible(3);
 		btnTheatreSelect.click();
 	}
 		
@@ -56,14 +64,15 @@ public class Showtimes {
 	}
 	
 	public void ChooseDay(String strDay){
-		SimpleDate simpleDate = new SimpleDate();
 		
-		switch (strDay) {
+		switch (strDay.toUpperCase()) {
 		case "TODAY":
 			lstDate.select("Today");
 			break;
 		case "TOMORROW":
-			lstDate.selectValue(simpleDate.advanceDay(1).toString());
+			strDay = DateTimeConversion.getDaysOut("1", "yyyy-MM-dd");
+			lstDate.selectValue(strDay);
+			break;
 		default:
 			lstDate.selectValue(strDay);
 			break;
@@ -74,5 +83,19 @@ public class Showtimes {
 	public void ChooseFirstShowing() {
 		btnFirstShowtime.click();
 		
+	}
+
+	public void ChooseMovie(String movieTitle) {
+		lstMovies.syncVisible(3);
+		for(int i=0;i<=2;i++){
+		
+			try{
+				lstMovies.select(movieTitle);
+				break;
+			}
+			catch(Exception e){
+				TestReporter.logInfo(e.getMessage());
+			}
+		}		
 	}
 }

@@ -9,15 +9,15 @@
         },
         {
         	"name": "theatre",
-        	"value": "AMC Colonial 18"
+        	"value": "AMC Sugarloaf Mills 18"
         },
         {
         	"name": "date",
-        	"value": "Today"
+        	"value": "Tomorrow"
         },
         {
         	"name": "tickets",
-        	"value": 1
+        	"value": "1"
         },
         {
         	"name": "creditCard",

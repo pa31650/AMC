@@ -33,7 +33,9 @@ public class SelectTicketType {
 			
 	}
 	
-	public void AddAdultTickets(int intTickets){
+	public void AddAdultTickets(String tickets){
+		int intTickets = Integer.valueOf(tickets);
+		
 		for (int i = 0; i < intTickets; i++) {
 			AddAdultTicket();
 		}
