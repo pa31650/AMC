@@ -56,11 +56,19 @@ public class Showtimes {
 	}
 	
 	public void ChooseDay(String strDay){
-		if (strDay=="Today") {
+		SimpleDate simpleDate = new SimpleDate();
+		
+		switch (strDay) {
+		case "TODAY":
 			lstDate.select("Today");
-		} else {
+			break;
+		case "TOMORROW":
+			lstDate.selectValue(simpleDate.advanceDay(1).toString());
+		default:
 			lstDate.selectValue(strDay);
+			break;
 		}
+		
 	}
 
 	public void ChooseFirstShowing() {

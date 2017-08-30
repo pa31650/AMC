@@ -57,7 +57,7 @@ public class TicketPurchaseFlow extends TestEnvironment{
     }
         
     @Test(dataProvider = "Sample")
-    public void ticketPurchaseFlow(String iterationName,String movieTitle,String theatre,String date, int tickets){
+    public void ticketPurchaseFlow(String iterationName,String movieTitle,String theatre,String date, int tickets, String creditCard){
     	    	
     	//[Home] Open AMC website
     	Homepage homepage = new Homepage(getDriver());
@@ -96,9 +96,27 @@ public class TicketPurchaseFlow extends TestEnvironment{
     	confirmPurchase.EnterEmail(email.getEmail());
     	
     	//[Confirm Purchase] Enter payment info
-    	confirmPurchase.EnterCCInfo(CreditCards.MASTERCARD());
     	CreditCards creditCards = new CreditCards();
     	
+    	switch (creditCard.toUpperCase()) {
+		case "MC":
+			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
+			break;
+		case "MASTERCARD":
+			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
+			break;
+		case "VISA":
+			confirmPurchase.EnterCCInfo(creditCards.VISA());
+			break;
+		case "VISA_EXPIRED":
+			confirmPurchase.EnterCCInfo(creditCards.VISA_EXPIRED());
+			break;
+		default:
+			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
+			break;
+		}
+    	
+    	confirmPurchase.EnterCCInfo(creditCards.VISA_EXPIRED());
     	
     	//[Confirm Purchase] Click purchase
     	confirmPurchase.ClickPurchaseButton();

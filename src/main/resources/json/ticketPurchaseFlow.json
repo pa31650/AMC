@@ -18,6 +18,10 @@
         {
         	"name": "tickets",
         	"value": 1
+        },
+        {
+        	"name": "creditCard",
+        	"value": "VISA"
         }
       ]
     }
