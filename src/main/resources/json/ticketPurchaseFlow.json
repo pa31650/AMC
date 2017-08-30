@@ -4,8 +4,20 @@
       "iterationName": "Get tickets to Logan Lucky",
       "data": [
         {
-          "name": "movieTitle",
-          "value": "Logan Lucky"
+        	"name": "movieTitle",
+        	"value": "Logan Lucky"
+        },
+        {
+        	"name": "theatre",
+        	"value": "AMC Colonial 18"
+        },
+        {
+        	"name": "date",
+        	"value": "Today"
+        },
+        {
+        	"name": "tickets",
+        	"value": 1
         }
       ]
     }
