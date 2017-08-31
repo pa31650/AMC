@@ -3,16 +3,9 @@ package com.amc;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
-import com.orasi.core.interfaces.Element;
-import com.orasi.core.interfaces.Label;
-import com.orasi.core.interfaces.Link;
-import com.orasi.core.interfaces.Listbox;
-import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.Webtable;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
-import com.orasi.utils.PageLoaded;
-import com.orasi.utils.date.SimpleDate;
+import com.orasi.utils.TestReporter;
 
 public class SelectTicketTypePage {
 	private OrasiDriver driver = null;
@@ -43,5 +36,15 @@ public class SelectTicketTypePage {
 	
 	public void ClickContinueButton(){
 		btnContinue.click();
+	}
+
+	/**Test Functionality**/
+	public void selectTicketTypeComplete(String tickets) {
+		addAdultTickets(tickets);
+    	TestReporter.logStep(tickets + " Adult Ticket was selected.");
+    	
+    	//Continue
+    	ClickContinueButton();
+		
 	}
 }

@@ -12,7 +12,10 @@ import com.orasi.core.interfaces.Webtable;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
 import com.orasi.utils.PageLoaded;
+import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataHelpers.creditCards.CreditCard;
+import com.orasi.utils.dataHelpers.creditCards.CreditCards;
+import com.orasi.utils.dataHelpers.personFactory.Email;
 import com.orasi.utils.date.SimpleDate;
 
 import groovyjarjarantlr.collections.List;
@@ -64,5 +67,39 @@ public class ConfirmPurchasePage {
 	
 	public boolean errorExist(){
 		return lblError.isDisplayed();
+	}
+
+	public void confirmPurchasePageComplete(String creditCard) {
+    	Email email = new Email();
+    	
+    	String strEmailAddress = email.getEmail();
+    	enterEmail(strEmailAddress);
+    	
+    	TestReporter.logStep(strEmailAddress + " was entered for email address.");
+    	
+    	// Enter payment info
+    	CreditCards creditCards = new CreditCards();
+    	
+    	switch (creditCard.toUpperCase()) {
+		case "MC":
+			enterCCInfo(creditCards.MASTERCARD());
+			break;
+		case "MASTERCARD":
+			enterCCInfo(creditCards.MASTERCARD());
+			break;
+		case "VISA":
+			enterCCInfo(creditCards.VISA());
+			break;
+		case "VISA_EXPIRED":
+			enterCCInfo(creditCards.VISA_EXPIRED());
+			break;
+		default:
+			enterCCInfo(creditCards.MASTERCARD());
+			break;
+		}
+    	    	
+    	//Click purchase
+    	clickPurchaseButton();
+		
 	}
 }
