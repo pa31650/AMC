@@ -1,7 +1,7 @@
 {
   "testData": [
     {
-      "iterationName": "Get tickets to Logan Lucky",
+      "iterationName": "Ticket Purchase Happy Path",
       "data": [
         {
         	"name": "movieTitle",
@@ -9,7 +9,7 @@
         },
         {
         	"name": "theatre",
-        	"value": "AMC Sugarloaf Mills 18"
+        	"value": "AMC Southlake 24"
         },
         {
         	"name": "date",

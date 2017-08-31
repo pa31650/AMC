@@ -17,7 +17,7 @@ import com.orasi.utils.date.SimpleDate;
 
 import groovyjarjarantlr.collections.List;
 
-public class ConfirmPurchase {
+public class ConfirmPurchasePage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
@@ -31,13 +31,13 @@ public class ConfirmPurchase {
 	@FindBy(xpath="//h4[contains(text(),'Error')]") private Label lblError;
 			
 	/**Constructor**/
-	public ConfirmPurchase(OrasiDriver driver){
+	public ConfirmPurchasePage(OrasiDriver driver){
 		this.driver = driver;
 		ElementFactory.initElements(driver, this);
 	}
 
 	/**Page Interactions**/
-	public void EnterEmail(String strEmail){
+	public void enterEmail(String strEmail){
 		txtEmail.set(strEmail);
 	}
 	
@@ -49,11 +49,11 @@ public class ConfirmPurchase {
 		txtZip.set(strZip);
 	}*/
 	
-	public void ClickPurchaseButton(){
+	public void clickPurchaseButton(){
 		btnPurchase.click();
 	}
 
-	public void EnterCCInfo(CreditCard creditCard) {
+	public void enterCCInfo(CreditCard creditCard) {
 		txtCCNumber.set(creditCard.getCardNumber());
 		lstExpMonth.selectValue(creditCard.getExpireMonth());
 		lstExpYear.selectValue(creditCard.getExpireYear());
@@ -62,7 +62,7 @@ public class ConfirmPurchase {
 		
 	}
 	
-	public boolean ErrorExist(){
+	public boolean errorExist(){
 		return lblError.isDisplayed();
 	}
 }

@@ -14,7 +14,7 @@ import com.orasi.utils.OrasiDriver;
 import com.orasi.utils.PageLoaded;
 import com.orasi.utils.date.SimpleDate;
 
-public class SelectTicketType {
+public class SelectTicketTypePage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
@@ -22,22 +22,22 @@ public class SelectTicketType {
 	@FindBy(xpath="//button[contains(text(),'Continue')]") private Button btnContinue;
 			
 	/**Constructor**/
-	public SelectTicketType(OrasiDriver driver){
+	public SelectTicketTypePage(OrasiDriver driver){
 		this.driver = driver;
 		ElementFactory.initElements(driver, this);
 	}
 
 	/**Page Interactions**/
-	public void AddAdultTicket() {
+	public void addAdultTicket() {
 		btnAddAdultTicket.click();
 			
 	}
 	
-	public void AddAdultTickets(String tickets){
+	public void addAdultTickets(String tickets){
 		int intTickets = Integer.valueOf(tickets);
 		
 		for (int i = 0; i < intTickets; i++) {
-			AddAdultTicket();
+			addAdultTicket();
 		}
 	}
 	

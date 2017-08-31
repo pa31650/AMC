@@ -35,7 +35,6 @@ public class TicketPurchaseFlow extends TestEnvironment{
 	@DataProvider(name = "Sample", parallel=true)
 	public Object[][] scenarios() {
 		return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
-		//return new ExcelDataProvider("/testdata/sample.xlsx", "Data").getTestData();
 	}
 	
 	@BeforeMethod
@@ -61,76 +60,85 @@ public class TicketPurchaseFlow extends TestEnvironment{
     public void ticketPurchaseFlow(String iterationName,String movieTitle,String theatre,String date, String tickets, String creditCard){
     	    	
     	//[Home] Open AMC website
-    	Homepage homepage = new Homepage(getDriver());
+    	HomePage homePage = new HomePage(getDriver());
 
     	//[Home] Click on Showtimes element
-    	homepage.ClickShowtimes();
+    	homePage.clickShowtimes();
     	
-    	//[Home] Click Get Tickets for movie
-		/*String xpathExpression = "//*[@class='PosterContent']//*[text()='" + movieTitle + "']/following::a[1]";
-    	
-    	Button btnGetTickets = getDriver().findButton(By.xpath(xpathExpression));
-    	
-    	btnGetTickets.click();*/
-
     	//[Showtimes] Choose theatre
-    	Showtimes showtimes = new Showtimes(getDriver());
+    	ShowtimesPage showtimesPage = new ShowtimesPage(getDriver());
     	
-    	showtimes.TheatreSearch(theatre);
+    	showtimesPage.theatreSearch(theatre);
     	
-    	TestReporter.log("Theatre: " + theatre + " was searched for.");
-    	
-    	//showtimes.SelectTheatre(theatre);
-    	
+    	TestReporter.log("Theatre: " + theatre + " was selected.");
+    	    	
     	//[Showtimes] Choose Movie
-    	showtimes.ChooseMovie(movieTitle);
+    	showtimesPage.chooseMovie(movieTitle);
+    	TestReporter.logStep("Movie Title: " + movieTitle + " was selected.");
     	
     	//[Showtimes] Choose Day - "Today" or "YYYY-MM-DD"
-    	showtimes.ChooseDay(date);
+    	showtimesPage.chooseDay(date);
+    	TestReporter.logStep("Date: " + date + " was selected.");
+    	
+    	boolean reservedSeating = showtimesPage.isReservedSeatingAvail();
     	
     	//[Showtimes] Choose first showtime of the day at selected theatre
-    	showtimes.ChooseFirstShowing();
+    	showtimesPage.chooseFirstShowing(); 	
+    	
+    	//[SelectSeat] Choose seat if theatre provides reserved seating service
+    	if (reservedSeating) {
+			SelectSeatPage selectSeatPage = new SelectSeatPage(getDriver());
+			
+			Integer intSeats = Integer.valueOf(tickets);
+			
+			selectSeatPage.chooseOpenSeats(intSeats);
+			
+			selectSeatPage.btnContinue();
+			
+		}
     	
     	//[Ticket Type] Select Adult/Child/Senior tickets
-    	SelectTicketType selectTicketType = new SelectTicketType(getDriver());
+    	SelectTicketTypePage selectTicketTypePage = new SelectTicketTypePage(getDriver());
     	
-    	selectTicketType.AddAdultTickets(tickets);
+    	selectTicketTypePage.addAdultTickets(tickets);
+    	TestReporter.logStep(tickets + " Adult Ticket was selected.");
     	
     	//[Ticket Type] Continue
-    	selectTicketType.ClickContinueButton();
+    	selectTicketTypePage.ClickContinueButton();
     	
     	//[Confirm Purchase] Enter email address
-    	ConfirmPurchase confirmPurchase = new ConfirmPurchase(getDriver());
+    	ConfirmPurchasePage confirmPurchasePage = new ConfirmPurchasePage(getDriver());
     	
     	Email email = new Email();
     	    	
-    	confirmPurchase.EnterEmail(email.getEmail());
+    	confirmPurchasePage.enterEmail(email.getEmail());
+    	TestReporter.logStep(email.getEmail() + " was entered for email address.");
     	
     	//[Confirm Purchase] Enter payment info
     	CreditCards creditCards = new CreditCards();
     	
     	switch (creditCard.toUpperCase()) {
 		case "MC":
-			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
+			confirmPurchasePage.enterCCInfo(creditCards.MASTERCARD());
 			break;
 		case "MASTERCARD":
-			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
+			confirmPurchasePage.enterCCInfo(creditCards.MASTERCARD());
 			break;
 		case "VISA":
-			confirmPurchase.EnterCCInfo(creditCards.VISA());
+			confirmPurchasePage.enterCCInfo(creditCards.VISA());
 			break;
 		case "VISA_EXPIRED":
-			confirmPurchase.EnterCCInfo(creditCards.VISA_EXPIRED());
+			confirmPurchasePage.enterCCInfo(creditCards.VISA_EXPIRED());
 			break;
 		default:
-			confirmPurchase.EnterCCInfo(creditCards.MASTERCARD());
+			confirmPurchasePage.enterCCInfo(creditCards.MASTERCARD());
 			break;
 		}
     	    	
     	//[Confirm Purchase] Click purchase
-    	confirmPurchase.ClickPurchaseButton();
+    	confirmPurchasePage.clickPurchaseButton();
     	
     	//[Confirm Purchase] Check for Error (and output message?)
-    	TestReporter.assertTrue(confirmPurchase.ErrorExist(), "Ensuring that the Error label is present after clicking Purchase button with bad cc data.");
+    	TestReporter.assertTrue(confirmPurchasePage.errorExist(), "Ensuring that the Error label is present after clicking Purchase button with bad cc data.");
     }    
 }

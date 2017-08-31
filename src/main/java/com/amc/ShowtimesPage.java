@@ -18,7 +18,7 @@ import com.orasi.utils.date.SimpleDate;
 
 import groovyjarjarantlr.collections.List;
 
-public class Showtimes {
+public class ShowtimesPage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
@@ -29,24 +29,38 @@ public class Showtimes {
 	@FindBy(xpath="//div[@class='Showtimes-Action-Wrapper'][2]//*[@class='Showtimes-Action-Dropdown']") private Listbox lstDate;
 	@FindBy(xpath="//div[@class='Showtimes-Action-Wrapper'][3]//*[@class='Showtimes-Action-Dropdown']") private Listbox lstMovies;
 	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')]//div[@class='Showtime'][1]//a[@class='Btn Btn--default']") private Button btnFirstShowtime;
+	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')][1]//div[contains(@class,'Showtimes-Section-First')][1]//div[contains(text(),'Reserved Seating')]") private Label lblReservedSeating;
 		
 	/**Constructor**/
-	public Showtimes(OrasiDriver driver){
+	public ShowtimesPage(OrasiDriver driver){
 		this.driver = driver;
 		ElementFactory.initElements(driver, this);
 	}
 
 	/**Page Interactions**/
-	public void SelectTheatre(String strTheatre){
-		lstTheatreDropdown.select(strTheatre);
+	public void selectTheatre(String strTheatre){
+		lstTheatreDropdown.syncVisible(3);
+		
+		for(int i=0;i<=2;i++){
+		
+			try{
+				lstTheatreDropdown.select(strTheatre);
+				break;
+			}
+			catch(Exception e){
+				TestReporter.logInfo(e.getMessage());
+			}
+		}				
 	}
 	
-	public void FindAnotherTheatre(){
-		SelectTheatre("Find Another Theatre...");
+	public void findAnotherTheatre(){
+		selectTheatre("Find Another Theatre...");
 	}
 	
-	public void TheatreSearch(String strSearch){
-		FindAnotherTheatre();
+	public void theatreSearch(String strSearch){
+		findAnotherTheatre();
+		
+		PageLoaded.isDomComplete(driver);
 		
 		txtTheatreSearch.syncVisible(3);
 		txtTheatreSearch.set(strSearch);
@@ -56,14 +70,16 @@ public class Showtimes {
 		
 		btnTheatreSelect.syncVisible(3);
 		btnTheatreSelect.click();
+		
+		selectTheatre(strSearch);
 	}
 		
-	public void FindGSOTheatre(){
-		FindAnotherTheatre();
-		TheatreSearch("27409");	
+	public void findGSOTheatre(){
+		findAnotherTheatre();
+		theatreSearch("27409");	
 	}
 	
-	public void ChooseDay(String strDay){
+	public void chooseDay(String strDay){
 		
 		switch (strDay.toUpperCase()) {
 		case "TODAY":
@@ -80,12 +96,12 @@ public class Showtimes {
 		
 	}
 
-	public void ChooseFirstShowing() {
+	public void chooseFirstShowing() {
 		btnFirstShowtime.click();
 		
 	}
 
-	public void ChooseMovie(String movieTitle) {
+	public void chooseMovie(String movieTitle) {
 		lstMovies.syncVisible(3);
 		for(int i=0;i<=2;i++){
 		
@@ -98,4 +114,13 @@ public class Showtimes {
 			}
 		}		
 	}
+
+	public boolean isReservedSeatingAvail() {
+		
+		return lblReservedSeating.isDisplayed();
+	}
+	
+	/**Test Functionality**/
+	
+	
 }

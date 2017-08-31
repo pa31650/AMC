@@ -12,7 +12,7 @@ import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
 import com.orasi.utils.PageLoaded;
 
-public class Homepage {
+public class HomePage {
 	private OrasiDriver driver = null;
 	
 	/**Page Elements**/
@@ -20,7 +20,7 @@ public class Homepage {
 	@FindBy(xpath="//a[@href='/showtimes']") private Link lnkShowtimes;
 	
 	/**Constructor**/
-	public Homepage(OrasiDriver driver){
+	public HomePage(OrasiDriver driver){
 		this.driver = driver;
 		ElementFactory.initElements(driver, this);
 	}
@@ -29,7 +29,7 @@ public class Homepage {
 	/*public void GetTickets(){
 		btnGetTickets.click();
 	}*/
-	public void ClickShowtimes(){
+	public void clickShowtimes(){
 		lnkShowtimes.click();
 	}
 }
