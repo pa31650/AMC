@@ -77,27 +77,9 @@ public class ConfirmPurchasePage {
     	
     	TestReporter.logStep(strEmailAddress + " was entered for email address.");
     	
-    	// Enter payment info
-    	CreditCards creditCards = new CreditCards();
-    	
-    	switch (creditCard.toUpperCase()) {
-		case "MC":
-			enterCCInfo(creditCards.MASTERCARD());
-			break;
-		case "MASTERCARD":
-			enterCCInfo(creditCards.MASTERCARD());
-			break;
-		case "VISA":
-			enterCCInfo(creditCards.VISA());
-			break;
-		case "VISA_EXPIRED":
-			enterCCInfo(creditCards.VISA_EXPIRED());
-			break;
-		default:
-			enterCCInfo(creditCards.MASTERCARD());
-			break;
-		}
-    	    	
+    	// Enter payment info  	
+    	enterCCInfo(CreditCards.getCreditCardByType(creditCard));
+    	    	    	
     	//Click purchase
     	clickPurchaseButton();
 		

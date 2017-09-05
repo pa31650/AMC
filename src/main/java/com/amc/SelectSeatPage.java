@@ -22,6 +22,7 @@ import com.orasi.core.interfaces.Webtable;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
 import com.orasi.utils.PageLoaded;
+import com.orasi.utils.TestReporter;
 import com.orasi.utils.date.SimpleDate;
 
 public class SelectSeatPage {
@@ -49,7 +50,9 @@ public class SelectSeatPage {
 			String xpathExpression = "//span[contains(text(),'" + seat + "')]";
 			Element elmSeat = driver.findElement(By.xpath(xpathExpression));
 			elmSeat.click();
+			TestReporter.logStep("Seat " + seat + " was selected.");
 		}	
+		TestReporter.logStep(intSeats + " seat(s) were selected.");
 	}
 	
 	public List findOpenSeats(int intSeats){
@@ -60,7 +63,7 @@ public class SelectSeatPage {
 			String openSeat = findOpenSeat(strSeat);
 			
 			seats.add(openSeat);
-			strSeat = moveNextSeat(strSeat);
+			strSeat = moveNextSeat(openSeat);
 		}
 		return seats;
 	}
@@ -69,7 +72,7 @@ public class SelectSeatPage {
 		String strSeat = startSeat;
 		
 		while (!isSeatOpen(strSeat)) {
-			moveNextSeat(strSeat);
+			strSeat = moveNextSeat(strSeat);
 		}
 		
 		return strSeat;
@@ -80,21 +83,21 @@ public class SelectSeatPage {
 		String xpathExpression = "//*[contains(@aria-label,'Available')]//span[contains(text(),'" + strSeat + "')]";
 		Checkbox chkSeat = driver.findCheckbox(By.xpath(xpathExpression));
 		
-		return chkSeat.isEnabled();
+		return chkSeat.syncVisible(1,false);
 	}
 	
 	public boolean isSeat(String strSeat){
 		String xpathExpression = "//span[contains(text(),'" + strSeat + "')]";
 		Element elmSeat = driver.findElement(By.xpath(xpathExpression));
 		
-		return elmSeat.isEnabled();
+		return elmSeat.syncVisible(1,false);
 	}
 	
 	public boolean isSeatSelected(String strSeat){
 		String xpathExpression = "//*[contains(@class,'is-selected')]//span[contains(text(),'" + strSeat + "')]";
 		Checkbox chkSeat = driver.findCheckbox(By.xpath(xpathExpression));
 		
-		return chkSeat.isEnabled();
+		return chkSeat.syncVisible(1,false);
 	}
 	
 	public String moveNextSeat(String strSeat){
@@ -119,7 +122,10 @@ public class SelectSeatPage {
 		while (!isSeat(strSeat)) {
 			char value = strSeatRow.charAt(0);
 			int nextValue = (int)value + 1; // find the int value plus 1
-			strSeatRow = String.valueOf(nextValue);
+			
+			char x = (char)nextValue;
+			strSeatRow = String.valueOf(x);
+			strSeatNumber = "1";
 			strSeat =  strSeatRow + strSeatNumber;
 		}
 		
