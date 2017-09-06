@@ -1,7 +1,7 @@
-package com.amc.api.theatres;
+package com.amc.api.theatres.objects;
 
 
-public class Response {
+public class TheatreResponse {
 
 private Integer pageSize;
 private Integer pageNumber;

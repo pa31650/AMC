@@ -19,9 +19,9 @@ public class TicketPurchaseFlow extends TestEnvironment{
 	}
 	
 	@BeforeMethod
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment" })
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "mobileOSVersion" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, String mobileOSVersion) {
     	setApplicationUnderTest("AMC");
 		setBrowserUnderTest(browserUnderTest);
 		setBrowserVersion(browserVersion);
@@ -29,6 +29,7 @@ public class TicketPurchaseFlow extends TestEnvironment{
 		setRunLocation(runLocation);
 		setTestEnvironment(environment);
 		setThreadDriver(true);
+		setMobileOSVersion(mobileOSVersion);
 		testStart("TicketPurchaseFlow");
 	}
     

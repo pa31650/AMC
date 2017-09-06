@@ -1,7 +1,7 @@
-package com.amc.api.theatres;
+package com.amc.api.theatres.showtimes.objects;
 
 
-public class Self {
+public class HttpsApiAmctheatresComRelsV2Theatre {
 
 private String href;
 private Boolean templated;
@@ -23,5 +23,4 @@ this.templated = templated;
 }
 
 }
-
 

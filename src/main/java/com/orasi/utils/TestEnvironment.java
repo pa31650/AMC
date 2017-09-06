@@ -438,7 +438,7 @@ public class TestEnvironment {
         }
         // Code for running on mobile devices
         else if (runLocation.equalsIgnoreCase("mobile")) {
-            mobileDriverSetup();
+            mobileDriverSetupBeta();
         } else {
             throw new AutomationException(
                     "Parameter for run [Location] was not set to 'Local', 'Grid', 'Sauce', 'Mobile'");
@@ -615,17 +615,20 @@ public class TestEnvironment {
             // Which mobile OS platform to use, e.g. iOS, Android
             caps.setCapability("platformName", operatingSystem);
             // Mobile OS version, e.g. 7.1, 4.4
-            caps.setCapability("platformVersion", mobileOSVersion);
+            caps.setCapability(CapabilityType.VERSION, mobileOSVersion);
             // Name of mobile web browser to automate. Should be an empty string if automating an app instead
-            caps.setCapability("browserName", browserUnderTest);
-            // The absolute local path or remote http URL to an .ipa or .apk file, or a .zip containing one of these.
-            // leave browserUnderTest blank/null if using this
-            caps.setCapability("app", mobileAppPath);
+            caps.setCapability(CapabilityType.BROWSER_NAME, browserUnderTest);
         } else {
             caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
             caps.setCapability("deviceName", deviceID);
         }
-
+        
+        if (browserUnderTest.isEmpty()) {
+            // The absolute local path or remote http URL to an .ipa or .apk file, or a .zip containing one of these.
+            // leave browserUnderTest blank/null if using this
+            caps.setCapability("app", mobileAppPath);
+		} 
+        
         try {
             setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
         } catch (MalformedURLException e) {
@@ -680,6 +683,42 @@ public class TestEnvironment {
                 return Platform.YOSEMITE;
             default:
                 throw new AutomationException("OS is not in supported list of platforms: " + os);
+        }
+    }
+    private void mobileDriverSetupBeta() {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("platform", "ANDROID");
+        caps.setCapability("deviceName", "T01130JFGT");
+        caps.setCapability("app", "");
+        caps.setCapability("platformName", "ANDROID");
+        caps.setCapability("applicationName", "T01130JFGT");
+        caps.setCapability("udid", "T01130JFGT");
+        caps.setCapability("browserName", "chrome");
+        
+        
+        /*// if a device ID is specified, go to that device
+        if (deviceID.isEmpty()) {
+            // Which mobile OS platform to use, e.g. iOS, Android
+            caps.setCapability("platformName", operatingSystem);
+            // Mobile OS version, e.g. 7.1, 4.4
+            caps.setCapability(CapabilityType.VERSION, mobileOSVersion);
+            // Name of mobile web browser to automate. Should be an empty string if automating an app instead
+            caps.setCapability(CapabilityType.BROWSER_NAME, browserUnderTest);
+        } else {
+            caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
+            caps.setCapability("deviceName", deviceID);
+        }
+        
+        if (browserUnderTest.isEmpty()) {
+            // The absolute local path or remote http URL to an .ipa or .apk file, or a .zip containing one of these.
+            // leave browserUnderTest blank/null if using this
+            caps.setCapability("app", mobileAppPath);
+		} */
+        
+        try {
+            setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
+        } catch (MalformedURLException e) {
+            throw new AutomationException("Could not generate the moblile remote driver", e);
         }
     }
 

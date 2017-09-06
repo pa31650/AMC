@@ -1,4 +1,4 @@
-package com.amc.api.showtimes;
+package com.amc.api.theatres.showtimes.objects;
 
 
 public class Response {

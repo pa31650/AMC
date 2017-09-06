@@ -1,4 +1,4 @@
-package com.amc.api.theatres;
+package com.amc.api.theatres.objects;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.amc.api.theatres;
+package com.amc.api.theatres.objects;
 
 
-public class Next {
+public class Self {
 
 private String href;
 private Boolean templated;
@@ -23,4 +23,5 @@ this.templated = templated;
 }
 
 }
+
 

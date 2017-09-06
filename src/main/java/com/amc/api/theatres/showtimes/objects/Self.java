@@ -1,7 +1,7 @@
-package com.amc.api.showtimes;
+package com.amc.api.theatres.showtimes.objects;
 
 
-public class HttpsApiAmctheatresComRelsV2SeatingLayout {
+public class Self {
 
 private String href;
 private Boolean templated;
