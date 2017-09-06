@@ -1,4 +1,4 @@
-package com.amc.api.theatres.objects;
+package com.amc.api.common.attributes;
 
 import java.util.HashMap;
 import java.util.Map;

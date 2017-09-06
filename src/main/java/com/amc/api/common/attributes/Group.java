@@ -1,21 +1,23 @@
-package com.amc.api.theatres.objects;
+package com.amc.api.common.attributes;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Attribute {
+public class Group {
 
-private String code;
+private Integer id;
 private String name;
 private String description;
+private Integer sort;
+private Links links;
 private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-public String getCode() {
-return code;
+public Integer getId() {
+return id;
 }
 
-public void setCode(String code) {
-this.code = code;
+public void setId(Integer id) {
+this.id = id;
 }
 
 public String getName() {
@@ -32,6 +34,22 @@ return description;
 
 public void setDescription(String description) {
 this.description = description;
+}
+
+public Integer getSort() {
+return sort;
+}
+
+public void setSort(Integer sort) {
+this.sort = sort;
+}
+
+public Links getLinks() {
+return links;
+}
+
+public void setLinks(Links links) {
+this.links = links;
 }
 
 public Map<String, Object> getAdditionalProperties() {

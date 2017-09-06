@@ -1,23 +1,20 @@
-package com.amc.api.theatres.objects;
+package com.amc.api.common.attributes;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Embedded {
 
-private List<Theatre> theatres = null;
+private List<Attribute> attributes = null;
 private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-public List<Theatre> getTheatres() {
-return theatres;
+public List<Attribute> getAttributes() {
+return attributes;
 }
 
-public void setTheatres(List<Theatre> theatres) {
-this.theatres = theatres;
+public void setAttributes(List<Attribute> attributes) {
+this.attributes = attributes;
 }
 
 public Map<String, Object> getAdditionalProperties() {
@@ -29,4 +26,5 @@ this.additionalProperties.put(name, value);
 }
 
 }
+
 

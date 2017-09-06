@@ -1,28 +1,19 @@
-package com.amc.api.theatres.objects;
+package com.amc.api.showtimes.objects;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Self {
+public class Languages {
 
-private String href;
-private Boolean templated;
+private String spoken;
 private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-public String getHref() {
-return href;
+public String getSpoken() {
+return spoken;
 }
 
-public void setHref(String href) {
-this.href = href;
-}
-
-public Boolean getTemplated() {
-return templated;
-}
-
-public void setTemplated(Boolean templated) {
-this.templated = templated;
+public void setSpoken(String spoken) {
+this.spoken = spoken;
 }
 
 public Map<String, Object> getAdditionalProperties() {

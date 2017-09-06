@@ -1,9 +1,9 @@
-package com.amc.api.theatres.objects;
+package com.amc.api.common.attributes;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Self {
+public class HttpsApiAmctheatresComRelsV2Media {
 
 private String href;
 private Boolean templated;

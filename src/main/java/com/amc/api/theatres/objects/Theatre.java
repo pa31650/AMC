@@ -2,178 +2,228 @@ package com.amc.api.theatres.objects;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Theatre {
 
-private Integer id;
-private String longName;
-private String name;
-private String showtimesPhoneNumber;
-private String guestServicesPhoneNumber;
-private String timezone;
-private String slug;
-private String facebookUrl;
-private String websiteUrl;
-private String ticketable;
-private List<Attribute> attributes = null;
-private Location location;
-private Media media;
-private Links_ links;
-private List<String> redemptionMethods = null;
-private List<String> concessionsDeliveryOptions = null;
-private Double convenienceFeeTaxPercent;
-private Integer convenienceFeeTaxFlatAmount;
-private String brand;
+	@JsonIgnoreProperties(ignoreUnknown = true)
+    private Integer id;
+    private String longName;
+    private String name;
+    private String showtimesPhoneNumber;
+    private String guestServicesPhoneNumber;
+    private String timezone;
+    private String slug;
+    private String facebookUrl;
+    private String websiteUrl;
+    private String ticketable;
+    private List<Attribute> attributes = null;
+    private Location location;
+    private Media media;
+    @JsonProperty("_links")
+    private Links links;
+    private List<String> redemptionMethods = null;
+    private List<String> concessionsDeliveryOptions = null;
+    private Double convenienceFeeTaxPercent;
+    private Integer convenienceFeeTaxFlatAmount;
+    private String brand;
+    private String westWorldMediaNumber;
+    private String loyaltyVersionId;
+    private String onlineConcessions;
+    private String deliveryToSeat;
+    private String utcOffset;
 
-public Integer getId() {
-return id;
-}
+    public Integer getId() {
+        return id;
+    }
 
-public void setId(Integer id) {
-this.id = id;
-}
+    public String getUtcOffset() {
+        return utcOffset;
+    }
 
-public String getLongName() {
-return longName;
-}
+    public void setUtcOffset(String utcOffset) {
+        this.utcOffset = utcOffset;
+    }
 
-public void setLongName(String longName) {
-this.longName = longName;
-}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-public String getName() {
-return name;
-}
+    public String getLongName() {
+        return longName;
+    }
 
-public void setName(String name) {
-this.name = name;
-}
+    public void setLongName(String longName) {
+        this.longName = longName;
+    }
 
-public String getShowtimesPhoneNumber() {
-return showtimesPhoneNumber;
-}
+    public String getName() {
+        return name;
+    }
 
-public void setShowtimesPhoneNumber(String showtimesPhoneNumber) {
-this.showtimesPhoneNumber = showtimesPhoneNumber;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public String getGuestServicesPhoneNumber() {
-return guestServicesPhoneNumber;
-}
+    public String getShowtimesPhoneNumber() {
+        return showtimesPhoneNumber;
+    }
 
-public void setGuestServicesPhoneNumber(String guestServicesPhoneNumber) {
-this.guestServicesPhoneNumber = guestServicesPhoneNumber;
-}
+    public void setShowtimesPhoneNumber(String showtimesPhoneNumber) {
+        this.showtimesPhoneNumber = showtimesPhoneNumber;
+    }
 
-public String getTimezone() {
-return timezone;
-}
+    public String getGuestServicesPhoneNumber() {
+        return guestServicesPhoneNumber;
+    }
 
-public void setTimezone(String timezone) {
-this.timezone = timezone;
-}
+    public void setGuestServicesPhoneNumber(String guestServicesPhoneNumber) {
+        this.guestServicesPhoneNumber = guestServicesPhoneNumber;
+    }
 
-public String getSlug() {
-return slug;
-}
+    public String getTimezone() {
+        return timezone;
+    }
 
-public void setSlug(String slug) {
-this.slug = slug;
-}
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
 
-public String getFacebookUrl() {
-return facebookUrl;
-}
+    public String getSlug() {
+        return slug;
+    }
 
-public void setFacebookUrl(String facebookUrl) {
-this.facebookUrl = facebookUrl;
-}
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
 
-public String getWebsiteUrl() {
-return websiteUrl;
-}
+    public String getFacebookUrl() {
+        return facebookUrl;
+    }
 
-public void setWebsiteUrl(String websiteUrl) {
-this.websiteUrl = websiteUrl;
-}
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl = facebookUrl;
+    }
 
-public String getTicketable() {
-return ticketable;
-}
+    public String getWebsiteUrl() {
+        return websiteUrl;
+    }
 
-public void setTicketable(String ticketable) {
-this.ticketable = ticketable;
-}
+    public void setWebsiteUrl(String websiteUrl) {
+        this.websiteUrl = websiteUrl;
+    }
 
-public List<Attribute> getAttributes() {
-return attributes;
-}
+    public String getTicketable() {
+        return ticketable;
+    }
 
-public void setAttributes(List<Attribute> attributes) {
-this.attributes = attributes;
-}
+    public void setTicketable(String ticketable) {
+        this.ticketable = ticketable;
+    }
 
-public Location getLocation() {
-return location;
-}
+    public List<Attribute> getAttributes() {
+        return attributes;
+    }
 
-public void setLocation(Location location) {
-this.location = location;
-}
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
+    }
 
-public Media getMedia() {
-return media;
-}
+    public Location getLocation() {
+        return location;
+    }
 
-public void setMedia(Media media) {
-this.media = media;
-}
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
-public Links_ getLinks() {
-return links;
-}
+    public Media getMedia() {
+        return media;
+    }
 
-public void setLinks(Links_ links) {
-this.links = links;
-}
+    public void setMedia(Media media) {
+        this.media = media;
+    }
 
-public List<String> getRedemptionMethods() {
-return redemptionMethods;
-}
+    public Links getLinks() {
+        return links;
+    }
 
-public void setRedemptionMethods(List<String> redemptionMethods) {
-this.redemptionMethods = redemptionMethods;
-}
+    public void setLinks(Links links) {
+        this.links = links;
+    }
 
-public List<String> getConcessionsDeliveryOptions() {
-return concessionsDeliveryOptions;
-}
+    public List<String> getRedemptionMethods() {
+        return redemptionMethods;
+    }
 
-public void setConcessionsDeliveryOptions(List<String> concessionsDeliveryOptions) {
-this.concessionsDeliveryOptions = concessionsDeliveryOptions;
-}
+    public void setRedemptionMethods(List<String> redemptionMethods) {
+        this.redemptionMethods = redemptionMethods;
+    }
 
-public Double getConvenienceFeeTaxPercent() {
-return convenienceFeeTaxPercent;
-}
+    public List<String> getConcessionsDeliveryOptions() {
+        return concessionsDeliveryOptions;
+    }
 
-public void setConvenienceFeeTaxPercent(Double convenienceFeeTaxPercent) {
-this.convenienceFeeTaxPercent = convenienceFeeTaxPercent;
-}
+    public void setConcessionsDeliveryOptions(List<String> concessionsDeliveryOptions) {
+        this.concessionsDeliveryOptions = concessionsDeliveryOptions;
+    }
 
-public Integer getConvenienceFeeTaxFlatAmount() {
-return convenienceFeeTaxFlatAmount;
-}
+    public Double getConvenienceFeeTaxPercent() {
+        return convenienceFeeTaxPercent;
+    }
 
-public void setConvenienceFeeTaxFlatAmount(Integer convenienceFeeTaxFlatAmount) {
-this.convenienceFeeTaxFlatAmount = convenienceFeeTaxFlatAmount;
-}
+    public void setConvenienceFeeTaxPercent(Double convenienceFeeTaxPercent) {
+        this.convenienceFeeTaxPercent = convenienceFeeTaxPercent;
+    }
 
-public String getBrand() {
-return brand;
-}
+    public Integer getConvenienceFeeTaxFlatAmount() {
+        return convenienceFeeTaxFlatAmount;
+    }
 
-public void setBrand(String brand) {
-this.brand = brand;
-}
+    public void setConvenienceFeeTaxFlatAmount(Integer convenienceFeeTaxFlatAmount) {
+        this.convenienceFeeTaxFlatAmount = convenienceFeeTaxFlatAmount;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getWestWorldMediaNumber() {
+        return westWorldMediaNumber;
+    }
+
+    public void setWestWorldMediaNumber(String westWorldMediaNumber) {
+        this.westWorldMediaNumber = westWorldMediaNumber;
+    }
+
+    public String getLoyaltyVersionId() {
+        return loyaltyVersionId;
+    }
+
+    public void setLoyaltyVersionId(String loyaltyVersionId) {
+        this.loyaltyVersionId = loyaltyVersionId;
+    }
+
+    public String getOnlineConcessions() {
+        return onlineConcessions;
+    }
+
+    public void setOnlineConcessions(String onlineConcessions) {
+        this.onlineConcessions = onlineConcessions;
+    }
+
+    public String getDeliveryToSeat() {
+        return deliveryToSeat;
+    }
+
+    public void setDeliveryToSeat(String deliveryToSeat) {
+        this.deliveryToSeat = deliveryToSeat;
+    }
 
 }

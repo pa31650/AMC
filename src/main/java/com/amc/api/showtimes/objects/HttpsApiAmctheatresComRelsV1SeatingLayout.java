@@ -1,9 +1,9 @@
-package com.amc.api.theatres.objects;
+package com.amc.api.showtimes.objects;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Self {
+public class HttpsApiAmctheatresComRelsV1SeatingLayout {
 
 private String href;
 private Boolean templated;

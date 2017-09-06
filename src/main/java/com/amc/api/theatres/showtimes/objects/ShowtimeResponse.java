@@ -1,7 +1,7 @@
 package com.amc.api.theatres.showtimes.objects;
 
 
-public class Response {
+public class ShowtimeResponse {
 
 private Integer pageSize;
 private Integer pageNumber;
