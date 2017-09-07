@@ -24,6 +24,7 @@ public class ShowtimesPage {
 	@FindBy(xpath="//option[@value='all']/..") private Listbox lstMovies;
 	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')]//div[@class='Showtime'][1]//a[@class='Btn Btn--default']") private Button btnFirstShowtime;
 	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')][1]//div[contains(@class,'Showtimes-Section-First')][1]//div[contains(text(),'Reserved Seating')]") private Label lblReservedSeating;
+	@FindBy(xpath="//*[contains(@class,'No-Showtimes-First')]//p") private Label lblNoShowtimes;
 		
 	/**Constructor**/
 	public ShowtimesPage(OrasiDriver driver){
@@ -91,7 +92,12 @@ public class ShowtimesPage {
 	}
 
 	public void chooseFirstShowing() {
-		btnFirstShowtime.click();
+		if (lblNoShowtimes.syncEnabled(1,false)) {
+            TestReporter.logStep("No Showings available at preferred theatre");
+        } else {
+            btnFirstShowtime.click();
+            TestReporter.logStep("First Showing of the day chosen.");
+        }
 		
 	}
 

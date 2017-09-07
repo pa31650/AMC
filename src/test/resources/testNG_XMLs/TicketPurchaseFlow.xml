@@ -8,10 +8,10 @@
 	</listeners>
 	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="prod" />
-	<parameter name="runLocation" value="mobile" />
+	<parameter name="runLocation" value="grid" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="ANDROID" />
-	<parameter name="mobileOSVersion" value="5.1" />
+	<parameter name="operatingSystem" value="windows" />
+	<parameter name="mobileOSVersion" value="" />
 
  	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
 

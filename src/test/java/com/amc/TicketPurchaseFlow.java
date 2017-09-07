@@ -57,8 +57,7 @@ public class TicketPurchaseFlow extends TestEnvironment{
     	boolean reservedSeating = showtimesPage.isReservedSeatingAvail();
     	
     	showtimesPage.chooseFirstShowing();
-    	TestReporter.logStep("First Showing of the day chosen.");
-    	
+    	    	
     	//[SelectSeat] Choose seat if theatre provides reserved seating service
     	if (reservedSeating) {
 			SelectSeatPage selectSeatPage = new SelectSeatPage(getDriver());

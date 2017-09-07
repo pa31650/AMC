@@ -526,7 +526,7 @@ public class TestEnvironment {
 
                 break;
             case "html":
-                caps = DesiredCapabilities.htmlUnitWithJs();
+                caps = DesiredCapabilities.htmlUnit();
                 break;
             case "safari":
                 caps = DesiredCapabilities.safari();
@@ -716,6 +716,7 @@ public class TestEnvironment {
 		} */
         
         try {
+            
             setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
         } catch (MalformedURLException e) {
             throw new AutomationException("Could not generate the moblile remote driver", e);
