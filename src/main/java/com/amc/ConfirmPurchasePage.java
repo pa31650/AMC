@@ -66,15 +66,18 @@ public class ConfirmPurchasePage {
 	}
 
 	public void confirmPurchasePageComplete(String creditCard) {
-    	Email email = new Email();
+	    //Enter Delivery Info
+        /*if (lstDeliveryTimes.syncVisible(5,false)) {
+            completeDeliveryInfo();
+        } */      
+        	    
+	    Email email = new Email();
     	
     	String strEmailAddress = email.getEmail();
     	enterEmail(strEmailAddress);
     	
     	TestReporter.logStep(strEmailAddress + " was entered for email address.");
     	
-    	//Enter Delivery Info
-    	completeDeliveryInfo();
     	
     	// Enter payment info  	
     	enterCCInfo(CreditCards.getCreditCardByType(creditCard));

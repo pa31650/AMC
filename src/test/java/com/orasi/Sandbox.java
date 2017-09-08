@@ -1,65 +1,54 @@
 package com.orasi;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
-import com.amc.FoodDrinksPage;
-import com.amc.api.AMC;
-import com.amc.api.v2.theatres.objects.Theatre;
-import com.amc.api.v2.theatres.objects.TheatreResponse;
-import com.amc.api.v2.theatres.showtimes.objects.ShowtimeResponse;
-import com.orasi.api.restServices.ResponseCodes;
-import com.orasi.api.restServices.RestResponse;
-import com.orasi.utils.TestReporter;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Sandbox extends AMC{
+public class Sandbox {
 
-    /*@Test
-    public void GetShowtimes() {
-        RestResponse rest = AMC.showtimes().getShowtimes("59229828");
-        TestReporter.logAPI(rest.getStatusCode() == ResponseCodes.OK, "Get showtime: 59229828", rest);        
-    }
+    
+    private AndroidDriver<MobileElement> driver;
     
     @Test
-    public void GetShowtimesForTheatre() {
-    	RestResponse rest = AMC.theatreShowtimes().getShowtimes("7");
-    	TestReporter.logAPI(rest.getStatusCode() == ResponseCodes.OK, "Get showtimes for theatre '7'", rest);
-    }
-    
-    @Test
-    
-    public void GetAllTheatres(){
-
-        //Get SKU for Adult Ticket
-        RestResponse rest = AMC.theatres().getTheatres();
-    	TestReporter.logAPI(rest.getStatusCode() == ResponseCodes.OK, "Get all Theatres", rest);
-    	
-    	TheatreResponse theatres = rest.mapJSONToObject(TheatreResponse.class);
-        
-        for (Theatre theatre : theatres.getEmbedded().getTheatres()) {
-        System.out.println(theatre.getName()+ " - " + theatre.getId());
+    public void test(){
+        List<MobileElement> theatres = driver.findElements(By.xpath("//div[contains(@class,'TheatreFinder-theatre--mobile')]//div[contains(@class,'TheatreInfo')]//h4"));
+        for (MobileElement theatre : theatres) {
+           theatre.getAttribute("value");
+            
         }
-        
     }
-    @Test
-    public void GetSKU() {
-        
-        RestResponse rest = AMC.theatreShowtimes().getShowtimes(7, "09-08-2017", "Logan Lucky");
-        
-        ShowtimeResponse theatreshowtimes = rest.mapJSONToObject(ShowtimeResponse.class);
-                
-        TestReporter.logAPI(rest.getStatusCode() == ResponseCodes.OK, "Get showtimes for theatre id 7, 9/8/2017, Logan Lucky",rest);
-        
-        String sku = theatreshowtimes.getEmbedded().getShowtimes().get(0).getTicketPrices().get(0).getSku();
-        
-        System.out.println(sku);
-        
-    }*/
-    
-    
-    
-    
-    
-    
-}
+    public void setUp() throws MalformedURLException {
+            
+            //Create object of DesiredCapabilities class
+            DesiredCapabilities cap = new DesiredCapabilities();
+            
+            //Set android platformName desired capability
+            cap.setCapability("platformName", "ANDROID");
+            
+            //Set android browserName desired capability
+            cap.setCapability("browserName", "chrome");
+            
+            //Set android version desired capability
+            cap.setCapability("version", "5.1");
+                        
+            //Set android device name desired capability
+            cap.setCapability("deviceName", "T01130JFGT");
+            
+            driver = new AndroidDriver<MobileElement>(new URL("http://192.168.227.2:4444/wd/hub"), cap);
+            try {
+                driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            } catch (WebDriverException e) {
+                System.out.println("The app failed to open");
+            }
+        }
+    }

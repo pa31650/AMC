@@ -1,5 +1,9 @@
 package com.amc;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
@@ -25,6 +29,7 @@ public class ShowtimesPage {
 	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')]//div[@class='Showtime'][1]//a[@class='Btn Btn--default']") private Button btnFirstShowtime;
 	@FindBy(xpath="//*[contains(@class,'Theatre-Wrapper-First')][1]//div[contains(@class,'Showtimes-Section-First')][1]//div[contains(text(),'Reserved Seating')]") private Label lblReservedSeating;
 	@FindBy(xpath="//*[contains(@class,'No-Showtimes-First')]//p") private Label lblNoShowtimes;
+	@FindBy(xpath="//i[contains(@alt,'Submit Search')]") private Button btnAltSearch;
 		
 	/**Constructor**/
 	public ShowtimesPage(OrasiDriver driver){
@@ -52,6 +57,7 @@ public class ShowtimesPage {
 	    PageLoaded.isDomComplete(driver);
 	    
 		selectTheatre("Find Another Theatre...");
+		TestReporter.logStep("Find Another Theatre... was selected.");
 	}
 	
 	public void theatreSearch(String strSearch){
@@ -60,16 +66,33 @@ public class ShowtimesPage {
 		
 		PageLoaded.isDomComplete(driver);
 		
-		txtTheatreSearch.syncVisible();
+		txtTheatreSearch.syncVisible(10);
 		txtTheatreSearch.set(strSearch);
+		TestReporter.logStep(strSearch + " was entered into the search box.");
 		
-		btnTheatreSearch.syncVisible();
-		btnTheatreSearch.click();
-		
-		btnTheatreSelect.syncVisible();
-		btnTheatreSelect.click();
-		
-		selectTheatre(strSearch);
+		if (btnTheatreSearch.syncVisible(5,false)) {
+		    btnTheatreSearch.click();
+        } else {
+            btnAltSearch.click();
+        }
+			
+		if (btnTheatreSelect.syncVisible(5,false)) {
+		    btnTheatreSelect.click();
+        } else {
+            //Get a list of theatre names displayed
+            List<WebElement> theatres = driver.findWebElements(By.xpath("//div[contains(@class,'TheatreFinder-theatre--mobile')]//div[contains(@class,'TheatreInfo')]//h4"));
+            for (WebElement theatre : theatres) {
+                //Iterate through them and match lcase with strtheatre
+                //new String(theatre.getText().toLowerCase()).equals(strSearch.toLowerCase());
+                if (new String(theatre.getText().toLowerCase()).equals(strSearch.toLowerCase())) {
+                    //click matching one
+                    theatre.click();
+                    break;
+                } 
+            }
+        }
+				
+		//selectTheatre(strSearch);
 	}
 		
 	public void findGSOTheatre(){
@@ -80,7 +103,7 @@ public class ShowtimesPage {
 	
 	public void chooseDay(String strDay){
 	    PageLoaded.isDomComplete(driver);
-	    lstDate.syncEnabled();
+	    lstDate.syncEnabled(10);
 		switch (strDay.toUpperCase()) {
 		case "TODAY":
 			lstDate.select("Today");
@@ -128,7 +151,7 @@ public class ShowtimesPage {
 
 	public boolean isReservedSeatingAvail() {
 	    PageLoaded.isDomComplete(driver);
-		return lblReservedSeating.syncVisible(null,false);
+		return lblReservedSeating.syncVisible(1,false);
 	}
 	
 	/**Test Functionality**/
@@ -136,7 +159,7 @@ public class ShowtimesPage {
 	    PageLoaded.isDomComplete(driver);
 		theatreSearch(theatre);
     	
-    	TestReporter.log("Theatre: " + theatre + " was selected.");
+    	TestReporter.logStep("Theatre: " + theatre + " was selected.");
     	    	
     	//Choose Movie
     	chooseMovie(movieTitle);

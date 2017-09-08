@@ -34,6 +34,7 @@ public class Theatre {
     private String onlineConcessions;
     private String deliveryToSeat;
     private String utcOffset;
+    private String outageDescription;
 
     public Integer getId() {
         return id;
@@ -225,6 +226,14 @@ public class Theatre {
 
     public void setDeliveryToSeat(String deliveryToSeat) {
         this.deliveryToSeat = deliveryToSeat;
+    }
+
+    public String getOutageDescription() {
+        return outageDescription;
+    }
+
+    public void setOutageDescription(String outageDescription) {
+        this.outageDescription = outageDescription;
     }
 
 }

@@ -1,32 +1,20 @@
 package com.amc;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.xpath.XPath;
-
-import org.apache.commons.collections.functors.ForClosure;
-import org.omg.CORBA.PRIVATE_MEMBER;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Checkbox;
 import com.orasi.core.interfaces.Element;
-import com.orasi.core.interfaces.Label;
-import com.orasi.core.interfaces.Link;
-import com.orasi.core.interfaces.Listbox;
-import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.Webtable;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
-import com.orasi.utils.PageLoaded;
 import com.orasi.utils.TestReporter;
-import com.orasi.utils.date.SimpleDate;
 
 public class SelectSeatPage {
-	String strBestSeat = "C4";
+	String strBestSeat = "A3";
 	
 	private OrasiDriver driver = null;
 

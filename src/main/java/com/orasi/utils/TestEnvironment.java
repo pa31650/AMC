@@ -7,8 +7,11 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariOptions;
@@ -18,6 +21,9 @@ import org.testng.ITestResult;
 import com.orasi.exception.AutomationException;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.saucerest.SauceREST;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 
 /**
  *
@@ -438,17 +444,19 @@ public class TestEnvironment {
         }
         // Code for running on mobile devices
         else if (runLocation.equalsIgnoreCase("mobile")) {
-            mobileDriverSetupBeta();
+            mobileDriverSetup();
         } else {
             throw new AutomationException(
                     "Parameter for run [Location] was not set to 'Local', 'Grid', 'Sauce', 'Mobile'");
         }
 
         // Set the timeouts to the defaults according to the constants class
-        getDriver().setElementTimeout(Constants.ELEMENT_TIMEOUT);
-        getDriver().setPageTimeout(Constants.PAGE_TIMEOUT);
-        getDriver().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
-
+        if (!getRunLocation().toLowerCase().contains("mobile")) {
+            getDriver().setElementTimeout(Constants.ELEMENT_TIMEOUT);
+            getDriver().setPageTimeout(Constants.PAGE_TIMEOUT);
+            getDriver().setScriptTimeout(Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT);
+        }         
+          
         // Microsoft Edge Browser
         if (!browserUnderTest.toLowerCase().contains("edge") && !getRunLocation().toLowerCase().contains("mobile")) {
             getDriver().manage().deleteAllCookies();
@@ -608,7 +616,7 @@ public class TestEnvironment {
      * @date 9/28/2016
      * @author jessica.marshall
      */
-    private void mobileDriverSetup() {
+    private void mobileDriverSetupOld() {
         DesiredCapabilities caps = new DesiredCapabilities();
         // if a device ID is specified, go to that device
         if (deviceID.isEmpty()) {
@@ -685,44 +693,31 @@ public class TestEnvironment {
                 throw new AutomationException("OS is not in supported list of platforms: " + os);
         }
     }
-    private void mobileDriverSetupBeta() {
+    
+    private void mobileDriverSetup() {
         
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platform", "ANDROID");
-        //caps.setCapability("deviceName", "T01130JFGT");
-        //caps.setCapability("app", "");
-        caps.setCapability("platformName", "ANDROID");
-        caps.setCapability("applicationName", "T01130JFGT");
-        //caps.setCapability("udid", "T01130JFGT");
-        caps.setCapability("browserName", "chrome");
-        caps.setCapability("platformVersion", "5.1");
+        //Create object of DesiredCapabilities class
+        DesiredCapabilities cap = new DesiredCapabilities();
         
+        //Set android platformName desired capability
+        cap.setCapability("platformName", "ANDROID");
         
-        /*// if a device ID is specified, go to that device
-        if (deviceID.isEmpty()) {
-            // Which mobile OS platform to use, e.g. iOS, Android
-            caps.setCapability("platformName", operatingSystem);
-            // Mobile OS version, e.g. 7.1, 4.4
-            caps.setCapability(CapabilityType.VERSION, mobileOSVersion);
-            // Name of mobile web browser to automate. Should be an empty string if automating an app instead
-            caps.setCapability(CapabilityType.BROWSER_NAME, browserUnderTest);
-        } else {
-            caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
-            caps.setCapability("deviceName", deviceID);
-        }
+        //Set android browserName desired capability
+        cap.setCapability("browserName", "chrome");
         
-        if (browserUnderTest.isEmpty()) {
-            // The absolute local path or remote http URL to an .ipa or .apk file, or a .zip containing one of these.
-            // leave browserUnderTest blank/null if using this
-            caps.setCapability("app", mobileAppPath);
-		} */
-       
+        //Set android version desired capability
+        cap.setCapability("version", "5.1");
+                    
+        //Set android device name desired capability
+        cap.setCapability("deviceName", "T01130JFGT");
+        
+        //driver = new AndroidDriver<MobileElement>(new URL("http://192.168.227.2:4444/wd/hub"), cap);
         try {
-            
-            setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
+            setDriver(new OrasiDriver(cap, new URL("http://192.168.227.2:4444/wd/hub")));
+            //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } catch (MalformedURLException e) {
-            throw new AutomationException("Could not generate the moblile remote driver", e);
-        }
+            System.out.println("The app failed to open");
+        }        
     }
 
 }

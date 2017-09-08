@@ -24,8 +24,7 @@ public class FoodDrinksPage {
 	@FindBy(xpath=("//a[contains(text(),'Shares')]")) private Button btnSharesMenu;
 	@FindBy(xpath=("//button[contains(text(),'Continue to Purchase')]")) private Button btnContinue;
 	@FindBy(xpath=("//div[@class='FDPromoModal-Content']//a[contains(text(),'No Thanks')]")) private Button btnPromoNoThanks;
-	
-	////h3[contains(text(),'Flatbread Pizza')]/../following-sibling::div/child::button
+	@FindBy(xpath=("//i[contains(@class,'arrow-right')]")) private Button btnArrowRight;
 		
 	/**Constructor**/
 	public FoodDrinksPage(OrasiDriver driver){
@@ -35,8 +34,14 @@ public class FoodDrinksPage {
 
 	/**Page Interactions**/
 	public void NavigatetoMealsTab() {
-	    btnMealsMenu.syncVisible();
-	    btnMealsMenu.click();
+	    if (btnMealsMenu.syncEnabled(5,false)) {
+	        btnMealsMenu.click();
+        } else {
+           btnArrowRight.click();
+           
+           btnMealsMenu.syncEnabled();
+           btnMealsMenu.click();
+        }	    
 	}
 	
 	private String GetAriaControls(Button button){
@@ -58,12 +63,14 @@ public class FoodDrinksPage {
 	    Listbox lstOption = driver.findListbox(By.xpath(xpathExpressionListbox));
 	    List<WebElement> options = lstOption.getOptions();
 	    
+	    lstOption.scrollIntoView();
 	    lstOption.selectValue(options.get(1).getAttribute("value"));
 	    
 	    String xpathExpressionAddtoOrder = "//div[contains(@id,'" + strAriaControls + "')]//div[contains(@class,'LoadingContainer-inline')][1]//button[contains(@class,'submit')]";
 	    Button btnAddtoOrder = driver.findButton(By.xpath(xpathExpressionAddtoOrder));
 	    
-	    btnAddtoOrder.click();
+	    btnAddtoOrder.scrollIntoView();
+	    btnAddtoOrder.focusClick();
 	    
 	    ClickContinuetoPurchase();
 	    
@@ -73,6 +80,7 @@ public class FoodDrinksPage {
 	}
 	
 	public void ClickContinuetoPurchase() {
+	    //btnContinue.focusClick();
 	    btnContinue.click();
 	}
 	

@@ -2,6 +2,8 @@ package com.orasi.utils;
 
 import java.io.File;
 
+import org.slf4j.impl.StaticMDCBinder;
+
 public class Constants {
 
     /*
@@ -20,6 +22,8 @@ public class Constants {
     public final static int ELEMENT_TIMEOUT = 3;
     public final static int PAGE_TIMEOUT = 10;
     public final static int MILLISECONDS_TO_POLL_FOR_ELEMENT = 250;
+    public final static int MOBILE_ELEMENT_TIMEOUT = 10;
+    public final static int MOBILE_PAGE_TIMEOUT = 20;
 
     /*
      * Test constants
