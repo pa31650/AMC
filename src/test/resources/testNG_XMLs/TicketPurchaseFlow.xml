@@ -8,7 +8,7 @@
 	</listeners>
 	<parameter name="browserUnderTest" value="chrome" />
 	<parameter name="environment" value="prod" />
-	<parameter name="runLocation" value="grid" />
+	<parameter name="runLocation" value="local" />
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="windows" />
 	<parameter name="mobileOSVersion" value="" />

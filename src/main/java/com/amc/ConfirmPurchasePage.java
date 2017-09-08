@@ -1,5 +1,7 @@
 package com.amc;
 
+import org.apache.poi.ss.formula.functions.Choose;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
@@ -16,9 +18,9 @@ import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataHelpers.creditCards.CreditCard;
 import com.orasi.utils.dataHelpers.creditCards.CreditCards;
 import com.orasi.utils.dataHelpers.personFactory.Email;
+import com.orasi.utils.dataHelpers.personFactory.Person;
 import com.orasi.utils.date.SimpleDate;
-
-import groovyjarjarantlr.collections.List;
+import java.util.List;
 
 public class ConfirmPurchasePage {
 	private OrasiDriver driver = null;
@@ -32,6 +34,8 @@ public class ConfirmPurchasePage {
 	@FindBy(xpath="//input[@placeholder='Zip']") private Textbox txtZip;
 	@FindBy(xpath="//button[contains(text(),'Purchase')]") private Button btnPurchase;
 	@FindBy(xpath="//h4[contains(text(),'Error')]") private Label lblError;
+	@FindBy(xpath="//input[@placeholder='Order Name']") private Textbox txtOrderName;
+	@FindBy(xpath="//option[contains(text(),'Select Time')]/..") private Listbox lstDeliveryTimes;
 			
 	/**Constructor**/
 	public ConfirmPurchasePage(OrasiDriver driver){
@@ -43,14 +47,6 @@ public class ConfirmPurchasePage {
 	public void enterEmail(String strEmail){
 		txtEmail.set(strEmail);
 	}
-	
-	/*public void EnterCCInfo(String strCCNumber,String strExpMonth,String strExpYear,String strCVV,String strZip){
-		txtCCNumber.set(strCCNumber);
-		lstExpMonth.selectValue(strExpMonth);
-		lstExpYear.selectValue(strExpYear);
-		txtCVV.set(strCVV);
-		txtZip.set(strZip);
-	}*/
 	
 	public void clickPurchaseButton(){
 		btnPurchase.click();
@@ -77,11 +73,33 @@ public class ConfirmPurchasePage {
     	
     	TestReporter.logStep(strEmailAddress + " was entered for email address.");
     	
+    	//Enter Delivery Info
+    	completeDeliveryInfo();
+    	
     	// Enter payment info  	
     	enterCCInfo(CreditCards.getCreditCardByType(creditCard));
     	    	    	
     	//Click purchase
     	clickPurchaseButton();
 		
+	}
+	
+	public void completeDeliveryInfo(){
+	    chooseEarliestDeliveryTime();
+	    
+	    enterOrderName();
+	    	    	    
+	}
+	
+	public void chooseEarliestDeliveryTime() { 
+	    List<WebElement> options = lstDeliveryTimes.getOptions();
+        
+        lstDeliveryTimes.selectValue(options.get(1).getAttribute("value"));   
+    }
+
+    public void enterOrderName() {
+	    Person person = new Person();
+        
+        txtOrderName.set(person.getFullName());
 	}
 }

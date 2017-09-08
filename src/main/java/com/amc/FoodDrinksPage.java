@@ -1,0 +1,79 @@
+package com.amc;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.orasi.core.interfaces.Button;
+import com.orasi.core.interfaces.Listbox;
+import com.orasi.core.interfaces.impl.internal.ElementFactory;
+import com.orasi.utils.OrasiDriver;
+
+public class FoodDrinksPage {
+	private OrasiDriver driver = null;
+	
+	/**Page Elements**/
+	@FindBy(xpath=("//a[contains(text(),'Meals')]")) private Button btnMealsMenu;
+	@FindBy(xpath=("//a[contains(text(),'Special Offers')]")) private Button btnSpecialOffersMenu;
+	@FindBy(xpath=("//a[contains(text(),'Combos')]")) private Button btnCombosMenu;
+	@FindBy(xpath=("//a[contains(text(),'Popcorn')]")) private Button btnPopcornMenu;
+	@FindBy(xpath=("//a[contains(text(),'Drinks')]")) private Button btnDrinksMenu;
+	@FindBy(xpath=("//a[contains(text(),'Treats')]")) private Button btnTreatsMenu;
+	@FindBy(xpath=("//a[contains(text(),'Shares')]")) private Button btnSharesMenu;
+	@FindBy(xpath=("//button[contains(text(),'Continue to Purchase')]")) private Button btnContinue;
+	@FindBy(xpath=("//div[@class='FDPromoModal-Content']//a[contains(text(),'No Thanks')]")) private Button btnPromoNoThanks;
+	
+	////h3[contains(text(),'Flatbread Pizza')]/../following-sibling::div/child::button
+		
+	/**Constructor**/
+	public FoodDrinksPage(OrasiDriver driver){
+		this.driver = driver;
+		ElementFactory.initElements(driver, this);
+	}
+
+	/**Page Interactions**/
+	public void NavigatetoMealsTab() {
+	    btnMealsMenu.syncVisible();
+	    btnMealsMenu.click();
+	}
+	
+	private String GetAriaControls(Button button){
+
+	    return button.getAttribute("aria-controls");
+	    
+	}
+	
+	public void ChooseFirstItemMeals(){
+	    String strAriaControls = GetAriaControls(btnMealsMenu);
+	    
+	    String xpathExpressionButton = "//div[contains(@id,'" + strAriaControls + "')]//div[contains(@class,'LoadingContainer-inline')][1]//button[contains(@aria-label,'Expand')]";
+	    Button btnCustomize = driver.findButton(By.xpath(xpathExpressionButton));
+	    
+	    btnCustomize.syncEnabled();
+	    btnCustomize.click();
+	    
+	    String xpathExpressionListbox = "//div[contains(@id,'" + strAriaControls + "')]//select[1]";
+	    Listbox lstOption = driver.findListbox(By.xpath(xpathExpressionListbox));
+	    List<WebElement> options = lstOption.getOptions();
+	    
+	    lstOption.selectValue(options.get(1).getAttribute("value"));
+	    
+	    String xpathExpressionAddtoOrder = "//div[contains(@id,'" + strAriaControls + "')]//div[contains(@class,'LoadingContainer-inline')][1]//button[contains(@class,'submit')]";
+	    Button btnAddtoOrder = driver.findButton(By.xpath(xpathExpressionAddtoOrder));
+	    
+	    btnAddtoOrder.click();
+	    
+	    ClickContinuetoPurchase();
+	    
+	    if(btnPromoNoThanks.syncEnabled(3,false)){
+	        btnPromoNoThanks.click();
+	    }
+	}
+	
+	public void ClickContinuetoPurchase() {
+	    btnContinue.click();
+	}
+	
+}

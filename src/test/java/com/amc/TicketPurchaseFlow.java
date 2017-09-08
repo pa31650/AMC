@@ -69,12 +69,21 @@ public class TicketPurchaseFlow extends TestEnvironment{
 			selectSeatPage.btnContinue();
 			
 		}
-    	
+    	    	
     	//[Ticket Type] Select Adult/Child/Senior tickets
     	SelectTicketTypePage selectTicketTypePage = new SelectTicketTypePage(getDriver());
     	
     	//[Ticket Type] Add adult tickets & Continue
     	selectTicketTypePage.selectTicketTypeComplete(tickets);
+
+        //[Food & Drinks] Select food item from Meals tab
+        FoodDrinksPage foodDrinksPage = new FoodDrinksPage(getDriver());
+        
+        //[Food & Drinks] Move to meals tab
+        foodDrinksPage.NavigatetoMealsTab();
+        
+        //[Food & Drinks] Choose first option
+        foodDrinksPage.ChooseFirstItemMeals();
     	
     	//[Confirm Purchase] Enter email address
     	ConfirmPurchasePage confirmPurchasePage = new ConfirmPurchasePage(getDriver());

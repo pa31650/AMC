@@ -7,11 +7,11 @@
 		<listener class-name="com.orasi.utils.listeners.TestListener" />
 	</listeners>
 	<parameter name="browserUnderTest" value="chrome" />
-	<parameter name="environment" value="local" />
+	<parameter name="environment" value="prod" />
 	<parameter name="runLocation" value="mobile" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="ANDROID" />
-	<parameter name="mobileOSVersion" value="5.1" />
+	<parameter name="operatingSystem" value="android" />
+	<parameter name="mobileOSVersion" value="" />
 
  	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
 

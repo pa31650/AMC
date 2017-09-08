@@ -3,6 +3,7 @@ package com.orasi;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.testng.annotations.Test;
 
+import com.amc.FoodDrinksPage;
 import com.amc.api.AMC;
 import com.amc.api.v2.theatres.objects.Theatre;
 import com.amc.api.v2.theatres.objects.TheatreResponse;
@@ -14,7 +15,7 @@ import com.orasi.utils.TestReporter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Sandbox extends AMC{
 
-    @Test
+    /*@Test
     public void GetShowtimes() {
         RestResponse rest = AMC.showtimes().getShowtimes("59229828");
         TestReporter.logAPI(rest.getStatusCode() == ResponseCodes.OK, "Get showtime: 59229828", rest);        
@@ -54,7 +55,9 @@ public class Sandbox extends AMC{
         
         System.out.println(sku);
         
-    }
+    }*/
+    
+    
     
     
     

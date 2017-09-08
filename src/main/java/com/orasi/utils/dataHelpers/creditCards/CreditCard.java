@@ -40,11 +40,11 @@ public class CreditCard {
     }
 
     public String getCardNumber() {
-        return Base64Coder.decodeString(cardNumber);
+        return cardNumber;
     }
 
     public String getSecurityCode() {
-        return Base64Coder.decodeString(securityCode);
+        return securityCode;
     }
 
     public String getCardType() {

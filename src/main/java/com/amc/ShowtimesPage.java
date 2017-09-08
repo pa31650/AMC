@@ -17,7 +17,7 @@ public class ShowtimesPage {
 	
 	/**Page Elements**/
 	@FindBy(xpath="//option[contains(@value,'another')]/..") private Listbox lstTheatreDropdown;
-	@FindBy(xpath="//input") private Textbox txtTheatreSearch;
+	@FindBy(xpath="//input[contains(@class,'TheatreSearchField-input')]") private Textbox txtTheatreSearch;
 	@FindBy(xpath="//button[contains(text(),'Search')]") private Button btnTheatreSearch;
 	@FindBy(xpath="//button[contains(text(),'Select')]") private Button btnTheatreSelect;
 	@FindBy(xpath="//option[contains(text(),'Today')]/..") private Listbox lstDate;
@@ -34,7 +34,7 @@ public class ShowtimesPage {
 
 	/**Page Interactions**/
 	public void selectTheatre(String strTheatre){
-		lstTheatreDropdown.syncVisible(3);
+	    PageLoaded.isDomComplete(driver);
 		
 		for(int i=0;i<=2;i++){
 		
@@ -49,33 +49,38 @@ public class ShowtimesPage {
 	}
 	
 	public void findAnotherTheatre(){
+	    PageLoaded.isDomComplete(driver);
+	    
 		selectTheatre("Find Another Theatre...");
 	}
 	
 	public void theatreSearch(String strSearch){
+	    PageLoaded.isDomComplete(driver);
 		findAnotherTheatre();
 		
 		PageLoaded.isDomComplete(driver);
 		
-		txtTheatreSearch.syncVisible(3);
+		txtTheatreSearch.syncVisible();
 		txtTheatreSearch.set(strSearch);
 		
-		btnTheatreSearch.syncVisible(3);
+		btnTheatreSearch.syncVisible();
 		btnTheatreSearch.click();
 		
-		btnTheatreSelect.syncVisible(3);
+		btnTheatreSelect.syncVisible();
 		btnTheatreSelect.click();
 		
 		selectTheatre(strSearch);
 	}
 		
 	public void findGSOTheatre(){
+	    PageLoaded.isDomComplete(driver);
 		findAnotherTheatre();
 		theatreSearch("27409");	
 	}
 	
 	public void chooseDay(String strDay){
-		
+	    PageLoaded.isDomComplete(driver);
+	    lstDate.syncEnabled();
 		switch (strDay.toUpperCase()) {
 		case "TODAY":
 			lstDate.select("Today");
@@ -91,18 +96,24 @@ public class ShowtimesPage {
 		
 	}
 
-	public void chooseFirstShowing() {
-		if (lblNoShowtimes.syncEnabled(1,false)) {
+	public boolean chooseFirstShowing() {
+	    PageLoaded.isDomComplete(driver);
+		boolean blnFirstShow;
+	    if (lblNoShowtimes.syncEnabled(5,false)) {
             TestReporter.logStep("No Showings available at preferred theatre");
+            blnFirstShow = false;
         } else {
             btnFirstShowtime.click();
             TestReporter.logStep("First Showing of the day chosen.");
+            blnFirstShow = true;
         }
+		return blnFirstShow;
 		
 	}
 
 	public void chooseMovie(String movieTitle) {
-		lstMovies.syncVisible(3);
+	    PageLoaded.isDomComplete(driver);
+		
 		for(int i=0;i<=2;i++){
 		
 			try{
@@ -116,12 +127,13 @@ public class ShowtimesPage {
 	}
 
 	public boolean isReservedSeatingAvail() {
-		
+	    PageLoaded.isDomComplete(driver);
 		return lblReservedSeating.syncVisible(null,false);
 	}
 	
 	/**Test Functionality**/
 	public void showtimesComplete(String theatre,String movieTitle,String date){
+	    PageLoaded.isDomComplete(driver);
 		theatreSearch(theatre);
     	
     	TestReporter.log("Theatre: " + theatre + " was selected.");

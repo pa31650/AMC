@@ -686,14 +686,16 @@ public class TestEnvironment {
         }
     }
     private void mobileDriverSetupBeta() {
+        
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platform", "ANDROID");
-        caps.setCapability("deviceName", "T01130JFGT");
-        caps.setCapability("app", "");
+        //caps.setCapability("deviceName", "T01130JFGT");
+        //caps.setCapability("app", "");
         caps.setCapability("platformName", "ANDROID");
         caps.setCapability("applicationName", "T01130JFGT");
-        caps.setCapability("udid", "T01130JFGT");
+        //caps.setCapability("udid", "T01130JFGT");
         caps.setCapability("browserName", "chrome");
+        caps.setCapability("platformVersion", "5.1");
         
         
         /*// if a device ID is specified, go to that device
@@ -714,7 +716,7 @@ public class TestEnvironment {
             // leave browserUnderTest blank/null if using this
             caps.setCapability("app", mobileAppPath);
 		} */
-        
+       
         try {
             
             setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));

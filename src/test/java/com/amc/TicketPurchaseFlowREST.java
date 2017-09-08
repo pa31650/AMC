@@ -21,7 +21,7 @@ import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataProviders.JsonDataProvider;
 import com.orasi.utils.date.DateTimeConversion;
 
-public class ApiTicketPurchaseFlow extends BaseAPI{
+public class TicketPurchaseFlowREST extends BaseAPI{
 	
 	// ************* *
 	// Data Provider

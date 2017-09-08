@@ -55,8 +55,8 @@ public class SelectSeatPage {
 		TestReporter.logStep(intSeats + " seat(s) were selected.");
 	}
 	
-	public List findOpenSeats(int intSeats){
-		List<String> seats = new ArrayList();
+	public List<String> findOpenSeats(int intSeats){
+		List<String> seats = new ArrayList<String>();
 		String strSeat = strBestSeat;
 		
 		for (int i = 0; i < intSeats; i++) {
