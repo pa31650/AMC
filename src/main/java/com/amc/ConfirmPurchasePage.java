@@ -66,10 +66,12 @@ public class ConfirmPurchasePage {
 	}
 
 	public void confirmPurchasePageComplete(String creditCard) {
+	    
+	    
 	    //Enter Delivery Info
-        /*if (lstDeliveryTimes.syncVisible(5,false)) {
+        if (lstDeliveryTimes.syncVisible(5,false)) {
             completeDeliveryInfo();
-        } */      
+        }       
         	    
 	    Email email = new Email();
     	
@@ -97,12 +99,16 @@ public class ConfirmPurchasePage {
 	public void chooseEarliestDeliveryTime() { 
 	    List<WebElement> options = lstDeliveryTimes.getOptions();
         
-        lstDeliveryTimes.selectValue(options.get(1).getAttribute("value"));   
+        lstDeliveryTimes.selectValue(options.get(1).getAttribute("value")); 
+        
+        TestReporter.logStep("Option: " + options.get(1).getAttribute("value" + " was selected"));
     }
 
     public void enterOrderName() {
 	    Person person = new Person();
         
         txtOrderName.set(person.getFullName());
+        
+        TestReporter.logStep("Name: " + person.getFullName() + " was entered for Order Name");
 	}
 }

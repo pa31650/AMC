@@ -2,14 +2,18 @@ package com.amc;
 
 import java.util.List;
 
+import org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Listbox;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
+import com.orasi.utils.TestReporter;
 
 public class FoodDrinksPage {
 	private OrasiDriver driver = null;
@@ -53,6 +57,7 @@ public class FoodDrinksPage {
 	public void ChooseFirstItemMeals(){
 	    String strAriaControls = GetAriaControls(btnMealsMenu);
 	    
+	    
 	    String xpathExpressionButton = "//div[contains(@id,'" + strAriaControls + "')]//div[contains(@class,'LoadingContainer-inline')][1]//button[contains(@aria-label,'Expand')]";
 	    Button btnCustomize = driver.findButton(By.xpath(xpathExpressionButton));
 	    
@@ -63,14 +68,21 @@ public class FoodDrinksPage {
 	    Listbox lstOption = driver.findListbox(By.xpath(xpathExpressionListbox));
 	    List<WebElement> options = lstOption.getOptions();
 	    
-	    lstOption.scrollIntoView();
+	    //lstOption.scrollIntoView();
 	    lstOption.selectValue(options.get(1).getAttribute("value"));
+	    
+	    TestReporter.logStep("Option: " + options.get(1).getAttribute("value") + "was selected.");
 	    
 	    String xpathExpressionAddtoOrder = "//div[contains(@id,'" + strAriaControls + "')]//div[contains(@class,'LoadingContainer-inline')][1]//button[contains(@class,'submit')]";
 	    Button btnAddtoOrder = driver.findButton(By.xpath(xpathExpressionAddtoOrder));
 	    
-	    btnAddtoOrder.scrollIntoView();
-	    btnAddtoOrder.focusClick();
+	    /*Actions actions = new Actions(driver);
+	    actions.moveToElement(btnAddtoOrder);
+	    actions.perform();*/
+	    
+	    btnCustomize.scrollIntoView();
+	    //btnAddtoOrder.jsClick();
+	    btnAddtoOrder.click();
 	    
 	    ClickContinuetoPurchase();
 	    
