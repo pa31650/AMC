@@ -18,14 +18,13 @@ public class SeeAMoviePage {
     @FindBy(id="com.amc:id/button1") public WebElement choose_location_btn;
     @FindBy(id="com.amc:id/search_src_text") public WebElement theater_search;
     @FindBy(id="com.amc:id/theatre_view") public WebElement amc_gso_18;
-    @FindBy(xpath="//android.widget.TextView[@text='Annabelle: Creation']") public WebElement annabelle_header;
-    @FindBy(xpath="//com.amc:id/showtime_button[@clickable='true']") public WebElement available_movie_time;
+    @FindBy(xpath="//android.widget.Button[@clickable='true']") public WebElement first_showtime;
     @FindBy(id="com.amc:id/seatsSelectedLabel") public WebElement seats_header;
 
     //List of movies
     @FindBy(xpath="//android.widget.ImageView[@content-desc='Wind River']") public WebElement wind_river;
-    @FindBy(xpath="//android.widget.ImageView[@content-desc='Home Again']") public WebElement home_again;
-    @FindBy(xpath="//android.widget.ImageView[@content-desc='Annabelle: Creation']") public WebElement annabelle_creation;
+    @FindBy(xpath="//android.widget.ImageView[@content-desc='It']") public WebElement it;
+    @FindBy(xpath="//android.widget.ImageView[@content-desc='mother!']") public WebElement mother;
 
     public SeeAMoviePage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
