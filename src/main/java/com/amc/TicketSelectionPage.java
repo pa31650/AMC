@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class TicketSelectionPage {
 
-    AndroidDriver<MobileElement> driver;
+    private AndroidDriver<MobileElement> driver;
 
     //Misc elements
     @FindBy(xpath="//android.widget.TextView[@text='PLEASE SELECT YOUR SEAT(S)']") public WebElement page_header;

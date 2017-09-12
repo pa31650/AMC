@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PurchasePage {
 
-    AndroidDriver<MobileElement> driver;
+    private AndroidDriver<MobileElement> driver;
 
     //Misc elements
     @FindBy(id="com.amc:id/contactInfoTitle") public WebElement contactinfo_header;

@@ -10,7 +10,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class SeeAMoviePage {
 
-    AndroidDriver<MobileElement> driver;
+    private AndroidDriver<MobileElement> driver;
 
     //Misc elements
     @FindBy(id="com.amc:id/event_close_icon") private WebElement popup_close;
