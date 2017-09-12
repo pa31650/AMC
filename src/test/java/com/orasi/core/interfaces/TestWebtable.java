@@ -21,15 +21,17 @@ public class TestWebtable extends TestEnvironment{
     
     @BeforeTest(groups ={"regression", "interfaces", "webtable", "dev"})
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+	    "operatingSystem", "environment" , "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
-	setApplicationUnderTest("Bluesource");
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
+	setApplicationUnderTest("Test Site");
 	setBrowserUnderTest(browserUnderTest);
 	setBrowserVersion(browserVersion);
 	setOperatingSystem(operatingSystem);
 	setRunLocation(runLocation);
 	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
 	setPageURL("http://www.iupui.edu/~webtrain/tutorials/tables.html");
 	testStart("TestWebtable");
     }

@@ -21,20 +21,33 @@ import ru.yandex.qatools.allure.annotations.Title;
 
 public class TestListbox extends TestEnvironment{
     WebDriver driver = null;
+<<<<<<< .merge_file_JcjMyE
 //    private String multiSelectXpath = "//*[@id='page']/div[2]/div/select";
 //    private String listboxXpath = "//*[@id='para1']/select";
     @BeforeTest(alwaysRun=true)
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
 	    "operatingSystem", "environment" })
+=======
+    private String multiSelectXpath = "//*[@id='page']/div[2]/div/select";
+    private String listboxXpath = "//*[@id='para1']/select";
+    @BeforeTest(groups ={"regression", "interfaces", "listbox", "dev"})
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion","operatingSystem", "environment", "deviceName", "deviceOrientation" })
+>>>>>>> .merge_file_ct1vqE
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
 	setApplicationUnderTest("Test Site");
 	setBrowserUnderTest(browserUnderTest);
 	setBrowserVersion(browserVersion);
 	setOperatingSystem(operatingSystem);
 	setRunLocation(runLocation);
 	setTestEnvironment(environment);
+<<<<<<< .merge_file_JcjMyE
 	setPageURL("http://orasi.github.io/Chameleon/sites/unitTests/orasi/core/interfaces/listbox.html");
+=======
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
+	setPageURL("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/core/interfaces/listbox.html");
+>>>>>>> .merge_file_ct1vqE
 	testStart("TestListbox");
     }
     

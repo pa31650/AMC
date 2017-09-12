@@ -13,6 +13,7 @@ import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ru.yandex.qatools.allure.annotations.Title;
 
+<<<<<<< .merge_file_YOyH5L
 public class TestFrameHandler extends TestEnvironment {
 	@BeforeTest(groups = { "regression", "utils", "dev", "framehandler" })
 	@Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment" })
@@ -27,6 +28,27 @@ public class TestFrameHandler extends TestEnvironment {
 		setPageURL("http://orasi.github.io/Chameleon/sites/unitTests/orasi/utils/frameHandler.html");
 		testStart("TestFrame");
 	}
+=======
+public class TestFrameHandler extends TestEnvironment{
+    @BeforeTest(groups ={"regression", "utils", "dev", "framehandler"})
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
+	    "operatingSystem", "environment", "deviceName", "deviceOrientation" })
+    public void setup(@Optional String runLocation, String browserUnderTest,
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
+	setApplicationUnderTest("Test Site");
+	setBrowserUnderTest(browserUnderTest);
+	setBrowserVersion(browserVersion);
+	setOperatingSystem(operatingSystem);
+	setRunLocation(runLocation);
+	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
+	setDefaultTestTimeout(3);
+	setPageURL("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/utils/frameHandler.html");
+	testStart("TestFrame");
+    }
+    
+>>>>>>> .merge_file_8IYP1M
 
 	@AfterTest(groups = { "regression", "utils", "dev" })
 	public void close(ITestContext testResults) {

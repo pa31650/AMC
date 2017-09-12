@@ -24,9 +24,9 @@ import ru.yandex.qatools.allure.annotations.Title;
 
 public class TestByAngular extends TestEnvironment{
 	@BeforeTest(groups ={"regression", "interfaces", "ByAngularModel", "dev"})
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
+<<<<<<< .merge_file_JWyB2v
 	    String browserVersion, String operatingSystem, String environment) {
 	    
 	    if(getBrowserUnderTest().toLowerCase().equals("html")) setReportToMustard(false);
@@ -39,6 +39,21 @@ public class TestByAngular extends TestEnvironment{
 		setRunLocation(runLocation);
 		setPageURL("http://cafetownsend-angular-rails.herokuapp.com/login");	
 		setTestEnvironment(environment);
+=======
+	    String browserVersion, String operatingSystem, String environment, String deviceName, String deviceOrientation) {
+	setApplicationUnderTest("Test Site");
+	setBrowserUnderTest(browserUnderTest);
+	setBrowserVersion(browserVersion);
+	setOperatingSystem(operatingSystem);
+	
+	if(getBrowserUnderTest().toLowerCase().equals("html") || getBrowserUnderTest().isEmpty() ) throw new SkipException("Test not valid for HTMLUnitDriver");
+		
+	setRunLocation(runLocation);
+	setPageURL("http://cafetownsend-angular-rails.herokuapp.com/login");	
+	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
+>>>>>>> .merge_file_tKAoVv
 		testStart("TestByAngularModel");
 	}
     

@@ -15,6 +15,7 @@ import com.orasi.utils.TestReporter;
  */
 public class TextboxImpl extends ElementImpl implements Textbox {
 	/**
+<<<<<<< .merge_file_NPQoJm
 	 * Creates a Element for a given WebElement.
 	 * 
 	 * @param element
@@ -38,6 +39,28 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 	@Override
 	public void clear() {
 		TestReporter.logTrace("Entering TextboxImpl#clear");
+=======
+     * Creates a Element for a given WebElement.
+     * @param element element to wrap up
+     */
+    public TextboxImpl(WebElement element) {
+    	super(element);
+    	 this.elementType = "Textbox";
+    }
+    
+    public TextboxImpl(WebElement element, OrasiDriver driver) {
+        super(element, driver);
+        this.elementType = "Textbox";
+    }
+
+    /**
+     * @summary - Gets the value of an input field. 
+     * 		Overrides default clear().
+     * @see org.openqa.selenium.WebElement.clear()
+     */
+    @Override
+    public void clear() {
+>>>>>>> .merge_file_9xAULn
 		try {
 			getWrappedElement().clear();
 			TestReporter.interfaceLog("Clear text from Textbox [<b>" + getElementLocatorInfo() + " </b>]");
@@ -128,6 +151,7 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 				getWrappedDriver().executeJavaScript("arguments[0].scrollIntoView(true);arguments[0].click();",	getWrappedElement());
 				getWrappedElement().clear();
 				getWrappedElement().sendKeys(text);
+<<<<<<< .merge_file_NPQoJm
 				TestReporter.interfaceLog(" Send Keys [ <b>" + text + "</b> ] to Textbox [ <b>"
 						+ getElementLocatorInfo() + " </b> ]");
 
@@ -135,6 +159,11 @@ public class TextboxImpl extends ElementImpl implements Textbox {
 				TestReporter.interfaceLog("Send Keys [ <b>" + text + "</b> ] to Textbox [ <b>"
 						+ getElementLocatorInfo() + " </b> ]", true);
 				TestReporter.logTrace("Exiting TextboxImpl#scrollAndSet");
+=======
+				TestReporter.interfaceLog("Set string [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b>  ]");
+				} catch (RuntimeException rte) {
+				TestReporter.interfaceLog("Set string [ <b>" + text.toString() + "</b> ] to Textbox [ <b>@FindBy: " + getElementLocatorInfo() + " </b>  ]", true);
+>>>>>>> .merge_file_9xAULn
 				throw rte;
 			}
 		} else {

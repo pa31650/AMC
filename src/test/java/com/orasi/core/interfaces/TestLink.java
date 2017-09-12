@@ -19,6 +19,7 @@ import ru.yandex.qatools.allure.annotations.Title;
 
 public class TestLink extends TestEnvironment {
     
+<<<<<<< .merge_file_lAnlPz
         @BeforeTest(groups ={"regression", "interfaces", "link", "dev"})
         @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
     	    "operatingSystem", "environment" })
@@ -33,6 +34,23 @@ public class TestLink extends TestEnvironment {
         	setPageURL("http://orasi.github.io/Chameleon/sites/unitTests/orasi/core/interfaces/link.html");
         	testStart("TestLink");
         }
+=======
+    @BeforeTest(groups ={"regression", "interfaces", "link", "dev"})
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion","operatingSystem", "environment", "deviceName", "deviceOrientation" })
+    public void setup(@Optional String runLocation, String browserUnderTest,
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
+	setApplicationUnderTest("Test Site");
+	setBrowserUnderTest(browserUnderTest);
+	setBrowserVersion(browserVersion);
+	setOperatingSystem(operatingSystem);
+	setRunLocation(runLocation);
+	setTestEnvironment(environment);
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
+	setPageURL("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/core/interfaces/link.html");
+	testStart("TestLink");
+    }
+>>>>>>> .merge_file_yZr8Tz
     
         @AfterTest(groups ={"regression", "interfaces", "link", "dev"})
         public void close(ITestContext testResults){

@@ -20,17 +20,22 @@ public class TestCheckbox extends TestEnvironment{
     WebDriver driver = null;
     
     @BeforeTest(groups ={"regression", "interfaces", "checkbox", "dev"})
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
-	    "operatingSystem", "environment" })
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "deviceName", "deviceOrientation" })
     public void setup(@Optional String runLocation, String browserUnderTest,
-	    String browserVersion, String operatingSystem, String environment) {
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
 	setApplicationUnderTest("Test Site");
 	setBrowserUnderTest(browserUnderTest);
 	setBrowserVersion(browserVersion);
 	setOperatingSystem(operatingSystem);
 	setRunLocation(runLocation);
 	setTestEnvironment(environment);
+<<<<<<< .merge_file_QBggdy
 	setPageURL("http://orasi.github.io/Chameleon/sites/unitTests/orasi/core/interfaces/checkbox.html");
+=======
+	setDeviceName(deviceName);
+	setDeviceOrientation(deviceOrientation);
+	setPageURL("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/core/interfaces/checkbox.html");
+>>>>>>> .merge_file_WqiGjy
 	testStart("TestCheckbox");
     }
     

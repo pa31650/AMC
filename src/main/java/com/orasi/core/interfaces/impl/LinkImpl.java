@@ -57,6 +57,7 @@ public class LinkImpl extends ElementImpl implements Link {
 		TestReporter.logTrace("Exiting LinkImpl#click");
 	}
 
+<<<<<<< .merge_file_QUJxTn
 	@Override
 	public String getURL() {
 		TestReporter.logTrace("Entering LinkImpl#getURL");
@@ -64,4 +65,33 @@ public class LinkImpl extends ElementImpl implements Link {
 		TestReporter.logTrace("Exiting LinkImpl#getURL");
 		return url;
 	}
+=======
+    	try{
+    	    driver.executeJavaScript("if( document.createEvent ) {var click_ev = document.createEvent('MouseEvents'); click_ev.initEvent('click', true , true )"
+    	    	+ ";arguments[0].dispatchEvent(click_ev);} else { arguments[0].click();}", element);
+    	}catch(RuntimeException rte){
+    	    TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]", true);
+    	    throw rte;
+    	}
+    	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+        
+    }
+    
+    @Override
+    public void click() {    	
+        try{
+            getWrappedElement().click();
+        }catch(RuntimeException rte){
+            TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]", true);
+            throw rte;
+        }
+    	TestReporter.interfaceLog(" Click Link [ <b>@FindBy: " + getElementLocatorInfo()  + " </b> ]");
+    }
+    
+    @Override
+    public String getURL(){
+	return getWrappedElement().getAttribute("href");
+    }
+
+>>>>>>> .merge_file_0WK9Yn
 }

@@ -18,6 +18,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteKeyboard;
@@ -613,6 +614,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
 		((DefaultJavaScriptExecutor) driver).shutdown();
 	}
 
+<<<<<<< .merge_file_ZIDuer
 	@Override
 	public int pumpEventLoop(long timeoutMillis) {
 		return ((DefaultJavaScriptExecutor) driver).pumpEventLoop(timeoutMillis);
@@ -625,6 +627,38 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
 	public String getSessionId() {
 		return getRemoteWebDriver().getSessionId().toString();
 	}
+=======
+    public void setScriptTimeout(int timeout){
+	setScriptTimeout(timeout, TimeUnit.SECONDS);
+    }
+    
+    public void setScriptTimeout(int timeout, TimeUnit timeUnit){
+   	this.currentScriptTimeout = timeout;
+   	driver.manage().timeouts().setScriptTimeout(timeout, timeUnit);
+       }
+    
+    public int getScriptTimeout(){
+	return currentScriptTimeout;
+    }
+    
+    public void setPageTimeout(int timeout){
+	setPageTimeout(timeout, TimeUnit.SECONDS);
+    }
+    
+    public void setPageTimeout(int timeout, TimeUnit timeUnit){
+	if (driver instanceof SafariDriver || driver.toString().contains("safari")|| driver.toString().contains("android")){
+	    System.out.println("This driver does not support pageLoadTimeout");
+	}else{
+	    this.currentPageTimeout = timeout;
+	    driver.manage().timeouts().pageLoadTimeout(timeout, timeUnit);
+	}
+    }
+    
+    public int getPageTimeout(){
+	return currentPageTimeout;
+    }
+    
+>>>>>>> .merge_file_JY7Xir
 
 
 	/**
@@ -914,9 +948,107 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
 			Highlight.setDebugColor(color);
 		}
 
+<<<<<<< .merge_file_ZIDuer
 		public void setHighlightColor(Colors color){
 			Highlight.setHighlightColor(color);;
 		}
+=======
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+	return super.clone();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	return super.equals(obj);
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+	super.finalize();
+    }
+
+    @Override
+    public int hashCode() {
+	return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+	return super.toString();
+    }
+   
+    
+    public Object executeJavaScript(String script, Object... parameters) {
+        return ((JavascriptExecutor) driver).executeScript(script, parameters);
+    }
+    
+    public Object executeAsyncJavaScript(String script, Object... parameters) {
+        return ((JavascriptExecutor) driver).executeAsyncScript(script, parameters);
+    }
+
+    
+    @Override
+    public void run() {
+	((DefaultJavaScriptExecutor) driver).run();
+    }
+
+    @Override
+    public void addWindow(WebWindow newWindow) {
+	((DefaultJavaScriptExecutor) driver).addWindow(newWindow);
+    }
+
+    
+    @Override
+    public void shutdown() {
+	((DefaultJavaScriptExecutor) driver).shutdown();
+    }
+
+    
+    @Override
+    public int pumpEventLoop(long timeoutMillis) {
+	return ((DefaultJavaScriptExecutor) driver).pumpEventLoop(timeoutMillis);
+    }
+    
+    public String getSessionId(){
+	return ((RemoteWebDriver) driver).getSessionId().toString();
+    }
+    
+    private void setDriverWithCapabilties(DesiredCapabilities caps){
+	switch (caps.getBrowserName().toLowerCase()) {
+	case "firefox":
+	    driver = new FirefoxDriver(caps);
+	    break;
+	case "internet explorer":
+	case "ie":
+	    driver = new InternetExplorerDriver(caps);
+	    break;    
+	case "chrome":
+	    driver = new ChromeDriver(caps);
+	    break;    
+
+	case "safari":
+	    driver = new SafariDriver(caps);
+	    break;    
+	case "htmlunit":
+	case "html":
+	    driver = new HtmlUnitDriver(true);
+	    break;    
+
+	case "edge":
+	case "microsoftedge":
+	    driver = new EdgeDriver(caps);
+	    break;   
+
+	case "phantom":
+	case "phantomjs":
+	    driver = new PhantomJSDriver(caps);
+	    break;   
+	default:
+	    break;
+	}
+    }
+>>>>>>> .merge_file_JY7Xir
 
 		public void setErrorColor(Colors color){
 			Highlight.setErrorColor(color);

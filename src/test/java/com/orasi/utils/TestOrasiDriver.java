@@ -40,6 +40,7 @@ import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ru.yandex.qatools.allure.annotations.Title;
 
+<<<<<<< .merge_file_8Mkn3K
 public class TestOrasiDriver extends TestEnvironment {
 
 	protected ResourceBundle appURLRepository = ResourceBundle.getBundle(Constants.ENVIRONMENT_URL_PATH);
@@ -268,6 +269,37 @@ public class TestOrasiDriver extends TestEnvironment {
 	public void findElement() {
 		Element element = driver.findElement(By.id("FirstName"));
 		Assert.assertNotNull(element);
+=======
+public class TestOrasiDriver{
+    protected ResourceBundle appURLRepository = ResourceBundle
+	    .getBundle(Constants.ENVIRONMENT_URL_PATH);
+    protected SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(
+	    Base64Coder.decodeString(appURLRepository
+		    .getString("SAUCELABS_USERNAME")),
+	    Base64Coder.decodeString(appURLRepository
+		    .getString("SAUCELABS_KEY")));
+    DesiredCapabilities caps = null;
+    OrasiDriver driver = null;
+    File file = null;	
+    String runLocation = "";
+    String browserUnderTest = "";
+    String browserVersion = "";
+    String operatingSystem = "";
+    String environment = "";
+    String deviceName = "";
+    String deviceOrientation= "";
+    
+    @BeforeTest(groups ={"regression", "utils", "orasidriver"})
+    @Parameters({ "runLocation", "browserUnderTest", "browserVersion",
+	    "operatingSystem", "environment", "deviceName", "deviceOrientation" })
+    public void setup(@Optional String runLocation, String browserUnderTest,
+	    String browserVersion, String operatingSystem, String environment, @Optional String deviceName, @Optional String deviceOrientation) {
+	
+	if (browserUnderTest.equalsIgnoreCase("jenkinsParameter")) {
+	    this.browserUnderTest = System.getProperty("jenkinsBrowser").trim();
+	} else{
+	    this.browserUnderTest = browserUnderTest;
+>>>>>>> .merge_file_9OP26K
 	}
 	
 	@Features("Utilities")
@@ -366,6 +398,7 @@ public class TestOrasiDriver extends TestEnvironment {
 		Assert.assertTrue(driver.getTitle().contains("CafeTownsend-AngularJS-Rails"));
 	}
 	
+<<<<<<< .merge_file_8Mkn3K
 	@Features("Utilities")
 	@Stories("OrasiDriver")
 	@Title("findNGModel")
@@ -404,6 +437,41 @@ public class TestOrasiDriver extends TestEnvironment {
 		Sleeper.sleep(2000);
 		Assert.assertNotNull(driver.findElement(ByNG.repeater("employee in employees")));
 	}
+=======
+
+	if (runLocation.equalsIgnoreCase("jenkinsParameter")) {
+	    deviceName = System.getProperty("jenkinsDeviceNameLocation").trim();
+	} else{
+	    this.deviceName = deviceName;
+	}    
+	
+
+	if (deviceOrientation.equalsIgnoreCase("jenkinsParameter")) {
+	    deviceOrientation = System.getProperty("jenkinsDeviceOrientationLocation").trim();
+	} else{
+	    this.runLocation = deviceOrientation;
+	}    
+	this.environment = environment;
+	caps = new DesiredCapabilities();
+	caps.setCapability("ignoreZoomSetting", true);
+	caps.setCapability(CapabilityType.BROWSER_NAME,this.browserUnderTest);
+	caps.setCapability(CapabilityType.VERSION,browserVersion);
+	caps.setCapability(CapabilityType.PLATFORM,operatingSystem);
+	caps.setCapability("enablePersistentHover", false);
+	caps.setCapability("name", "TestOrasiDriver");
+	if(runLocation.toLowerCase().equals("local")){
+	    driver = new OrasiDriver(caps);		    
+	}else{
+	    TestEnvironment te = new TestEnvironment("",this.browserUnderTest,browserVersion, operatingSystem,runLocation,environment);
+	    try {
+		driver = new OrasiDriver(caps, new URL(te.getRemoteURL()));
+	    } catch (MalformedURLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+	driver.get("http://orasi.github.io/Selenium-Java-Core/sites/unitTests/orasi/core/interfaces/testsite.html");
+>>>>>>> .merge_file_9OP26K
 	
 	@Features("Utilities")
 	@Stories("OrasiDriver")
