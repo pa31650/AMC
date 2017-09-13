@@ -5,11 +5,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-import src.main.java.com.amc.PurchasePage;
-import src.main.java.com.amc.TicketSelectionPage;
+import src.main.java.com.amc.*;
 import src.main.resources.AMCTests;
-import src.main.java.com.amc.SeeAMoviePage;
-import src.main.java.com.amc.SignInPage;
 
 import io.appium.java_client.TouchAction;
 
@@ -22,12 +19,14 @@ public class TicketPurchaseTests extends AMCTests {
         SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
         TicketSelectionPage ticketselection = new TicketSelectionPage(getDriver());
         PurchasePage purchase = new PurchasePage(getDriver());
+        ContactInfoPage contactinfo = new ContactInfoPage(getDriver());
+        PaymentPage payment = new PaymentPage(getDriver());
 
         //Set the device location settings
         signin.LogInAsGuest();
 
         //Confirm that the app is on the home screen
-        WebDriverWait element = new WebDriverWait(getDriver(), 20);
+        WebDriverWait element = new WebDriverWait(getDriver(), 10);
         element.until(ExpectedConditions.elementToBeClickable(By.id("com.amc:id/toolbar_title")));
         String home_header = getDriver().findElementById("com.amc:id/toolbar_title").getText();
         if (home_header.equals("See a Movie")) {
@@ -94,5 +93,13 @@ public class TicketPurchaseTests extends AMCTests {
         } catch (Exception e) {
             System.out.println("The purchase page failed to be selected.");
         }
+
+        //TEST CODE
+        purchase.add_email.click();
+        contactinfo.EnterEmail();
+
+        //element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
+        purchase.add_payment.click();
+        payment.AddCreditCard();
     }
 }
