@@ -13,7 +13,7 @@ import io.appium.java_client.TouchAction;
 public class TicketPurchaseTests extends AMCTests {
 
     @Test
-    public void GenericTicketFlow() {
+    public void SelectMovie() {
 
         SignInPage signin = new SignInPage(getDriver());
         SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
@@ -88,18 +88,52 @@ public class TicketPurchaseTests extends AMCTests {
 
         ticketselection.next_btn.click();
         try {
-            element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
+            element.until(ExpectedConditions.visibilityOf(purchase.add_email));
             System.out.println("The app is on the purchase page.");
         } catch (Exception e) {
             System.out.println("The purchase page failed to be selected.");
         }
 
-        //TEST CODE
+        /*//TEST CODE
         purchase.add_email.click();
         contactinfo.EnterEmail();
 
         //element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
         purchase.add_payment.click();
-        payment.AddCreditCard();
+        payment.AddCreditCard();*/
+    }
+
+    @Test
+    public void SelectTheater() {
+
+        SignInPage signin = new SignInPage(getDriver());
+        SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
+        FoodAndDrinksPage foodanddrinks = new FoodAndDrinksPage(getDriver());
+        TicketSelectionPage ticketselection = new TicketSelectionPage(getDriver());
+        PurchasePage purchase = new PurchasePage(getDriver());
+        ContactInfoPage contactinfo = new ContactInfoPage(getDriver());
+        PaymentPage payment = new PaymentPage(getDriver());
+
+        //Set the device location settings
+        signin.LogInAsGuest();
+
+        //Confirm that the app is on the home screen
+        WebDriverWait element = new WebDriverWait(getDriver(), 10);
+        element.until(ExpectedConditions.elementToBeClickable(By.id("com.amc:id/toolbar_title")));
+        String home_header = getDriver().findElementById("com.amc:id/toolbar_title").getText();
+        if (home_header.equals("See a Movie")) {
+            System.out.println("The app is on the home screen.");
+        } else
+            System.out.println("The app is not on the home screen.");
+
+        //Close promotional popup at the top of the screen
+        seeAMovie.closePopup();
+
+        //Select Food & Drinks page
+        seeAMovie.food_and_drinks.click();
+        element.until(ExpectedConditions.visibilityOf(foodanddrinks.order_ahead));
+
+        foodanddrinks.selectTheatre();
+        foodanddrinks.specialOffers();
     }
 }

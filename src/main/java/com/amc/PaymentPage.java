@@ -14,11 +14,11 @@ public class PaymentPage {
     private AndroidDriver<MobileElement> driver;
 
     //Misc elements
-    @FindBy(xpath="//android.widget.TextView[@text='Payment']") public WebElement page_header;
+    @FindBy(id="com.amc:id/page_title") public WebElement page_header;
     @FindBy(id="com.amc:id/new_card_number") public WebElement card_number;
     @FindBy(id="com.amc:id/button_right") public WebElement apply_to_order;
     @FindBy(id="com.amc:id/add_credit_card") public WebElement add_new;
-    @FindBy(xpath="//[com.amc:id/new_card_month_selector]//[android:id/text1]") public WebElement month;
+    @FindBy(xpath="//com.amc:id/new_card_month_selector/android:id/text1") public WebElement month;
 
     public PaymentPage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;

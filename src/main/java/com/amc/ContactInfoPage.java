@@ -14,7 +14,7 @@ public class ContactInfoPage {
     private AndroidDriver<MobileElement> driver;
 
     //Misc elements
-    @FindBy(xpath="//android.widget.TextView[@text='Contact Info']") public WebElement page_header;
+    @FindBy(id="com.amc:id/page_title") public WebElement page_header;
     @FindBy(id="com.amc:id/contact_email") public WebElement edit_email;
     @FindBy(id="com.amc:id/button_right") public WebElement save_btn;
 

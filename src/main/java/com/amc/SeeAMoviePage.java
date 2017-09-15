@@ -20,6 +20,7 @@ public class SeeAMoviePage {
     @FindBy(id="com.amc:id/theatre_view") public WebElement amc_gso_18;
     @FindBy(xpath="//android.widget.Button[@clickable='true']") public WebElement first_showtime;
     @FindBy(id="com.amc:id/seatsSelectedLabel") public WebElement seats_header;
+    @FindBy(id="com.amc:id/food_drink") public WebElement food_and_drinks;
 
     //List of movies
     @FindBy(xpath="//android.widget.ImageView[@content-desc='Wind River']") public WebElement wind_river;

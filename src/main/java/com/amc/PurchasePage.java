@@ -13,8 +13,8 @@ public class PurchasePage {
 
     //Misc elements
     @FindBy(id="com.amc:id/contactInfoTitle") public WebElement contactinfo_header;
-    @FindBy(xpath="//android.widget.TextView[@text='Add Email Address']") public WebElement add_email;
-    @FindBy(xpath="//android.widget.TextView[@text='Add Payment']") public WebElement add_payment;
+    @FindBy(id="com.amc:id/contactInfoHintText") public WebElement add_email;
+    @FindBy(id="com.amc:id/paymentInfoHintText") public WebElement add_payment;
     @FindBy(id="com.amc:id/purchase_button") public WebElement purchase_btn;
 
     public PurchasePage(AndroidDriver<MobileElement> driver) {
