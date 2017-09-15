@@ -42,7 +42,7 @@ public class AMCapiDemo extends AMC{
     @Test
     public void GetAdultTicketSKU() {
         
-        RestResponse rest = AMC.theatreShowtimes().getShowtimes(7, "09-08-2017", "Logan Lucky");
+        RestResponse rest = AMC.theatreShowtimes().getShowtimes(7, "09-16-2017", "Logan Lucky");
         ShowtimeResponse theatreshowtimes = rest.mapJSONToObject(ShowtimeResponse.class);
                 
         TestReporter.logAPI(rest.getStatusCode() == ResponseCodes.OK, "Get showtimes for theatre id 7, 9/8/2017, Logan Lucky",rest);

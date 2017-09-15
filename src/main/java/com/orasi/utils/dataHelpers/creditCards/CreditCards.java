@@ -154,16 +154,16 @@ public class CreditCards {
         return new CreditCard(
                 "VISA",
                 getPerson().getFullName(),
-                "4275330012345675",
-                "OTgw",
+                "4111111111111111",
+                "123",
                 "12",
-                "25",
+                "20",
                 address.get().getAddress1(),
                 address.get().getAddress2(),
                 address.get().getCity(),
                 address.get().getStateAbbv(),
                 address.get().getCountryAbbv(),
-                address.get().getZipCode());
+                "66211");
     }
 
     public final static CreditCard VISA_EXPIRED() {

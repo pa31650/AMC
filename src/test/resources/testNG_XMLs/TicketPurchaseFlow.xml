@@ -12,6 +12,7 @@
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="windows" />
 	<parameter name="mobileOSVersion" value="" />
+	<parameter name="deviceID" value="" />
 
  	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
 

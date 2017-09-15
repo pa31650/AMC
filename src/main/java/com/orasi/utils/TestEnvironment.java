@@ -17,6 +17,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 
 import com.orasi.exception.AutomationException;
 import com.saucelabs.common.SauceOnDemandAuthentication;
@@ -616,19 +617,23 @@ public class TestEnvironment {
      * @date 9/28/2016
      * @author jessica.marshall
      */
-    private void mobileDriverSetupOld() {
+    private void mobileDriverSetup() {
         DesiredCapabilities caps = new DesiredCapabilities();
+        
+        caps.setCapability("deviceName", deviceID);
         // if a device ID is specified, go to that device
-        if (deviceID.isEmpty()) {
+        if (!deviceID.isEmpty()) {
             // Which mobile OS platform to use, e.g. iOS, Android
             caps.setCapability("platformName", operatingSystem);
             // Mobile OS version, e.g. 7.1, 4.4
-            caps.setCapability(CapabilityType.VERSION, mobileOSVersion);
+            caps.setCapability("version", mobileOSVersion);
             // Name of mobile web browser to automate. Should be an empty string if automating an app instead
-            caps.setCapability(CapabilityType.BROWSER_NAME, browserUnderTest);
+            caps.setCapability("browserName", browserUnderTest);
+            
         } else {
-            caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
-            caps.setCapability("deviceName", deviceID);
+            //caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
+            //caps.setCapability("deviceName", deviceID);
+            TestReporter.logDebug("No Device Id was passed in");
         }
         
         if (browserUnderTest.isEmpty()) {
@@ -694,7 +699,7 @@ public class TestEnvironment {
         }
     }
     
-    private void mobileDriverSetup() {
+    private void mobileDriverSetupbeta() {
         
         //Create object of DesiredCapabilities class
         DesiredCapabilities cap = new DesiredCapabilities();
@@ -706,12 +711,11 @@ public class TestEnvironment {
         cap.setCapability("browserName", "chrome");
         
         //Set android version desired capability
-        cap.setCapability("version", "5.1");
+        cap.setCapability("version", "4.1.2");
                     
         //Set android device name desired capability
-        cap.setCapability("deviceName", "T01130JFGT");
+        cap.setCapability("deviceName", "FA3BDS901049");
         
-        //driver = new AndroidDriver<MobileElement>(new URL("http://192.168.227.2:4444/wd/hub"), cap);
         try {
             setDriver(new OrasiDriver(cap, new URL("http://192.168.227.2:4444/wd/hub")));
             //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);

@@ -11,7 +11,8 @@
 	<parameter name="runLocation" value="mobile" />
 	<parameter name="browserVersion" value="" />
 	<parameter name="operatingSystem" value="android" />
-	<parameter name="mobileOSVersion" value="" />
+	<parameter name="mobileOSVersion" value="4.1.2" />
+	<parameter name="deviceID" value="FA3BDS901049" />
 
  	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
 
