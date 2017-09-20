@@ -23,9 +23,9 @@ public class SeeAMoviePage {
     @FindBy(id="com.amc:id/food_drink") public WebElement food_and_drinks;
 
     //List of movies
-    @FindBy(xpath="//android.widget.ImageView[@content-desc='Wind River']") public WebElement wind_river;
-    @FindBy(xpath="//android.widget.ImageView[@content-desc='It']") public WebElement it;
-    @FindBy(xpath="//android.widget.ImageView[@content-desc='mother!']") public WebElement mother;
+    @FindBy(xpath="//android.widget.RelativeLayout[@index='0']") public WebElement first_movie;
+    @FindBy(xpath="//android.widget.RelativeLayout[@index='2']") public WebElement third_movie;
+    @FindBy(xpath="//android.widget.RelativeLayout[@index='4']") public WebElement fifth_movie;
 
     public SeeAMoviePage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;

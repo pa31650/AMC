@@ -2,6 +2,7 @@ package src.main.resources;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriverException;
@@ -61,5 +62,11 @@ public class AMCTests {
 
     public AndroidDriver<MobileElement> getDriver() {
         return driver;
+    }
+
+    public void RunAppInBackground(AndroidDriver<MobileElement> driver) {
+        try {
+            driver.runAppInBackground(Duration.ofSeconds(1));
+        } catch (Exception e) {}
     }
 }

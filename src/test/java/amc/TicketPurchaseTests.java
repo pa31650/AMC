@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 import src.main.java.com.amc.*;
 import src.main.resources.AMCTests;
@@ -15,6 +16,7 @@ public class TicketPurchaseTests extends AMCTests {
     @Test
     public void SelectMovie() {
 
+        //Initialize the drivers
         SignInPage signin = new SignInPage(getDriver());
         SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
         TicketSelectionPage ticketselection = new TicketSelectionPage(getDriver());
@@ -23,35 +25,29 @@ public class TicketPurchaseTests extends AMCTests {
         PaymentPage payment = new PaymentPage(getDriver());
 
         //Set the device location settings
+        System.out.println("TEST BEGIN");
         signin.LogInAsGuest();
 
         //Confirm that the app is on the home screen
         WebDriverWait element = new WebDriverWait(getDriver(), 10);
         element.until(ExpectedConditions.elementToBeClickable(By.id("com.amc:id/toolbar_title")));
-        String home_header = getDriver().findElementById("com.amc:id/toolbar_title").getText();
-        if (home_header.equals("See a Movie")) {
-            System.out.println("The app is on the home screen.");
-        } else
-            System.out.println("The app is not on the home screen.");
+        System.out.println("The test is currently on the home screen.");
 
         //Close promotional popup at the top of the screen
         seeAMovie.closePopup();
 
         //Scroll down to Annabelle: Creation
         TouchAction action = new TouchAction(getDriver());
-        element.until(ExpectedConditions.elementToBeClickable(seeAMovie.mother));
-        action.longPress(seeAMovie.mother).moveTo(seeAMovie.it).release().perform();
+        element.until(ExpectedConditions.elementToBeClickable(seeAMovie.third_movie));
+        action.longPress(seeAMovie.third_movie).moveTo(seeAMovie.first_movie).release().perform();
 
         //Click Annabelle: Creation
-        seeAMovie.wind_river.click();
+        seeAMovie.fifth_movie.click();
 
         //Confirm the app displays No Showtime title
-        try {
-            element.until(ExpectedConditions.presenceOfElementLocated(By.id("com.amc:id/noShowtimesTitle")));
-            System.out.println("The app displays that no showtimes can be found.");
-        } catch (TimeoutException te) {
-            System.out.println("The page failed to load.");
-        }
+        element.until(ExpectedConditions.presenceOfElementLocated(By.id("com.amc:id/noShowtimesTitle")));
+        System.out.println("The app displays that no showtimes can be found.");
+
 
         //Select Choose Location
         element.until(ExpectedConditions.visibilityOf(seeAMovie.choose_location_btn));
@@ -64,13 +60,9 @@ public class TicketPurchaseTests extends AMCTests {
 
 
         //Confirm the search results are visible and click the theater
-        try {
-            element.until(ExpectedConditions.presenceOfElementLocated(By.id("com.amc:id/theatre_view")));
-            System.out.println("The app displays the search result.");
-            seeAMovie.amc_gso_18.click();
-        } catch (TimeoutException te) {
-            System.out.println("The page failed to load.");
-        }
+        element.until(ExpectedConditions.presenceOfElementLocated(By.id("com.amc:id/theatre_view")));
+        Reporter.log("The app displays the search result.");
+        seeAMovie.amc_gso_18.click();
 
         //Select the first available showtime and select 1 adult ticket
         element.until(ExpectedConditions.visibilityOf(seeAMovie.first_showtime));
@@ -82,17 +74,14 @@ public class TicketPurchaseTests extends AMCTests {
         if (ticketselection.adult_header.getAttribute("text").equals("1 Adult")) {
             System.out.println("1 adult ticket was selected.");
         } else {
-            System.out.println("The ticket failed to be selected.");
+            System.out.println("The ticket failed to be selected or more than 1 ticket was selected.");
             getDriver().quit();
         }
 
         ticketselection.next_btn.click();
-        try {
-            element.until(ExpectedConditions.visibilityOf(purchase.add_email));
-            System.out.println("The app is on the purchase page.");
-        } catch (Exception e) {
-            System.out.println("The purchase page failed to be selected.");
-        }
+        element.until(ExpectedConditions.visibilityOf(purchase.add_email));
+        System.out.println("The app is currently on the purchase page.");
+        System.out.println("TEST END");
 
         /*//TEST CODE
         purchase.add_email.click();
@@ -106,6 +95,7 @@ public class TicketPurchaseTests extends AMCTests {
     @Test
     public void SelectTheater() {
 
+        //Initialize the drivers
         SignInPage signin = new SignInPage(getDriver());
         SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
         FoodAndDrinksPage foodanddrinks = new FoodAndDrinksPage(getDriver());
@@ -115,6 +105,7 @@ public class TicketPurchaseTests extends AMCTests {
         PaymentPage payment = new PaymentPage(getDriver());
 
         //Set the device location settings
+        System.out.println("TEST BEGIN");
         signin.LogInAsGuest();
 
         //Confirm that the app is on the home screen
@@ -133,7 +124,11 @@ public class TicketPurchaseTests extends AMCTests {
         seeAMovie.food_and_drinks.click();
         element.until(ExpectedConditions.visibilityOf(foodanddrinks.order_ahead));
 
+        //
         foodanddrinks.selectTheatre();
-        foodanddrinks.specialOffers();
+        foodanddrinks.deliveryToSeat();
+
+
+        System.out.println("TEST END");
     }
 }

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import src.main.resources.AMCTests;
 
 public class SignInPage {
 
@@ -17,6 +18,8 @@ public class SignInPage {
 
     @FindBy(id="com.android.packageinstaller:id/permission_deny_button") private WebElement deny_location;
     @FindBy(id="com.amc:id/continueAsGuestButton") private WebElement continue_as_guest;
+
+    AMCTests amctests = new AMCTests();
 
     public SignInPage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
@@ -34,9 +37,7 @@ public class SignInPage {
         }
 
         //Allows driver to find elements after closing the location alert
-        try {
-            driver.runAppInBackground(Duration.ofSeconds(1));
-        } catch (Exception e) {}
+        amctests.RunAppInBackground(driver);
 
         //Click continue as guest button
         WebDriverWait element = new WebDriverWait(driver, 20);
