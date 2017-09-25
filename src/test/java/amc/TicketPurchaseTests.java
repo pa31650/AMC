@@ -79,6 +79,7 @@ public class TicketPurchaseTests extends AMCTests {
             getDriver().quit();
         }
 
+        //Confirm visibility of purchase page
         ticketselection.next_btn.click();
         element.until(ExpectedConditions.visibilityOf(purchase.add_email));
         System.out.println("The app is currently on the purchase page.");
@@ -126,20 +127,24 @@ public class TicketPurchaseTests extends AMCTests {
         seeAMovie.food_and_drinks.click();
         element.until(ExpectedConditions.visibilityOf(foodanddrinks.order_ahead));
 
-        //
+        //Select theater and theater seat
         foodanddrinks.selectTheatre();
         foodanddrinks.deliveryToSeat();
 
+        //Confirm visibility of purchase page
         element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
         System.out.println("The app is on the purchase page.");
 
+        //Add email address
         purchase.add_email.click();
         contactinfo.EnterEmail();
         element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
 
+        //Add credit card information
         purchase.add_payment.click();
         payment.AddCreditCard();
 
+        //Confirm visibility of purchase page
         element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
         System.out.println("TEST END");
     }
