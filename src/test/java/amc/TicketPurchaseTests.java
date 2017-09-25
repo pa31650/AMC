@@ -46,6 +46,7 @@ public class TicketPurchaseTests extends AMCTests {
 
         //Confirm the app displays No Showtime title
         element.until(ExpectedConditions.presenceOfElementLocated(By.id("com.amc:id/noShowtimesTitle")));
+        System.out.println("The movie '" + seeAMovie.selected_movie.getText() + "' is selected.");
         System.out.println("The app displays that no showtimes can be found.");
 
 
@@ -103,6 +104,7 @@ public class TicketPurchaseTests extends AMCTests {
         PurchasePage purchase = new PurchasePage(getDriver());
         ContactInfoPage contactinfo = new ContactInfoPage(getDriver());
         PaymentPage payment = new PaymentPage(getDriver());
+        AMCTests amctests = new AMCTests();
 
         //Set the device location settings
         System.out.println("TEST BEGIN");
@@ -128,7 +130,17 @@ public class TicketPurchaseTests extends AMCTests {
         foodanddrinks.selectTheatre();
         foodanddrinks.deliveryToSeat();
 
+        element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
+        System.out.println("The app is on the purchase page.");
 
+        purchase.add_email.click();
+        contactinfo.EnterEmail();
+        element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
+
+        purchase.add_payment.click();
+        payment.AddCreditCard();
+
+        element.until(ExpectedConditions.visibilityOf(purchase.contactinfo_header));
         System.out.println("TEST END");
     }
 }

@@ -21,11 +21,13 @@ public class SeeAMoviePage {
     @FindBy(xpath="//android.widget.Button[@clickable='true']") public WebElement first_showtime;
     @FindBy(id="com.amc:id/seatsSelectedLabel") public WebElement seats_header;
     @FindBy(id="com.amc:id/food_drink") public WebElement food_and_drinks;
+    @FindBy(id="com.amc:id/header_title") public WebElement selected_movie;
 
     //List of movies
     @FindBy(xpath="//android.widget.RelativeLayout[@index='0']") public WebElement first_movie;
     @FindBy(xpath="//android.widget.RelativeLayout[@index='2']") public WebElement third_movie;
     @FindBy(xpath="//android.widget.RelativeLayout[@index='4']") public WebElement fifth_movie;
+
 
     public SeeAMoviePage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
