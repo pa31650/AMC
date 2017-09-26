@@ -15,11 +15,11 @@ public class TicketPurchaseFlow extends TestEnvironment{
 	// **************
 	@DataProvider(name = "Sample", parallel=true)
 	public Object[][] scenarios() {
-		return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
+		return new JsonDataProvider().getData("/json/ticketPurchaseFlow-GiftCard.json");
 	}
 	
 	@BeforeMethod
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "mobileOSVersion", "deviceID" })
+    @Parameters({ "runLocation" , "browserUnderTest" , "browserVersion" , "operatingSystem" , "environment" , "mobileOSVersion" , "deviceID" })
     public void setup(@Optional String runLocation, String browserUnderTest,
 	    String browserVersion, String operatingSystem, String environment, String mobileOSVersion, String deviceID) {
     	setApplicationUnderTest("AMC");
@@ -41,7 +41,7 @@ public class TicketPurchaseFlow extends TestEnvironment{
         
     @Test(dataProvider = "Sample")
     public void ticketPurchaseFlow(
-    		String iterationName,String movieTitle,String theatre,String date, String tickets, String creditCard){
+    		String iterationName,String movieTitle,String theatre,String date, String tickets, String creditCard, String selectMeal){
     	    	
     	//[Home] Open AMC website
     	HomePage homePage = new HomePage(getDriver());
@@ -77,22 +77,41 @@ public class TicketPurchaseFlow extends TestEnvironment{
     	//[Ticket Type] Add adult tickets & Continue
     	selectTicketTypePage.selectTicketTypeComplete(tickets);
 
-        //[Food & Drinks] Select food item from Meals tab
-        FoodDrinksPage foodDrinksPage = new FoodDrinksPage(getDriver());
-        
-        //[Food & Drinks] Move to meals tab
-        foodDrinksPage.NavigatetoMealsTab();
-        
-        //[Food & Drinks] Choose first option
-        foodDrinksPage.ChooseFirstItemMeals();
+    	switch (selectMeal.toLowerCase()) {
+            case "yes":
+                //[Food & Drinks] Select food item from Meals tab
+                FoodDrinksPage foodDrinksPage = new FoodDrinksPage(getDriver());
+                
+                //[Food & Drinks] Move to meals tab
+                foodDrinksPage.NavigatetoMealsTab();
+                
+                //[Food & Drinks] Choose first option
+                foodDrinksPage.ChooseFirstItemMeals();
+                break;
+
+            case "no":
+                break;
+        }
     	
     	//[Confirm Purchase] Enter email address
     	ConfirmPurchasePage confirmPurchasePage = new ConfirmPurchasePage(getDriver());
     	
     	//[Confirm Purchase] Enter email address and payment details & Purchase
-    	confirmPurchasePage.confirmPurchasePageComplete(creditCard);
-    	    	
-    	//[Confirm Purchase] Check for Error (and output message?)
-    	TestReporter.assertTrue(confirmPurchasePage.errorExist(), "Ensuring that the Error label is present after clicking Purchase button with bad cc data.");
+    	confirmPurchasePage.confirmPurchasePageComplete(creditCard,selectMeal);
+    	    
+    	switch (creditCard.toLowerCase()) {
+            case "visa":
+              //[Confirm Purchase] Check for Error (and output message?)
+                TestReporter.assertTrue(confirmPurchasePage.errorExist(), "Ensuring that the Error label is present after clicking Purchase button with bad cc data.");
+                break;
+            case "giftcard":
+                //[Thank You] Verify Thank you and report movie info
+                ThankYou thankYou = new ThankYou(getDriver());
+                TestReporter.assertTrue(thankYou.verifyThankYou(), "Enduring that the Thank You label is present");
+                thankYou.reportThankYouPage();
+            default:
+                break;
+        }
+    	
     }    
 }

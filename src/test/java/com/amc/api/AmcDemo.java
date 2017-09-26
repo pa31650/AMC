@@ -1,4 +1,4 @@
-package com.amc;
+package com.amc.api;
 
 import org.testng.annotations.Test;
 
@@ -10,7 +10,7 @@ import com.orasi.api.restServices.ResponseCodes;
 import com.orasi.api.restServices.RestResponse;
 import com.orasi.utils.TestReporter;
 
-public class AMCapiDemo extends AMC{
+public class AmcDemo extends AMC{
 
     @Test
     public void GetShowtimes() {

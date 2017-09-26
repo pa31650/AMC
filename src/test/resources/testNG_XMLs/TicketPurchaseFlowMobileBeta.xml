@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Ticket Purchase Flow" parallel="tests" thread-count="2" >
+
+	<listeners>
+		<listener class-name="com.orasi.utils.listeners.TestListener" />
+	</listeners>
+	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="environment" value="prod" />
+	<parameter name="runLocation" value="mobile" />
+	<parameter name="browserVersion" value="" />
+
+ 	<test name="Main Ticket Purchase Flow-GALAXY_S4_02" >
+		<parameter name="operatingSystem" value="android" />
+		<parameter name="mobileOSVersion" value="4.2.2" />
+		<parameter name="deviceID" value="1826b7bc" />
+		<classes>
+			<class name="com.amc.TicketPurchaseFlow" />
+		</classes>
+	</test> 
+	
+	<test name="Main Ticket Purchase Flow-HTC_One_01" >
+		<parameter name="operatingSystem" value="android" />
+		<parameter name="mobileOSVersion" value="4.1.2" />
+		<parameter name="deviceID" value="FA3BDS901049" />
+		<classes>
+			<class name="com.amc.TicketPurchaseFlow" />
+		</classes>
+	</test> 
+</suite> <!-- Suite -->

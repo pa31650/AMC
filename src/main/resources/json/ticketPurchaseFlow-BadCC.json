@@ -5,7 +5,7 @@
       "data": [
         {
         	"name": "movieTitle",
-        	"value": "Logan Lucky"
+        	"value": "American Assassin"
         },
         {
         	"name": "theatre",
@@ -22,6 +22,10 @@
         {
         	"name": "creditCard",
         	"value": "VISA"
+        },
+        {
+        	"name": "selectMeal",
+        	"value": "Yes"
         }
       ]
     }

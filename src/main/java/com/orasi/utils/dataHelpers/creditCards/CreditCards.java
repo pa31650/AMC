@@ -181,6 +181,22 @@ public class CreditCards {
                 address.get().getCountryAbbv(),
                 address.get().getZipCode());
     }
+    
+    public final static CreditCard GIFTCARD() {
+        return new CreditCard(
+                "GIFTCARD",
+                getPerson().getFullName(), 
+                "6139694901498926", 
+                "5685", 
+                null, 
+                null, 
+                address.get().getAddress1(),
+                address.get().getAddress2(),
+                address.get().getCity(),
+                address.get().getStateAbbv(),
+                address.get().getCountryAbbv(),
+                address.get().getZipCode());
+    }
 
     /**
      * This method allows you to enter the type of card you want
@@ -215,15 +231,12 @@ public class CreditCards {
 
             case "visaexpired":
                 return VISA_EXPIRED();
-
-            /*
-             * case "gc":
-             * case "gift":
-             * case "giftcard":
-             * // return GIFTCARD(); for later storage
-             * break;
-             */
-
+            
+            case "gc":
+            case "gift":
+            case "giftcard":
+                return GIFTCARD(); 
+            
         }
 
         // Should not be at this point unless card was not found above

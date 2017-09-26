@@ -71,7 +71,7 @@ public class FoodDrinksPage {
 	    //lstOption.scrollIntoView();
 	    lstOption.selectValue(options.get(1).getAttribute("value"));
 	    
-	    TestReporter.logStep("Option: " + options.get(1).getAttribute("value") + "was selected.");
+	    TestReporter.logStep("Option: " + options.get(1).getAttribute("value") + " was selected.");
 	    
 	    String xpathExpressionAddtoOrder = "//div[contains(@id,'" + strAriaControls + "')]//div[contains(@class,'LoadingContainer-inline')][1]//button[contains(@class,'submit')]";
 	    Button btnAddtoOrder = driver.findButton(By.xpath(xpathExpressionAddtoOrder));

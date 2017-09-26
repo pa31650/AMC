@@ -5,11 +5,11 @@
       "data": [
         {
         	"name": "movieTitle",
-        	"value": "Logan Lucky"
+        	"value": "American Assassin"
         },
         {
         	"name": "theatre",
-        	"value": "AMC CLASSIC Chesterfield 14"
+        	"value": "AMC CLASSIC North Dekalb 16"
         },
         {
         	"name": "date",
@@ -17,11 +17,15 @@
         },
         {
         	"name": "tickets",
-        	"value": "3"
+        	"value": "1"
         },
         {
         	"name": "creditCard",
-        	"value": "VISA"
+        	"value": "GIFTCARD"
+        },
+        {
+        	"name": "selectMeal",
+        	"value": "No"
         }
       ]
     }

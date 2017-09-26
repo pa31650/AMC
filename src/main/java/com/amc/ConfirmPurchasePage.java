@@ -1,25 +1,20 @@
 package com.amc;
 
-import org.apache.poi.ss.formula.functions.Choose;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
-import com.orasi.core.interfaces.Element;
 import com.orasi.core.interfaces.Label;
 import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.Listbox;
 import com.orasi.core.interfaces.Textbox;
-import com.orasi.core.interfaces.Webtable;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
-import com.orasi.utils.PageLoaded;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataHelpers.creditCards.CreditCard;
 import com.orasi.utils.dataHelpers.creditCards.CreditCards;
 import com.orasi.utils.dataHelpers.personFactory.Email;
 import com.orasi.utils.dataHelpers.personFactory.Person;
-import com.orasi.utils.date.SimpleDate;
 import java.util.List;
 
 public class ConfirmPurchasePage {
@@ -36,6 +31,10 @@ public class ConfirmPurchasePage {
 	@FindBy(xpath="//h4[contains(text(),'Error')]") private Label lblError;
 	@FindBy(xpath="//input[@placeholder='Order Name']") private Textbox txtOrderName;
 	@FindBy(xpath="//option[contains(text(),'Select Time')]/..") private Listbox lstDeliveryTimes;
+	@FindBy(xpath="//span[contains(text(),'Add Gift Card')]") private Link lnkAddGiftCard;
+	@FindBy(xpath="//input[@placeholder='Gift Card']") private Textbox txtGCNumber;
+	@FindBy(xpath="//input[@placeholder='Pin']") private Textbox txtPin;
+	@FindBy(xpath="//button[contains(text(),'Add Gift Card')]") private Button btnAddGiftCard;
 			
 	/**Constructor**/
 	public ConfirmPurchasePage(OrasiDriver driver){
@@ -65,13 +64,19 @@ public class ConfirmPurchasePage {
 		return lblError.isDisplayed();
 	}
 
-	public void confirmPurchasePageComplete(String creditCard) {
+	public void confirmPurchasePageComplete(String creditCard, String selectMeal) {
 	    
-	    
-	    //Enter Delivery Info
-        if (lstDeliveryTimes.syncVisible(5,false)) {
-            completeDeliveryInfo();
-        }       
+	    switch (selectMeal.toLowerCase()) {
+            case "yes":
+                //Enter Delivery Info
+                if (lstDeliveryTimes.syncVisible(5,false)) {
+                    completeDeliveryInfo();
+                } 
+                break;
+
+            case "no":
+                break;
+        }
         	    
 	    Email email = new Email();
     	
@@ -80,16 +85,31 @@ public class ConfirmPurchasePage {
     	
     	TestReporter.logStep(strEmailAddress + " was entered for email address.");
     	
-    	
-    	// Enter payment info  	
-    	enterCCInfo(CreditCards.getCreditCardByType(creditCard));
-    	    	    	
+    	// Enter payment info
+    	switch (creditCard.toLowerCase()) {
+            case "giftcard":
+                enterGCInfo(CreditCards.getCreditCardByType(creditCard));
+                break;
+
+            default:
+                enterCCInfo(CreditCards.getCreditCardByType(creditCard));
+                break;
+        }
+    	  	    	
     	//Click purchase
     	clickPurchaseButton();
 		
 	}
 	
-	public void completeDeliveryInfo(){
+	private void enterGCInfo(CreditCard creditCard) {
+	    lnkAddGiftCard.scrollIntoView();
+	    lnkAddGiftCard.click();
+	    txtGCNumber.set(creditCard.getCardNumber());
+	    txtPin.set(creditCard.getSecurityCode());
+	    clickAddGiftCard();
+    }
+
+    public void completeDeliveryInfo(){
 	    chooseEarliestDeliveryTime();
 	    
 	    enterOrderName();
@@ -111,4 +131,9 @@ public class ConfirmPurchasePage {
         
         TestReporter.logStep("Name: " + person.getFullName() + " was entered for Order Name");
 	}
+    
+    public void clickAddGiftCard() {
+        btnAddGiftCard.scrollIntoView();
+        btnAddGiftCard.click();
+    }
 }

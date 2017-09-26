@@ -33,6 +33,12 @@ public class Constants {
     public final static String SANDBOX_PATH = "/sandbox/";
     public final static String TNSNAMES_PATH = "/database/";
 
+    /*
+     * Mobile Device Constants
+     */
+    public final static String GALAXY_S5_02 = "e9064b6c";
+    public final static String GALAXY_S4_02 = "1826b7bc";
+    
     /**
      * Defaults to "./" if there's an exception of any sort.
      *

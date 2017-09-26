@@ -10,9 +10,9 @@
 	<parameter name="environment" value="prod" />
 	<parameter name="runLocation" value="mobile" />
 	<parameter name="browserVersion" value="" />
-	<parameter name="operatingSystem" value="android" />
-	<parameter name="mobileOSVersion" value="4.1.2" />
-	<parameter name="deviceID" value="FA3BDS901049" />
+	<parameter name="operatingSystem" value="ANDROID" />
+	<parameter name="mobileOSVersion" value="4.2.2" />
+	<parameter name="deviceID" value="1826b7bc" />
 
  	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
 
