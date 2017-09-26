@@ -25,7 +25,9 @@ public class SeeAMoviePage {
 
     //List of movies
     @FindBy(xpath="//android.widget.RelativeLayout[@index='0']") public WebElement first_movie;
+    @FindBy(xpath="//android.widget.RelativeLayout[@index='1']") public WebElement second_movie;
     @FindBy(xpath="//android.widget.RelativeLayout[@index='2']") public WebElement third_movie;
+    @FindBy(xpath="//android.widget.RelativeLayout[@index='3']") public WebElement fourth_movie;
     @FindBy(xpath="//android.widget.RelativeLayout[@index='4']") public WebElement fifth_movie;
 
 

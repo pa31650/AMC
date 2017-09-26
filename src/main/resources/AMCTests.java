@@ -30,13 +30,13 @@ public class AMCTests {
         cap.setCapability("browserName", "Samsung Galaxy S8+");
 
         //Set android version desired capability
-        cap.setCapability("version", "7.0");
+        cap.setCapability("version", "5.1");
 
         //Set android applicationName desired capability
         cap.setCapability("applicationName", "Samsung Galaxy S8+");
 
         //Set android device name desired capability
-        cap.setCapability("deviceName", "988a5b313834344c53");
+        cap.setCapability("deviceName", "T01130JFGT");
 
         //Set android appPackage desired capability
         cap.setCapability("appPackage", "com.amc");
@@ -46,7 +46,7 @@ public class AMCTests {
 
         //Created object of AndroidDriver will all set capabilities
         //Set appium server address and port number
-        //Launches calculator app
+        //Launches AMC Theatres app
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4725/wd/hub"), cap);
         try {
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);

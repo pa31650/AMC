@@ -64,7 +64,6 @@ public class PaymentPage {
         if (credit_card_error_msg.isDisplayed()) {
             System.out.println("The credit card is not valid.");
             System.out.println("TEST END");
-            driver.quit();
         }
     }
 }

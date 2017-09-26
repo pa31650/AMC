@@ -29,22 +29,22 @@ public class SampleDeviceTest {
         cap.setCapability("platformName", "ANDROID");
 
         //Set android browserName desired capability
-        cap.setCapability("browserName", "Samsung Galaxy S8+");
+        cap.setCapability("browserName", "Motorola Moto X");
 
         //Set android version desired capability
-        cap.setCapability("version", "7.0");
+        cap.setCapability("version", "5.1");
 
         //Set android applicationName desired capability
-        cap.setCapability("applicationName", "Samsung Galaxy S8+");
+        cap.setCapability("applicationName", "Motorola Moto X");
 
         //Set android device name desired capability
-        cap.setCapability("deviceName", "988a5b313834344c53");
+        cap.setCapability("deviceName", "T01130JFGT");
 
         //Set android appPackage desired capability
-        cap.setCapability("appPackage", "com.sec.android.app.popupcalculator");
+        cap.setCapability("appPackage", "com.android.calculator2");
 
         //Set android appActivity desired capability
-        cap.setCapability("appActivity", "com.sec.android.app.popupcalculator.Calculator");
+        cap.setCapability("appActivity", "com.android.calculator2.Calculator");
 
         //Created object of AndroidDriver will all set capabilities
         //Set appium server address and port number
@@ -57,19 +57,19 @@ public class SampleDeviceTest {
     @Test
     public void Sum() {
         //Click on DELETE/CLR button to clear result text box before running test
-        driver.findElement(By.id("com.sec.android.app.popupcalculator:id/bt_clear")).click();
+        //driver.findElement(By.id("com.android.calculator2:id/bt_clear")).click();
 
         //Click on number 2 button
-        driver.findElement(By.id("com.sec.android.app.popupcalculator:id/bt_02")).click();
+        driver.findElement(By.id("com.android.calculator2:id/digit_2")).click();
 
         //Click on + button
-        driver.findElement(By.id("com.sec.android.app.popupcalculator:id/bt_add")).click();;
+        driver.findElement(By.id("com.android.calculator2:id/op_add")).click();;
 
         //Click on number 5 button
-        driver.findElement(By.id("com.sec.android.app.popupcalculator:id/bt_05")).click();
+        driver.findElement(By.id("com.android.calculator2:id/digit_5")).click();
 
         //Click on = button
-        driver.findElement(By.id("com.sec.android.app.popupcalculator:id/bt_equal")).click();;
+        driver.findElement(By.id("com.android.calculator2:id/eq")).click();;
 
         //Get result from result text box
         String result = driver.findElement(By.className("android.widget.EditText")).getText();

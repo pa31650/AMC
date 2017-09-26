@@ -1,6 +1,7 @@
 package src.main.java.com.amc;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -22,7 +23,7 @@ public class FoodAndDrinksPage {
     @FindBy(id="com.amc:id/pickerTextToDisplay") private WebElement dropdown_selection;
     @FindBy(id="com.amc:id/concessionItems") private WebElement item_selection;
     @FindBy(id="com.amc:id/selectMovieTitle") private WebElement select_your_movie;
-    @FindBy(xpath="//android.widget.TextView[@text='MEALS']") private WebElement meals;
+    @FindBy(xpath="//android.widget.TextView[@text='Meals']") private WebElement meals;
 
     //special offers
     @FindBy(id="com.amc:id/groupName") private WebElement first_offer;
@@ -111,6 +112,9 @@ public class FoodAndDrinksPage {
 
         //Enter the order name and the seat number
         element.until(ExpectedConditions.visibilityOf(select_a_delivery_time_header));
+        TouchAction action = new TouchAction(driver);
+        action.longPress(select_a_delivery_time_header).moveTo(movie_and_time).release().perform();
+
         order_name.sendKeys("Test");
         seat_number.sendKeys("4");
         continue_btn.click();
