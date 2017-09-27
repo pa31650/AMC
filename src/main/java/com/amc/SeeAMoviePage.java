@@ -22,6 +22,8 @@ public class SeeAMoviePage {
     @FindBy(id="com.amc:id/seatsSelectedLabel") public WebElement seats_header;
     @FindBy(id="com.amc:id/food_drink") public WebElement food_and_drinks;
     @FindBy(id="com.amc:id/header_title") public WebElement selected_movie;
+    @FindBy(id="com.amc:id/toolbar_title") public WebElement see_a_movie_header;
+    @FindBy(id="com.amc:id/noShowtimesTitle") public WebElement no_showtimes;
 
     //List of movies
     @FindBy(xpath="//android.widget.RelativeLayout[@index='0']") public WebElement first_movie;

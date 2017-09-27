@@ -24,6 +24,8 @@ public class FoodAndDrinksPage {
     @FindBy(id="com.amc:id/concessionItems") private WebElement item_selection;
     @FindBy(id="com.amc:id/selectMovieTitle") private WebElement select_your_movie;
     @FindBy(xpath="//android.widget.TextView[@text='Meals']") private WebElement meals;
+    @FindBy(xpath="//android.widget.TextView[@text='Popcorn']") private WebElement popcorn;
+    @FindBy(xpath="//android.widget.TextView[@text='Special Offers']") private WebElement special_offers;
 
     //special offers
     @FindBy(id="com.amc:id/groupName") private WebElement first_offer;
@@ -66,7 +68,8 @@ public class FoodAndDrinksPage {
         WebDriverWait element = new WebDriverWait(driver, 10);
 
         //Select MEALS group
-        element.until(ExpectedConditions.elementToBeClickable(meals));
+        element.until(ExpectedConditions.elementToBeClickable(special_offers));
+        amctests.moveToElement(driver, popcorn, special_offers, meals);
         meals.click();
 
         //Select the first selection from the menu
@@ -112,8 +115,7 @@ public class FoodAndDrinksPage {
 
         //Enter the order name and the seat number
         element.until(ExpectedConditions.visibilityOf(select_a_delivery_time_header));
-        TouchAction action = new TouchAction(driver);
-        action.longPress(select_a_delivery_time_header).moveTo(movie_and_time).release().perform();
+        amctests.moveToElement(driver, select_a_delivery_time_header, movie_and_time, order_name);
 
         order_name.sendKeys("Test");
         seat_number.sendKeys("4");

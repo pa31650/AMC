@@ -1,15 +1,12 @@
 package src.test.java.amc;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 import src.main.java.com.amc.*;
 import src.main.resources.AMCTests;
-
-import io.appium.java_client.TouchAction;
 
 public class TicketPurchaseTests extends AMCTests {
 
@@ -21,8 +18,7 @@ public class TicketPurchaseTests extends AMCTests {
         SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
         TicketSelectionPage ticketselection = new TicketSelectionPage(getDriver());
         PurchasePage purchase = new PurchasePage(getDriver());
-        ContactInfoPage contactinfo = new ContactInfoPage(getDriver());
-        PaymentPage payment = new PaymentPage(getDriver());
+        AMCTests amctests = new AMCTests();
 
         //Set the device location settings
         System.out.println("TEST BEGIN");
@@ -30,25 +26,21 @@ public class TicketPurchaseTests extends AMCTests {
 
         //Confirm that the app is on the home screen
         WebDriverWait element = new WebDriverWait(getDriver(), 10);
-        element.until(ExpectedConditions.elementToBeClickable(By.id("com.amc:id/toolbar_title")));
+        element.until(ExpectedConditions.visibilityOf(seeAMovie.see_a_movie_header));
         System.out.println("The test is currently on the home screen.");
 
         //Close promotional popup at the top of the screen
         seeAMovie.closePopup();
 
         //Scroll down to Annabelle: Creation
-        TouchAction action = new TouchAction(getDriver());
         element.until(ExpectedConditions.elementToBeClickable(seeAMovie.third_movie));
-
-        do {
-            action.longPress(seeAMovie.fourth_movie).moveTo(seeAMovie.second_movie).release().perform();
-        } while (!(seeAMovie.fifth_movie.isDisplayed()));
+        amctests.moveToElement(getDriver(), seeAMovie.fourth_movie, seeAMovie.second_movie, seeAMovie.fifth_movie);
 
         //Click Annabelle: Creation
         seeAMovie.fifth_movie.click();
 
         //Confirm the app displays No Showtime title
-        element.until(ExpectedConditions.presenceOfElementLocated(By.id("com.amc:id/noShowtimesTitle")));
+        element.until(ExpectedConditions.visibilityOf(seeAMovie.no_showtimes));
         System.out.println("The movie '" + seeAMovie.selected_movie.getText() + "' is selected.");
         System.out.println("The app displays that no showtimes can be found.");
 
@@ -96,11 +88,9 @@ public class TicketPurchaseTests extends AMCTests {
         SignInPage signin = new SignInPage(getDriver());
         SeeAMoviePage seeAMovie = new SeeAMoviePage(getDriver());
         FoodAndDrinksPage foodanddrinks = new FoodAndDrinksPage(getDriver());
-        TicketSelectionPage ticketselection = new TicketSelectionPage(getDriver());
         PurchasePage purchase = new PurchasePage(getDriver());
         ContactInfoPage contactinfo = new ContactInfoPage(getDriver());
         PaymentPage payment = new PaymentPage(getDriver());
-        AMCTests amctests = new AMCTests();
 
         //Set the device location settings
         System.out.println("TEST BEGIN");

@@ -5,7 +5,9 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import io.appium.java_client.TouchAction;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -68,5 +70,12 @@ public class AMCTests {
         try {
             driver.runAppInBackground(Duration.ofSeconds(1));
         } catch (Exception e) {}
+    }
+
+    public void moveToElement(AndroidDriver<MobileElement> driver, WebElement a, WebElement b, WebElement c) {
+        TouchAction action = new TouchAction(driver);
+        do {
+            action.longPress(a).moveTo(b).release().perform();
+        } while (!(c.isDisplayed()));
     }
 }
