@@ -104,7 +104,7 @@
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 					</argLine-->
 					<suiteXmlFiles>
-						<suiteXmlFile>${testNGSourceDirectory}</suiteXmlFile> 
+						<suiteXmlFile>${testNGSourceDirectory}/TicketPurchaseFlow-negative.xml</suiteXmlFile> 
 					</suiteXmlFiles>
 					<systemPropertyVariables>
 						<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
