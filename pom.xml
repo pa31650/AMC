@@ -98,6 +98,21 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>2.12.4</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<!--argLine>
+						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+					</argLine-->
+					<suiteXmlFiles>
+						<suiteXmlFile>${testNGSourceDirectory}/TicketPurchaseFlow-Parallel.xml</suiteXmlFile> 
+					</suiteXmlFiles>
+					<systemPropertyVariables>
+						<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
+						<jenkinsBrowser>${browser}</jenkinsBrowser>
+						<jenkinsBrowserVersion>${browserVersion}</jenkinsBrowserVersion>
+						<jenkinsRunLocation>${runLocation}</jenkinsRunLocation>
+					</systemPropertyVariables>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
