@@ -26,7 +26,7 @@ public class ThankYou {
 	}
 	
 	public void reportThankYouPage() {
-	    lblMovieInfo.syncDisabled(null);
+	    lblMovieInfo.syncEnabled(5);
 	    TestReporter.logStep(lblMovieInfo.getText());
 	}
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Ticket Purchase Flow" parallel="tests" thread-count="5" >
+<suite name="Ticket Purchase Flow-negative" parallel="tests" thread-count="5" >
 
 	<listeners>
 		<listener class-name="com.orasi.utils.listeners.TestListener" />
@@ -17,7 +17,7 @@
 		<parameter name="runLocation" value="mobile" />
 		<parameter name="browserUnderTest" value="chrome" />
 		<classes>
-			<class name="com.amc.TicketPurchaseFlow" />
+			<class name="com.amc.TicketPurchaseFlowNegative" />
 		</classes>
 	</test> 
 	
@@ -29,7 +29,7 @@
 		<parameter name="runLocation" value="mobile" />
 		<parameter name="browserUnderTest" value="chrome" />
 		<classes>
-			<class name="com.amc.TicketPurchaseFlow" />
+			<class name="com.amc.TicketPurchaseFlowNegative" />
 		</classes>
 	</test> 
 	
@@ -41,7 +41,7 @@
 		<parameter name="runLocation" value="grid" />
 		<parameter name="browserUnderTest" value="chrome" />
 		<classes>
-			<class name="com.amc.TicketPurchaseFlow" />
+			<class name="com.amc.TicketPurchaseFlowNegative" />
 		</classes>
 	</test> 
 	
@@ -53,7 +53,7 @@
 		<parameter name="runLocation" value="grid" />
 		<parameter name="browserUnderTest" value="firefox" />
 		<classes>
-			<class name="com.amc.TicketPurchaseFlow" />
+			<class name="com.amc.TicketPurchaseFlowNegative" />
 		</classes>
 	</test>
 	

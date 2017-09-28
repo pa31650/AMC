@@ -1,0 +1,13 @@
+{
+  "testData": [
+    {
+      "iterationName": "AMC API Demo",
+      "data": [
+        {
+        	"name": "theatreName",
+        	"value": "AMC Esquire 7"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 package com.amc.api;
 
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.amc.api.AMC;
@@ -10,11 +13,20 @@ import com.amc.api.v2.theatres.showtimes.objects.ShowtimeResponse;
 import com.orasi.api.restServices.ResponseCodes;
 import com.orasi.api.restServices.RestResponse;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.dataProviders.JsonDataProvider;
 import com.sun.jna.platform.win32.OaIdl.DATE;
 import com.orasi.utils.date.*;
 
-public class AmcDemo extends AMC{
+public class AmcApiDemo extends AMC{
+    
+    // ************* *
+    // Data Provider
+    // **************
+    @DataProvider(name = "API Demo", parallel = true)
+    public Object[][] scenarios() {
+        return new JsonDataProvider().getData("/json/amcApiDemo.json");
 
+    }
     @Test
     public void GetShowtimes() {       
         RestResponse rest = AMC.showtimes().getShowtimes("59229828");
@@ -39,13 +51,12 @@ public class AmcDemo extends AMC{
         for (Theatre theatre : theatres.getEmbedded().getTheatres()) {
         System.out.println(theatre.getName()+ " - " + theatre.getId());
         }
-        
     }
     
-    @Test
-    public void GetAdultTicketSKU() {
+    @Test(dataProvider = "API Demo")
+    public void GetAdultTicketSKU(@Optional String iterationName, String strTheatreName) {
         String strToday = DateTimeConversion.getDaysOut("0", "MM-dd-YYYY");
-        Integer intTheatreID = AMC.theatres().getTheatreID("AMC Esquire 7");
+        Integer intTheatreID = AMC.theatres().getTheatreID(strTheatreName);
         String strMovieName = AMC.theatreShowtimes().getFirstMovieName(intTheatreID);
         
         RestResponse rest = AMC.theatreShowtimes().getShowtimes(intTheatreID, strToday, strMovieName);

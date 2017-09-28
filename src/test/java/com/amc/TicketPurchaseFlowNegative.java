@@ -7,15 +7,14 @@ import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
 import com.orasi.utils.dataProviders.JsonDataProvider;
 
-public class TicketPurchaseFlow extends TestEnvironment {
+public class TicketPurchaseFlowNegative extends TestEnvironment {
 
     // ************* *
     // Data Provider
     // **************
-    @DataProvider(name = "Ticket Purchase Flow", parallel = true)
+    @DataProvider(name = "Ticket Purchase Flow (negative)", parallel = true)
     public Object[][] scenarios() {
-        return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
-///Chameleon/src/main/resources/json/ticketPurchaseFlow.json
+        return new JsonDataProvider().getData("/json/ticketPurchaseFlow-negative.json");
     }
 
     @BeforeMethod
@@ -32,7 +31,7 @@ public class TicketPurchaseFlow extends TestEnvironment {
         setMobileOSVersion(mobileOSVersion);
         setDeviceID(deviceID);
         testStart(testName);
-        TestReporter.logStep("Test Name: " + testName);
+        TestReporter.logStep("Test Name: " + testName.toString());
     }
 
     @AfterMethod
@@ -40,7 +39,7 @@ public class TicketPurchaseFlow extends TestEnvironment {
         endTest("TestAlert", testResults);
     }
 
-    @Test(dataProvider = "Ticket Purchase Flow")
+    @Test(dataProvider = "Ticket Purchase Flow (negative)")
     public void ticketPurchaseFlow(
             String iterationName, String movieTitle, String theatre, String date, String tickets, String creditCard, String selectMeal) {
         
@@ -106,11 +105,8 @@ public class TicketPurchaseFlow extends TestEnvironment {
         TestReporter.logStep("Enter email address and payment details & Purchase");
         confirmPurchasePage.confirmPurchasePageComplete(creditCard, selectMeal);
 
-        // [Thank You] Verify Thank you and report movie info
-        ThankYou thankYou = new ThankYou(getDriver());
-        
-        TestReporter.assertTrue(thankYou.verifyThankYou(), "Ensuring that the Thank You page presents");
-        thankYou.reportThankYouPage();
-        
+        // [Confirm Purchase] Check for Error (and output message?)
+        TestReporter.assertTrue(confirmPurchasePage.errorExist(), "Ensuring that the Error label is present after clicking Purchase button with bad cc data.");
+
     }
 }
