@@ -1,0 +1,29 @@
+{
+  "testData": [
+    {
+      "iterationName": "Ticket Purchase Happy Path",
+      "data": [
+        {
+        	"name": "movieTitle",
+        	"value": "Bad Moms"
+        },
+        {
+        	"name": "theatre",
+        	"value": "QA Lab Theatre 0903"
+        },
+        {
+        	"name": "date",
+        	"value": "Tomorrow"
+        },
+        {
+        	"name": "tickets",
+        	"value": "1"
+        },
+        {
+        	"name": "creditCard",
+        	"value": "VISA"
+        }
+      ]
+    }
+  ]
+}
