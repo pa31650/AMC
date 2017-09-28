@@ -1,7 +1,7 @@
 {
   "testData": [
     {
-      "iterationName": "Ticket Purchase Happy Path",
+      "iterationName": "Ticket Purchase Bad CC data",
       "data": [
         {
         	"name": "movieTitle",

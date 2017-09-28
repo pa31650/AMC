@@ -1,0 +1,62 @@
+{
+  "testData": [
+    {
+      "iterationName": "Ticket Purchase Happy Path-Credit Card",
+      "data": [
+        {
+        	"name": "movieTitle",
+        	"value": "American Assassin"
+        },
+        {
+        	"name": "theatre",
+        	"value": "AMC Phipps Plaza 14"
+        },
+        {
+        	"name": "date",
+        	"value": "Tomorrow"
+        },
+        {
+        	"name": "tickets",
+        	"value": "1"
+        },
+        {
+        	"name": "creditCard",
+        	"value": "VISA"
+        },
+        {
+        	"name": "selectMeal",
+        	"value": "Yes"
+        }
+      ]
+    },
+    {
+      "iterationName": "Ticket Purchase Happy Path-Gift Card",
+      "data": [
+        {
+        	"name": "movieTitle",
+        	"value": "American Assassin"
+        },
+        {
+        	"name": "theatre",
+        	"value": "AMC CLASSIC North Dekalb 16"
+        },
+        {
+        	"name": "date",
+        	"value": "Tomorrow"
+        },
+        {
+        	"name": "tickets",
+        	"value": "1"
+        },
+        {
+        	"name": "creditCard",
+        	"value": "GIFTCARD"
+        },
+        {
+        	"name": "selectMeal",
+        	"value": "No"
+        }
+      ]
+    }
+  ]
+}

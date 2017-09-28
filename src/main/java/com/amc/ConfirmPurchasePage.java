@@ -81,9 +81,7 @@ public class ConfirmPurchasePage {
         	    
 	    Email email = new Email();
     	
-    	String strEmailAddress = email.getEmail();
-    	    	
-    	
+    	String strEmailAddress = email.getEmail();    	
     	
     	// Enter payment info
     	switch (creditCard.toLowerCase()) {
@@ -99,11 +97,12 @@ public class ConfirmPurchasePage {
                 TestReporter.logStep(strEmailAddress + " was entered for email address.");
                 
                 enterCCInfo(CreditCards.getCreditCardByType(creditCard));
+                clickPurchaseButton();
                 break;
         }
     	  	    	
     	//Click purchase
-    	clickPurchaseButton();
+    	//clickPurchaseButton();
 		
 	}
 	

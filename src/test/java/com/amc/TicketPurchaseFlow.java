@@ -14,7 +14,7 @@ public class TicketPurchaseFlow extends TestEnvironment {
     // **************
     @DataProvider(name = "Sample", parallel = true)
     public Object[][] scenarios() {
-        return new JsonDataProvider().getData("/json/ticketPurchaseFlow-BadCC.json");
+        return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
         // return new JsonDataProvider().getData("/json/ticketPurchaseFlow-GiftCard.json");
     }
 
