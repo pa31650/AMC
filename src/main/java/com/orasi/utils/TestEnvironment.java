@@ -462,6 +462,7 @@ public class TestEnvironment {
         if (!browserUnderTest.toLowerCase().contains("edge") && !getRunLocation().toLowerCase().contains("mobile")) {
             getDriver().manage().deleteAllCookies();
             getDriver().manage().window().maximize();
+            
         }
     }
 
@@ -572,6 +573,8 @@ public class TestEnvironment {
             } else {
                 caps.setCapability("marionette", false);
             }
+            
+            //caps.setCapability("geo.enabled", false);
 
         }
 
@@ -625,8 +628,9 @@ public class TestEnvironment {
         if (!deviceID.isEmpty()) {
             // Which mobile OS platform to use, e.g. iOS, Android
             caps.setCapability("platformName", operatingSystem);
+            caps.setCapability("platform", operatingSystem);
             // Mobile OS version, e.g. 7.1, 4.4
-            caps.setCapability("version", mobileOSVersion);
+            //caps.setCapability("version", mobileOSVersion);
             // Name of mobile web browser to automate. Should be an empty string if automating an app instead
             caps.setCapability("browserName", browserUnderTest);
             

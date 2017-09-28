@@ -61,6 +61,7 @@ public class ConfirmPurchasePage {
 	}
 	
 	public boolean errorExist(){
+	    lblError.syncEnabled(5,true);
 		return lblError.isDisplayed();
 	}
 
@@ -81,17 +82,22 @@ public class ConfirmPurchasePage {
 	    Email email = new Email();
     	
     	String strEmailAddress = email.getEmail();
-    	enterEmail(strEmailAddress);
+    	    	
     	
-    	TestReporter.logStep(strEmailAddress + " was entered for email address.");
     	
     	// Enter payment info
     	switch (creditCard.toLowerCase()) {
             case "giftcard":
+                enterEmail("Paul.Atkins@orasi.com");
+                TestReporter.logStep("Paul.Atkins@orasi.com was entered for email address.");
+                
                 enterGCInfo(CreditCards.getCreditCardByType(creditCard));
                 break;
 
             default:
+                enterEmail(strEmailAddress);
+                TestReporter.logStep(strEmailAddress + " was entered for email address.");
+                
                 enterCCInfo(CreditCards.getCreditCardByType(creditCard));
                 break;
         }

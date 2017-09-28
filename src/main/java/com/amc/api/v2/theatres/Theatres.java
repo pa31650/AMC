@@ -29,7 +29,7 @@ public class Theatres extends AMC{
 		TheatreResponse theatres = rest.mapJSONToObject(TheatreResponse.class);
         
         for (Theatre theatre : theatres.getEmbedded().getTheatres()) {
-        	if (theatre.getLongName() == theatreName) {
+            if (theatre.getLongName().equals(theatreName)) {
 				theatreID = theatre.getId();
         		break;
 			}
@@ -37,5 +37,7 @@ public class Theatres extends AMC{
 		return theatreID;
     	
     }
+
+    
     
 }

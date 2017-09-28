@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import com.orasi.core.interfaces.Button;
 import com.orasi.core.interfaces.Checkbox;
 import com.orasi.core.interfaces.Element;
+import com.orasi.core.interfaces.Label;
+import com.orasi.core.interfaces.Link;
 import com.orasi.core.interfaces.impl.internal.ElementFactory;
 import com.orasi.utils.OrasiDriver;
 import com.orasi.utils.TestReporter;
@@ -20,7 +22,7 @@ public class SelectSeatPage {
 
 	/**Page Elements**/
 	@FindBy(xpath="//button[contains(text(),'Continue')]") private Button btnContinue;
-	
+		
 	/**Constructor**/
 	public SelectSeatPage(OrasiDriver driver){
 		this.driver = driver;
@@ -119,4 +121,17 @@ public class SelectSeatPage {
 		
 		return strSeat;
 	}
+	
+	public void selectSeatPageComplete(String tickets) {
+	    
+        Integer intSeats = Integer.valueOf(tickets);
+    
+        chooseOpenSeats(intSeats);
+    
+        btnContinue();
+	    
+	}
+	
+    	
+	
 }
