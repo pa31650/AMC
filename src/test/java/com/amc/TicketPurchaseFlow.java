@@ -15,7 +15,7 @@ public class TicketPurchaseFlow extends TestEnvironment {
     @DataProvider(name = "Ticket Purchase Flow", parallel = true)
     public Object[][] scenarios() {
         return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
-///Chameleon/src/main/resources/json/ticketPurchaseFlow.json
+        //return new JsonDataProvider().getData("/json/ticketPurchaseFlow-QA.json");
     }
 
     @BeforeMethod
@@ -31,8 +31,8 @@ public class TicketPurchaseFlow extends TestEnvironment {
         setThreadDriver(true);
         setMobileOSVersion(mobileOSVersion);
         setDeviceID(deviceID);
-        testStart(testName);
-        TestReporter.logStep("Test Name: " + testName);
+        testStart("Ticket Purchase Flow" + browserUnderTest + " / " + operatingSystem);
+        
     }
 
     @AfterMethod
@@ -98,10 +98,10 @@ public class TicketPurchaseFlow extends TestEnvironment {
             case "no":
                 break;
         }
-
+              
         // [Confirm Purchase] Enter email address
         ConfirmPurchasePage confirmPurchasePage = new ConfirmPurchasePage(getDriver());
-
+        
         // [Confirm Purchase] Enter email address and payment details & Purchase
         TestReporter.logStep("Enter email address and payment details & Purchase");
         confirmPurchasePage.confirmPurchasePageComplete(creditCard, selectMeal);

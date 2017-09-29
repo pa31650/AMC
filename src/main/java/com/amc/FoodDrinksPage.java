@@ -41,6 +41,7 @@ public class FoodDrinksPage {
 	    if (btnMealsMenu.syncEnabled(5,false)) {
 	        btnMealsMenu.click();
         } else {
+           btnArrowRight.syncEnabled(5,true);
            btnArrowRight.click();
            
            btnMealsMenu.syncEnabled();

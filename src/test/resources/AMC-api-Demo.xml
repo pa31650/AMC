@@ -3,7 +3,7 @@
 <suite name="AMC API Demo">
   <test verbose="2" name="Default test">
     <classes>
-      <class name="com.amc.api.AmcDemo"/>
+      <class name="com.amc.api.AmcApiDemo"/>
     </classes>
   </test> <!-- Default test -->
 </suite> <!-- Default suite -->

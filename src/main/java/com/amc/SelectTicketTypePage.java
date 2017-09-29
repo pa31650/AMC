@@ -57,12 +57,25 @@ public class SelectTicketTypePage {
     	
     	if (IsSeatTaken()) {
     	    do {
-                lnkCloseModal.click();
-                SelectSeatPage selectSeatPage = new SelectSeatPage(driver);
+    	        TestReporter.logStep("Site reports that seat chosen is no longer available.");
+    	        
+    	        TestReporter.logStep("Close message window");
+    	        lnkCloseModal.click();
+                
+    	        SelectSeatPage selectSeatPage = new SelectSeatPage(driver);
+                
+                TestReporter.logStep("Refresh page to get latest seat map.");
                 driver.navigate().refresh();
+                
+                TestReporter.logStep("Retry selecting reserved seat(s)");
                 selectSeatPage.selectSeatPageComplete(tickets);
+                
+                TestReporter.logStep("Retry selecting Adult ticket(s)");
                 addAdultTickets(tickets);
+                
+                TestReporter.logStep("Retry clicking Continue button");
                 ClickContinueButton();
+                
             } while (IsSeatTaken());
         }
     	

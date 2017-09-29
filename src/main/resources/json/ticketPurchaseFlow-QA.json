@@ -1,7 +1,7 @@
 {
   "testData": [
     {
-      "iterationName": "Ticket Purchase Happy Path",
+      "iterationName": "Ticket Purchase Happy Path-QA",
       "data": [
         {
         	"name": "movieTitle",
@@ -9,11 +9,11 @@
         },
         {
         	"name": "theatre",
-        	"value": "QA Lab Theatre 0903"
+        	"value": "QA Lab Theatre 0905"
         },
         {
         	"name": "date",
-        	"value": "Tomorrow"
+        	"value": "Today"
         },
         {
         	"name": "tickets",
@@ -22,6 +22,10 @@
         {
         	"name": "creditCard",
         	"value": "VISA"
+        },
+        {
+        	"name": "selectMeal",
+        	"value": "yes"
         }
       ]
     }

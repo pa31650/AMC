@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.orasi.core.interfaces.Button;
+import com.orasi.core.interfaces.Checkbox;
 import com.orasi.core.interfaces.Label;
 import com.orasi.core.interfaces.Listbox;
 import com.orasi.core.interfaces.Textbox;
@@ -75,6 +76,8 @@ public class ShowtimesPage {
         } else {
             btnAltSearch.click();
         }
+		
+//		selectTheatreFromSearch(strSearch);
 			
 		if (btnTheatreSelect.syncVisible(5,false)) {
 		    btnTheatreSelect.click();
@@ -95,7 +98,14 @@ public class ShowtimesPage {
 		//selectTheatre(strSearch);
 	}
 		
-	public void findGSOTheatre(){
+	private void selectTheatreFromSearch(String strSearch) {
+        // TODO Auto-generated method stub
+	    String xpathExpression = "//h4[contains(text(),'"+ strSearch +"')]";
+        Label lblTheatre = driver.findLabel(By.xpath(xpathExpression));
+        lblTheatre.click();
+    }
+
+    public void findGSOTheatre(){
 	    PageLoaded.isDomComplete(driver);
 		findAnotherTheatre();
 		theatreSearch("27409");	

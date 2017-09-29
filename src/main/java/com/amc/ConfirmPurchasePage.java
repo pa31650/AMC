@@ -35,7 +35,8 @@ public class ConfirmPurchasePage {
 	@FindBy(xpath="//input[@placeholder='Gift Card']") private Textbox txtGCNumber;
 	@FindBy(xpath="//input[@placeholder='Pin']") private Textbox txtPin;
 	@FindBy(xpath="//button[contains(text(),'Add Gift Card')]") private Button btnAddGiftCard;
-			
+	@FindBy(xpath="//a[contains(text(),'Sign In')]") private Button btnSignIn;
+				
 	/**Constructor**/
 	public ConfirmPurchasePage(OrasiDriver driver){
 		this.driver = driver;
@@ -90,9 +91,12 @@ public class ConfirmPurchasePage {
                 TestReporter.logStep("Paul.Atkins@orasi.com was entered for email address.");
                 
                 enterGCInfo(CreditCards.getCreditCardByType(creditCard));
+                //Click purchase
+                clickPurchaseButton();
                 break;
 
             default:
+
                 enterEmail(strEmailAddress);
                 TestReporter.logStep(strEmailAddress + " was entered for email address.");
                 

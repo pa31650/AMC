@@ -186,8 +186,8 @@ public class CreditCards {
         return new CreditCard(
                 "GIFTCARD",
                 getPerson().getFullName(), 
-                "6139694901498926", 
-                "5685", 
+                "6139694905337255", 
+                "8894", 
                 null, 
                 null, 
                 address.get().getAddress1(),

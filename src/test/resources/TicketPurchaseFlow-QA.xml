@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Ticket Purchase Flow" parallel="methods" thread-count="5" data-provider-thread-count="2">
+
+	<listeners>
+		<listener class-name="com.orasi.utils.listeners.TestListener" />
+	</listeners>
+	<parameter name="browserUnderTest" value="chrome" />
+	<parameter name="environment" value="test" />
+	<parameter name="runLocation" value="grid" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="operatingSystem" value="windows" />
+	<parameter name="mobileOSVersion" value="" />
+	<parameter name="deviceID" value="" />
+
+ 	<test name="Main Ticket Purchase Flow" parallel="methods" thread-count="5">
+
+		<classes>
+			<class name="com.amc.TicketPurchaseFlow" />
+		</classes>
+	</test> 
+</suite> <!-- Suite -->

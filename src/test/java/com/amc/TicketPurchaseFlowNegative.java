@@ -30,8 +30,7 @@ public class TicketPurchaseFlowNegative extends TestEnvironment {
         setThreadDriver(true);
         setMobileOSVersion(mobileOSVersion);
         setDeviceID(deviceID);
-        testStart(testName);
-        TestReporter.logStep("Test Name: " + testName.toString());
+        testStart("Ticket Purchase Flow: " + browserUnderTest + " / " + operatingSystem);
     }
 
     @AfterMethod

@@ -350,6 +350,7 @@ public class TestEnvironment {
         // the console
         TestReporter.setPrintToConsole(true);
         setTestName(testName);
+        
         driverSetup();
         // launch the application under test normally
         if (pageUrl.isEmpty()) {
