@@ -6,8 +6,8 @@
     <test name="Test - Mobile App - GALAXY_S4_02" >
     	<parameter name="applicationName" value="Galaxy S4" />
 		<parameter name="platformName" value="ANDROID" />
-		<parameter name="mobileOSVersion" value="4.2.2" />
-		<parameter name="deviceName" value="1826b7bc" />
+		<parameter name="mobileOSVersion" value="5.1" />
+		<parameter name="deviceName" value="T01130JFGT" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="mobile" />
 		<parameter name="browserUnderTest" value="" />

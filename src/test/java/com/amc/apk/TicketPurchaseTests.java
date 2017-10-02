@@ -15,8 +15,9 @@ import org.testng.annotations.Test;
 import com.orasi.utils.Android;
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.dataProviders.JsonDataProvider;
+import com.orasi.utils.MobileAppDriver;
 
-public class TicketPurchaseTests extends Android {
+public class TicketPurchaseTests extends TestEnvironment {
 
     // ************* *
     // Data Provider
@@ -50,7 +51,7 @@ public class TicketPurchaseTests extends Android {
     }
     
     @Test
-    public void SelectMovie() {
+    public void SelectMovie(){
 
         //Initialize the drivers
         SignInPage signin = new SignInPage(getAndroidDriver());
@@ -64,7 +65,7 @@ public class TicketPurchaseTests extends Android {
         signin.LogInAsGuest();
 
         //Confirm that the app is on the home screen
-        WebDriverWait element = new WebDriverWait(getDriver(), 10);
+        WebDriverWait element = new WebDriverWait(getAndroidDriver(), 10);
         element.until(ExpectedConditions.visibilityOf(seeAMovie.see_a_movie_header));
         System.out.println("The test is currently on the home screen.");
 
@@ -110,7 +111,7 @@ public class TicketPurchaseTests extends Android {
             System.out.println("1 adult ticket was selected.");
         } else {
             System.out.println("The ticket failed to be selected or more than 1 ticket was selected.");
-            getDriver().quit();
+            getAndroidDriver().quit();
         }
 
         //Confirm visibility of purchase page
@@ -136,7 +137,7 @@ public class TicketPurchaseTests extends Android {
         signin.LogInAsGuest();
 
         //Confirm that the app is on the home screen
-        WebDriverWait element = new WebDriverWait(getDriver(), 10);
+        WebDriverWait element = new WebDriverWait(getAndroidDriver(), 10);
         element.until(ExpectedConditions.elementToBeClickable(By.id("com.amc:id/toolbar_title")));
         String home_header = getAndroidDriver().findElementById("com.amc:id/toolbar_title").getText();
         if (home_header.equals("See a Movie")) {

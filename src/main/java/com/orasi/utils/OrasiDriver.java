@@ -57,6 +57,9 @@ import com.orasi.utils.dataHelpers.DataWarehouse;
 import com.orasi.utils.debugging.Colors;
 import com.orasi.utils.debugging.Highlight;
 
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
 public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreenshot {
     /*
      * Define fields to be used by an OrasiDriver
@@ -112,7 +115,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
     public WebDriver getWebDriver() {
         return driver;
     }
-
+    
     public void setDriver(WebDriver driver) {
         this.driver = driver;
     }

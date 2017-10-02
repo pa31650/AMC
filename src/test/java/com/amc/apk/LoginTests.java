@@ -10,9 +10,10 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.orasi.utils.Android;
+import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.dataProviders.JsonDataProvider;
 
-public class LoginTests extends Android {
+public class LoginTests extends TestEnvironment {
 
     // ************* *
     // Data Provider
@@ -40,16 +41,16 @@ public class LoginTests extends Android {
             String mobileOSVersion, String deviceName, String environment, 
             String runLocation, String browserUnderTest, String appPackage, 
             String appActivity, String deviceOrientation) {
-        setApplicationUnderTest(applicationName);
+        setApplicationUnderTest(deviceName);
         setBrowserUnderTest(browserUnderTest);
+        setDeviceID(deviceName);
         setRunLocation(runLocation);
         setThreadDriver(true);
         setMobileOSVersion(mobileOSVersion);
-        setDeviceID(deviceID);
         setAppPackage(appPackage);
         setAppActivity(appActivity);
         setDeviceOrientation(deviceOrientation);
-        testStart("Login Tests");
+        mobilAppTestStart("Login Tests");
         
     }
     

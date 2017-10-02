@@ -73,6 +73,7 @@ public class TestEnvironment {
     /*
      * Mobile Fields
      */
+    private AndroidDriver<MobileElement> androidDriver;
     protected String deviceID = "";
     protected String mobileHubURL = appURLRepository.getString("MOBILE_HUB_URL");
     protected String mobileOSVersion = "";
@@ -305,6 +306,10 @@ public class TestEnvironment {
             return driver;
         }
     }
+    
+    public AndroidDriver<MobileElement> getAndroidDriver() {
+        return androidDriver;
+    }
 
     /**
      * User controls to see the driver to be threaded or not. Only use when
@@ -376,6 +381,19 @@ public class TestEnvironment {
             launchApplication(pageUrl);
         }
         return getDriver();
+    }
+    
+    protected AndroidDriver<MobileElement> mobilAppTestStart(String testName) {
+        TestReporter.setPrintToConsole(true);
+        setTestName(testName);
+        mobileAppDriverSetup();
+        
+        try {
+            getAndroidDriver().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        } catch (WebDriverException e) {
+            System.out.println("The app failed to open");
+        }
+        return getAndroidDriver();
     }
 
     /**
@@ -462,7 +480,8 @@ public class TestEnvironment {
         }
         // Code for running on mobile devices
         else if (runLocation.equalsIgnoreCase("mobile")) {
-            mobileDriverSetup();
+            //mobileDriverSetup();
+            mobileAppDriverSetup();
         } else {
             throw new AutomationException(
                     "Parameter for run [Location] was not set to 'Local', 'Grid', 'Sauce', 'Mobile'");
@@ -647,23 +666,51 @@ public class TestEnvironment {
         // Name of mobile web browser to automate. Should be an empty string if automating an app instead
         caps.setCapability("browserName", browserUnderTest);
         
-        if (browserUnderTest.isEmpty()) {
-            try {
-                new AndroidDriver<MobileElement>(new URL(getRemoteURL()), caps);
+        try {
+            setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
             } catch (MalformedURLException e) {
-                throw new AutomationException("Could not generate the moblile remote driver", e);
-            }
-		} else {
-		    try {
-                setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
-            } catch (MalformedURLException e) {
-                throw new AutomationException("Could not generate the moblile remote driver", e);
-            }
+            throw new AutomationException("Could not generate the moblile remote driver", e);
         }
+    }  
+    
+    private void mobileAppDriverSetup() {
+        //Create object of DesiredCapabilities class
+        //[{browserName=T01130JFGT, maxInstances=1, platformName=ANDROID, version=5.1, deviceName=T01130JFGT, platform=ANDROID}]
+        //[{appPackage=com.amc, appActivity=md5170375cde9c41ccb2cf27dba032a5216.SplashActivity, browserName=T01130JFGT, platformName=ANDROID, version=5.1, deviceName=T01130JFGT, platform=ANDROID, applicationName=Samsung Galaxy S8+}]
+        DesiredCapabilities cap = new DesiredCapabilities();
 
+        //Set android platformName desired capability
+        cap.setCapability("platformName", "ANDROID");
+        //cap.setCapability("platform", "ANDROID");
+
+        //Set android browserName desired capability
+        //cap.setCapability("browserName", "T01130JFGT");
+
+        //Set android version desired capability
+        cap.setCapability("version", "5.1");
+
+        //Set android applicationName desired capability
+        //cap.setCapability("applicationName", "Samsung Galaxy S8+");
+
+        //Set android device name desired capability
+        cap.setCapability("deviceName", "T01130JFGT");
+        //cap.setCapability("deviceID", "T01130JFGT");
+        //Set android appPackage desired capability
+        cap.setCapability("appPackage", "com.amc");
+
+        //Set android appActivity desired capability
+        cap.setCapability("appActivity", "md5170375cde9c41ccb2cf27dba032a5216.SplashActivity");
+
+        //Created object of AndroidDriver will all set capabilities
+        //Set appium server address and port number
+        //Launches AMC Theatres app
+        
+        try {
+            androidDriver = new AndroidDriver<MobileElement>(new URL(mobileHubURL), cap);
+        } catch (MalformedURLException e) {
+            throw new AutomationException("Could not generate the moblile remote driver", e);
+        }
     }
-    
-    
 
     /**
      * Used to get the Platform used by Selenium
