@@ -383,7 +383,7 @@ public class TestEnvironment {
         return getDriver();
     }
     
-    protected AndroidDriver<MobileElement> mobilAppTestStart(String testName) {
+    protected AndroidDriver<MobileElement> mobileAppTestStart(String testName) {
         TestReporter.setPrintToConsole(true);
         setTestName(testName);
         mobileAppDriverSetup();
@@ -680,31 +680,23 @@ public class TestEnvironment {
         DesiredCapabilities cap = new DesiredCapabilities();
 
         //Set android platformName desired capability
-        cap.setCapability("platformName", "ANDROID");
-        //cap.setCapability("platform", "ANDROID");
-
-        //Set android browserName desired capability
-        //cap.setCapability("browserName", "T01130JFGT");
+        cap.setCapability("platformName", operatingSystem);
 
         //Set android version desired capability
-        cap.setCapability("version", "5.1");
-
-        //Set android applicationName desired capability
-        //cap.setCapability("applicationName", "Samsung Galaxy S8+");
+        cap.setCapability("version", mobileOSVersion);
 
         //Set android device name desired capability
-        cap.setCapability("deviceName", "T01130JFGT");
-        //cap.setCapability("deviceID", "T01130JFGT");
+        cap.setCapability("deviceName", deviceID);
+
         //Set android appPackage desired capability
-        cap.setCapability("appPackage", "com.amc");
+        cap.setCapability("appPackage", appPackage);
 
         //Set android appActivity desired capability
-        cap.setCapability("appActivity", "md5170375cde9c41ccb2cf27dba032a5216.SplashActivity");
+        cap.setCapability("appActivity", appActivity);
 
         //Created object of AndroidDriver will all set capabilities
         //Set appium server address and port number
-        //Launches AMC Theatres app
-        
+        //Launches AMC Theatres app        
         try {
             androidDriver = new AndroidDriver<MobileElement>(new URL(mobileHubURL), cap);
         } catch (MalformedURLException e) {

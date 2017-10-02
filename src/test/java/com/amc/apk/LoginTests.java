@@ -26,31 +26,21 @@ public class LoginTests extends TestEnvironment {
     
     @BeforeMethod
     @Parameters({ 
-        "applicationName", 
-        "platformName", 
-        "mobileOSVersion", 
-        "deviceName", 
-        "environment", 
-        "runLocation", 
-        "browserUnderTest",
+        "platformName",
+        "mobileOSVersion",
+        "deviceName",
         "appPackage",
-        "appActivity",
-        "deviceOrientation"
+        "appActivity"
         })
-    public void setup(@Optional String applicationName, String platformName,
-            String mobileOSVersion, String deviceName, String environment, 
-            String runLocation, String browserUnderTest, String appPackage, 
-            String appActivity, String deviceOrientation) {
-        setApplicationUnderTest(deviceName);
-        setBrowserUnderTest(browserUnderTest);
-        setDeviceID(deviceName);
-        setRunLocation(runLocation);
-        setThreadDriver(true);
+    public void setup(@Optional String platformName,
+            String mobileOSVersion, String deviceName, String appPackage, 
+            String appActivity) {
+        setOperatingSystem(platformName);
         setMobileOSVersion(mobileOSVersion);
+        setDeviceID(deviceName);
         setAppPackage(appPackage);
         setAppActivity(appActivity);
-        setDeviceOrientation(deviceOrientation);
-        mobilAppTestStart("Login Tests");
+        mobileAppTestStart("Login Tests");
         
     }
     
