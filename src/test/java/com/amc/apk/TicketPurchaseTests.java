@@ -6,7 +6,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -19,33 +21,36 @@ import com.orasi.utils.MobileAppDriver;
 
 public class TicketPurchaseTests extends TestEnvironment {
 
-    // ************* *
+ // ************* *
     // Data Provider
     // **************
-    @DataProvider(name = "Ticket Purchase Flow", parallel = true)
+    @DataProvider(name = "Login Tests", parallel = false)
     public Object[][] scenarios() {
-        return new JsonDataProvider().getData("/json/ticketPurchaseFlow.json");
+        return new JsonDataProvider().getData("/json/TicketPurchaseTests.json");
         //return new JsonDataProvider().getData("/json/ticketPurchaseFlow-QA.json");
     }
-
-    @BeforeMethod
-    @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "mobileOSVersion", "deviceID" })
-    public void setup(@Optional String runLocation, String browserUnderTest,
-            String browserVersion, String operatingSystem, String environment, String mobileOSVersion, String deviceID) {
-        setApplicationUnderTest("AMC");
-        setBrowserUnderTest(browserUnderTest);
-        setBrowserVersion(browserVersion);
-        setOperatingSystem(operatingSystem);
-        setRunLocation(runLocation);
-        setTestEnvironment(environment);
-        setThreadDriver(true);
+    
+    @BeforeTest
+    @Parameters({ 
+        "platformName",
+        "mobileOSVersion",
+        "deviceName",
+        "appPackage",
+        "appActivity"
+        })
+    public void setup(@Optional String platformName,
+            String mobileOSVersion, String deviceName, String appPackage, 
+            String appActivity) {
+        setOperatingSystem(platformName);
         setMobileOSVersion(mobileOSVersion);
-        setDeviceID(deviceID);
-        testStart("Ticket Purchase Flow" + browserUnderTest + " / " + operatingSystem);
+        setDeviceID(deviceName);
+        setAppPackage(appPackage);
+        setAppActivity(appActivity);
+        mobileAppTestStart("Login Tests");
         
     }
 
-    @AfterMethod
+    @AfterTest
     public void close(ITestContext testResults) {
         endTest("TestAlert", testResults);
     }

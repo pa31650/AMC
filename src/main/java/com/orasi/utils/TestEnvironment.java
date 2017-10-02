@@ -438,6 +438,12 @@ public class TestEnvironment {
                 getDriver().quit();
             }
         }
+        
+        if (getAndroidDriver() != null){
+            if (!getAndroidDriver().toString().contains("null")) {
+                getAndroidDriver().quit();
+            }
+        }
     }
 
     /**
@@ -480,8 +486,8 @@ public class TestEnvironment {
         }
         // Code for running on mobile devices
         else if (runLocation.equalsIgnoreCase("mobile")) {
-            //mobileDriverSetup();
-            mobileAppDriverSetup();
+            mobileDriverSetup();
+            
         } else {
             throw new AutomationException(
                     "Parameter for run [Location] was not set to 'Local', 'Grid', 'Sauce', 'Mobile'");

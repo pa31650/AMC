@@ -1,23 +1,8 @@
 package com.orasi;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import io.appium.java_client.TouchAction;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-
 public class AMCTests {
 
-    private AndroidDriver<MobileElement> driver;
+    /*private AndroidDriver<MobileElement> driver;
 
     @BeforeMethod
     public void setUp() throws MalformedURLException {
@@ -55,18 +40,18 @@ public class AMCTests {
         } catch (WebDriverException e) {
             System.out.println("The app failed to open");
         }
-    }
+    }*/
 
-    @AfterMethod
+    /*@AfterMethod
     public void End() {
         driver.quit();
-    }
+    }*/
 
-    public AndroidDriver<MobileElement> getDriver() {
+    /*public AndroidDriver<MobileElement> getDriver() {
         return driver;
-    }
+    }*/
 
-    public void RunAppInBackground(AndroidDriver<MobileElement> driver) {
+    /*public void RunAppInBackground(AndroidDriver<MobileElement> driver) {
         try {
             driver.runAppInBackground(Duration.ofSeconds(1));
         } catch (Exception e) {}
@@ -77,5 +62,5 @@ public class AMCTests {
         do {
             action.longPress(a).moveTo(b).release().perform();
         } while (!(c.isDisplayed()));
-    }
+    }*/
 }

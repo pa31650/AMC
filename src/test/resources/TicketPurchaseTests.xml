@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Test - Mobile App" thread-count="20">
+	
+    <test name="Test - Mobile App - Moto X" >
+    	<parameter name="platformName" value="ANDROID" />
+    	<parameter name="mobileOSVersion" value="5.1" />
+    	<parameter name="deviceName" value="T01130JFGT" />
+    	<parameter name="appPackage" value="com.amc" />
+		<parameter name="appActivity" value="md5170375cde9c41ccb2cf27dba032a5216.SplashActivity" />
+				
+		<classes>
+			<class name="com.amc.apk.TicketPurchaseTests" />
+		</classes>
+	</test> 
+</suite> <!-- Suite -->
