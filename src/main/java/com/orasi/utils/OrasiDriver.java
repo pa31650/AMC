@@ -99,6 +99,7 @@ public class OrasiDriver implements WebDriver, JavaScriptExecutor, TakesScreensh
         currentPageTimeout = Constants.PAGE_TIMEOUT;
         currentElementTimeout = Constants.ELEMENT_TIMEOUT;
         currentScriptTimeout = Constants.DEFAULT_GLOBAL_DRIVER_TIMEOUT;
+
         driver = new RemoteWebDriver(url, caps);
     }
 

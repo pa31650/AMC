@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Test - Mobile App" parallel="tests" thread-count="20">
+	
+    <test name="Test - Mobile App - GALAXY_S4_02" >
+    	<parameter name="applicationName" value="Galaxy S4" />
+		<parameter name="platformName" value="ANDROID" />
+		<parameter name="mobileOSVersion" value="4.2.2" />
+		<parameter name="deviceName" value="1826b7bc" />
+		<parameter name="environment" value="prod" />
+		<parameter name="runLocation" value="mobile" />
+		<parameter name="browserUnderTest" value="" />
+		<parameter name="appPackage" value="com.amc" />
+		<parameter name="appActivity" value="md5170375cde9c41ccb2cf27dba032a5216.SplashActivity" />
+		<parameter name="deviceOrientation" value="portrait" />
+		<classes>
+			<class name="com.amc.apk.LoginTests" />
+		</classes>
+	</test> 
+</suite> <!-- Suite -->

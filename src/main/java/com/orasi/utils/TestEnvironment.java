@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -76,6 +77,9 @@ public class TestEnvironment {
     protected String mobileHubURL = appURLRepository.getString("MOBILE_HUB_URL");
     protected String mobileOSVersion = "";
     protected String mobileAppPath = appURLRepository.getString("MOBILE_APP_PATH");
+    protected String appPackage = "";
+    protected String appActivity = "";
+    protected String deviceOrientation = "";
 
     /*
      * Sauce Labs Fields
@@ -261,6 +265,18 @@ public class TestEnvironment {
 
     protected void setMobileOSVersion(String mobileOSVersion) {
         this.mobileOSVersion = mobileOSVersion;
+    }
+    
+    protected void setAppPackage(String appPackage){
+        this.appPackage = appPackage;
+    }
+    
+    protected void setAppActivity(String appActivity){
+        this.appActivity = appActivity;
+    }
+    
+    protected void setDeviceOrientation(String deviceOrientation){
+        this.deviceOrientation = deviceOrientation;
     }
 
     // ************************************
@@ -625,34 +641,29 @@ public class TestEnvironment {
         DesiredCapabilities caps = new DesiredCapabilities();
         
         caps.setCapability("deviceName", deviceID);
-        // if a device ID is specified, go to that device
-        if (!deviceID.isEmpty()) {
-            // Which mobile OS platform to use, e.g. iOS, Android
-            caps.setCapability("platformName", operatingSystem);
-            caps.setCapability("platform", operatingSystem);
-            // Mobile OS version, e.g. 7.1, 4.4
-            //caps.setCapability("version", mobileOSVersion);
-            // Name of mobile web browser to automate. Should be an empty string if automating an app instead
-            caps.setCapability("browserName", browserUnderTest);
-            
-        } else {
-            //caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
-            //caps.setCapability("deviceName", deviceID);
-            TestReporter.logDebug("No Device Id was passed in");
-        }
+        // Which mobile OS platform to use, e.g. iOS, Android
+        caps.setCapability("platformName", operatingSystem);
+        caps.setCapability("platform", operatingSystem);
+        // Name of mobile web browser to automate. Should be an empty string if automating an app instead
+        caps.setCapability("browserName", browserUnderTest);
         
         if (browserUnderTest.isEmpty()) {
-            // The absolute local path or remote http URL to an .ipa or .apk file, or a .zip containing one of these.
-            // leave browserUnderTest blank/null if using this
-            caps.setCapability("app", mobileAppPath);
-		} 
-        
-        try {
-            setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
-        } catch (MalformedURLException e) {
-            throw new AutomationException("Could not generate the moblile remote driver", e);
+            try {
+                new AndroidDriver<MobileElement>(new URL(getRemoteURL()), caps);
+            } catch (MalformedURLException e) {
+                throw new AutomationException("Could not generate the moblile remote driver", e);
+            }
+		} else {
+		    try {
+                setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
+            } catch (MalformedURLException e) {
+                throw new AutomationException("Could not generate the moblile remote driver", e);
+            }
         }
+
     }
+    
+    
 
     /**
      * Used to get the Platform used by Selenium
@@ -704,29 +715,6 @@ public class TestEnvironment {
         }
     }
     
-    private void mobileDriverSetupbeta() {
-        
-        //Create object of DesiredCapabilities class
-        DesiredCapabilities cap = new DesiredCapabilities();
-        
-        //Set android platformName desired capability
-        cap.setCapability("platformName", "ANDROID");
-        
-        //Set android browserName desired capability
-        cap.setCapability("browserName", "chrome");
-        
-        //Set android version desired capability
-        cap.setCapability("version", "4.1.2");
-                    
-        //Set android device name desired capability
-        cap.setCapability("deviceName", "FA3BDS901049");
-        
-        try {
-            setDriver(new OrasiDriver(cap, new URL("http://192.168.227.2:4444/wd/hub")));
-            //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        } catch (MalformedURLException e) {
-            System.out.println("The app failed to open");
-        }        
-    }
+    
 
 }
