@@ -5,6 +5,7 @@ import org.testng.annotations.*;
 
 import com.orasi.utils.TestEnvironment;
 import com.orasi.utils.TestReporter;
+import com.orasi.utils.dataProviders.ExcelDataProvider;
 import com.orasi.utils.dataProviders.JsonDataProvider;
 
 public class TicketPurchaseFlowNegative extends TestEnvironment {
@@ -14,7 +15,8 @@ public class TicketPurchaseFlowNegative extends TestEnvironment {
     // **************
     @DataProvider(name = "Ticket Purchase Flow (negative)", parallel = true)
     public Object[][] scenarios() {
-        return new JsonDataProvider().getData("/json/ticketPurchaseFlow-negative.json");
+        //return new JsonDataProvider().getData("/json/ticketPurchaseFlow-negative.json");
+        return new ExcelDataProvider("/excelsheets/ticketPurchaseFlow-negative.xlsx", "Data").getTestData();
     }
 
     @BeforeMethod
