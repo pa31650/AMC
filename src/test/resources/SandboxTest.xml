@@ -8,7 +8,6 @@
 	</listeners>
 	
 	<parameter name="browserVersion" value="" />
-	
 	<test name="Main Ticket Purchase Flow-Desktop Chrome" >
 		<parameter name="operatingSystem" value="WINDOWS" />
 		<parameter name="mobileOSVersion" value="" />
@@ -17,8 +16,10 @@
 		<parameter name="runLocation" value="grid" />
 		<parameter name="browserUnderTest" value="chrome" />
 		<classes>
-			<class name="com.amc.TicketPurchaseFlowNegative" />
+			<class name="com.amc.Sandbox" />
 		</classes>
 	</test> 
 	
+	
 </suite> <!-- Suite -->
+
