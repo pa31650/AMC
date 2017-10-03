@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -72,10 +73,14 @@ public class TestEnvironment {
     /*
      * Mobile Fields
      */
+    private AndroidDriver<MobileElement> androidDriver;
     protected String deviceID = "";
     protected String mobileHubURL = appURLRepository.getString("MOBILE_HUB_URL");
     protected String mobileOSVersion = "";
     protected String mobileAppPath = appURLRepository.getString("MOBILE_APP_PATH");
+    protected String appPackage = "";
+    protected String appActivity = "";
+    protected String deviceOrientation = "";
 
     /*
      * Sauce Labs Fields
@@ -262,6 +267,18 @@ public class TestEnvironment {
     protected void setMobileOSVersion(String mobileOSVersion) {
         this.mobileOSVersion = mobileOSVersion;
     }
+    
+    protected void setAppPackage(String appPackage){
+        this.appPackage = appPackage;
+    }
+    
+    protected void setAppActivity(String appActivity){
+        this.appActivity = appActivity;
+    }
+    
+    protected void setDeviceOrientation(String deviceOrientation){
+        this.deviceOrientation = deviceOrientation;
+    }
 
     // ************************************
     // ************************************
@@ -288,6 +305,10 @@ public class TestEnvironment {
         } else {
             return driver;
         }
+    }
+    
+    public AndroidDriver<MobileElement> getAndroidDriver() {
+        return androidDriver;
     }
 
     /**
@@ -361,6 +382,19 @@ public class TestEnvironment {
         }
         return getDriver();
     }
+    
+    protected AndroidDriver<MobileElement> mobileAppTestStart(String testName) {
+        TestReporter.setPrintToConsole(true);
+        setTestName(testName);
+        mobileAppDriverSetup();
+        
+        try {
+            getAndroidDriver().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        } catch (WebDriverException e) {
+            System.out.println("The app failed to open");
+        }
+        return getAndroidDriver();
+    }
 
     /**
      * Ends the test and grabs the test result (pass/fail) in case need to use that
@@ -402,6 +436,12 @@ public class TestEnvironment {
         if (getDriver() != null && getDriver().getWindowHandles().size() > 0) {
             if (!getDriver().toString().contains("null")) {
                 getDriver().quit();
+            }
+        }
+        
+        if (getAndroidDriver() != null){
+            if (!getAndroidDriver().toString().contains("null")) {
+                getAndroidDriver().quit();
             }
         }
     }
@@ -447,6 +487,7 @@ public class TestEnvironment {
         // Code for running on mobile devices
         else if (runLocation.equalsIgnoreCase("mobile")) {
             mobileDriverSetup();
+            
         } else {
             throw new AutomationException(
                     "Parameter for run [Location] was not set to 'Local', 'Grid', 'Sauce', 'Mobile'");
@@ -625,30 +666,45 @@ public class TestEnvironment {
         DesiredCapabilities caps = new DesiredCapabilities();
         
         caps.setCapability("deviceName", deviceID);
-        // if a device ID is specified, go to that device
-        if (!deviceID.isEmpty()) {
-            // Which mobile OS platform to use, e.g. iOS, Android
-            caps.setCapability("platformName", operatingSystem);
-            caps.setCapability("platform", operatingSystem);
-            // Mobile OS version, e.g. 7.1, 4.4
-            //caps.setCapability("version", mobileOSVersion);
-            // Name of mobile web browser to automate. Should be an empty string if automating an app instead
-            caps.setCapability("browserName", browserUnderTest);
-            
-        } else {
-            //caps.setCapability(CapabilityType.PLATFORM, Platform.ANY);
-            //caps.setCapability("deviceName", deviceID);
-            TestReporter.logDebug("No Device Id was passed in");
-        }
-        
-        if (browserUnderTest.isEmpty()) {
-            // The absolute local path or remote http URL to an .ipa or .apk file, or a .zip containing one of these.
-            // leave browserUnderTest blank/null if using this
-            caps.setCapability("app", mobileAppPath);
-		} 
+        // Which mobile OS platform to use, e.g. iOS, Android
+        caps.setCapability("platformName", operatingSystem);
+        caps.setCapability("platform", operatingSystem);
+        // Name of mobile web browser to automate. Should be an empty string if automating an app instead
+        caps.setCapability("browserName", browserUnderTest);
         
         try {
             setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
+            } catch (MalformedURLException e) {
+            throw new AutomationException("Could not generate the moblile remote driver", e);
+        }
+    }  
+    
+    private void mobileAppDriverSetup() {
+        //Create object of DesiredCapabilities class
+        //[{browserName=T01130JFGT, maxInstances=1, platformName=ANDROID, version=5.1, deviceName=T01130JFGT, platform=ANDROID}]
+        //[{appPackage=com.amc, appActivity=md5170375cde9c41ccb2cf27dba032a5216.SplashActivity, browserName=T01130JFGT, platformName=ANDROID, version=5.1, deviceName=T01130JFGT, platform=ANDROID, applicationName=Samsung Galaxy S8+}]
+        DesiredCapabilities cap = new DesiredCapabilities();
+
+        //Set android platformName desired capability
+        cap.setCapability("platformName", operatingSystem);
+
+        //Set android version desired capability
+        cap.setCapability("version", mobileOSVersion);
+
+        //Set android device name desired capability
+        cap.setCapability("deviceName", deviceID);
+
+        //Set android appPackage desired capability
+        cap.setCapability("appPackage", appPackage);
+
+        //Set android appActivity desired capability
+        cap.setCapability("appActivity", appActivity);
+
+        //Created object of AndroidDriver will all set capabilities
+        //Set appium server address and port number
+        //Launches AMC Theatres app        
+        try {
+            androidDriver = new AndroidDriver<MobileElement>(new URL(mobileHubURL), cap);
         } catch (MalformedURLException e) {
             throw new AutomationException("Could not generate the moblile remote driver", e);
         }
@@ -704,29 +760,6 @@ public class TestEnvironment {
         }
     }
     
-    private void mobileDriverSetupbeta() {
-        
-        //Create object of DesiredCapabilities class
-        DesiredCapabilities cap = new DesiredCapabilities();
-        
-        //Set android platformName desired capability
-        cap.setCapability("platformName", "ANDROID");
-        
-        //Set android browserName desired capability
-        cap.setCapability("browserName", "chrome");
-        
-        //Set android version desired capability
-        cap.setCapability("version", "4.1.2");
-                    
-        //Set android device name desired capability
-        cap.setCapability("deviceName", "FA3BDS901049");
-        
-        try {
-            setDriver(new OrasiDriver(cap, new URL("http://192.168.227.2:4444/wd/hub")));
-            //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        } catch (MalformedURLException e) {
-            System.out.println("The app failed to open");
-        }        
-    }
+    
 
 }
