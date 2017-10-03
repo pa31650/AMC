@@ -15,9 +15,20 @@ public class TicketPurchaseFlowNegative extends TestEnvironment {
     // **************
     @DataProvider(name = "Ticket Purchase Flow (negative)", parallel = true)
     public Object[][] scenarios() {
-        //return new JsonDataProvider().getData("/json/ticketPurchaseFlow-negative.json");
-        return new ExcelDataProvider("/excelsheets/ticketPurchaseFlow-negative.xlsx", "Data").getTestData();
+        return new JsonDataProvider().getData("/json/ticketPurchaseFlow-negative.json");
+        
     }
+    /*@DataProvider(name = "Ticket Purchase Flow (negative)")
+    public Object[][] scenarios() {
+        try {
+            Object[][] excelData = new ExcelDataProvider("/excelsheets/ticketPurchaseFlow-negative.xlsx","Data").getTestData();
+            return excelData;
+        }
+        catch (RuntimeException e){
+            TestReporter.assertTrue(false, "An error occured with accessing the data provider: " + e);
+        }
+        return new Object[][] {{}};
+    }*/
 
     @BeforeMethod
     @Parameters({ "runLocation", "browserUnderTest", "browserVersion", "operatingSystem", "environment", "mobileOSVersion", "deviceID" })

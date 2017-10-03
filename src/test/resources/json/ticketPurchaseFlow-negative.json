@@ -1,0 +1,33 @@
+{
+  "testData": [
+    {
+      "iterationName": "Ticket Purchase Bad CC data",
+      "data": [
+        {
+        	"name": "movieTitle",
+        	"value": "American Assassin"
+        },
+        {
+        	"name": "theatre",
+        	"value": "AMC Phipps Plaza 14"
+        },
+        {
+        	"name": "date",
+        	"value": "Tomorrow"
+        },
+        {
+        	"name": "tickets",
+        	"value": "1"
+        },
+        {
+        	"name": "creditCard",
+        	"value": "VISA"
+        },
+        {
+        	"name": "selectMeal",
+        	"value": "Yes"
+        }
+      ]
+    }
+  ]
+}
