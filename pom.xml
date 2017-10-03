@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.orasi</groupId>
-	<artifactId>Selenium-Java-Core</artifactId>
-	<version>1.1.1</version>
+	<artifactId>Chameleon</artifactId>
+	<version>1.1.2</version>
 	<packaging>jar</packaging>
 	<properties>
 		<aspectj.version>1.8.10</aspectj.version>    
