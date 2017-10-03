@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Ticket Purchase Flow-negative" parallel="tests" thread-count="5" >
+
+	<listeners>
+		<listener class-name="com.orasi.utils.listeners.TestListener" />
+	</listeners>
+	
+	<parameter name="browserVersion" value="" />
+	
+	<test name="Main Ticket Purchase Flow-HTC_One_01" >
+		<parameter name="operatingSystem" value="android" />
+		<parameter name="mobileOSVersion" value="4.1.2" />
+		<parameter name="deviceID" value="FA3BDS901049" />
+		<parameter name="environment" value="prod" />
+		<parameter name="runLocation" value="mobile" />
+		<parameter name="browserUnderTest" value="chrome" />
+		<classes>
+			<class name="com.amc.TicketPurchaseFlowNegative" />
+		</classes>
+	</test> 
+	
+</suite> <!-- Suite -->

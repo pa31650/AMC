@@ -20,7 +20,7 @@ public class Constants {
     public final static String SCREENSHOT_FOLDER = CURRENT_DIR + "selenium-reports" + DIR_SEPARATOR + "html" + DIR_SEPARATOR + "screenshots";
     public final static int DEFAULT_GLOBAL_DRIVER_TIMEOUT = 10;
     public final static int ELEMENT_TIMEOUT = 3;
-    public final static int PAGE_TIMEOUT = 10;
+    public final static int PAGE_TIMEOUT = 20;
     public final static int MILLISECONDS_TO_POLL_FOR_ELEMENT = 250;
     public final static int MOBILE_ELEMENT_TIMEOUT = 10;
     public final static int MOBILE_PAGE_TIMEOUT = 20;
