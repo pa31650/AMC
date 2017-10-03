@@ -15,7 +15,7 @@ public class TicketPurchaseFlowNegative extends TestEnvironment {
     // **************
     @DataProvider(name = "Ticket Purchase Flow (negative)", parallel = true)
     public Object[][] scenarios() {
-        return new JsonDataProvider().getData("/json/ticketPurchaseFlow-negative.json");
+        return new JsonDataProvider().getData("json/ticketPurchaseFlow-negative.json");
         
     }
     /*@DataProvider(name = "Ticket Purchase Flow (negative)")
