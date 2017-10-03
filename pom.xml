@@ -105,6 +105,7 @@
 					</argLine-->
 					<suiteXmlFiles>
 						<suiteXmlFile>${testNGSourceDirectory}/TicketPurchaseFlow-negative.xml</suiteXmlFile> 
+						<suiteXmlFile>${testNGSourceDirectory}/AMC-api-Demo.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<systemPropertyVariables>
 						<jenkinsOperatingSystem>${operatingSystem}</jenkinsOperatingSystem>
