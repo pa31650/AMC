@@ -9,13 +9,13 @@
 	
 	<parameter name="browserVersion" value="" />
 	
-	<test name="Main Ticket Purchase Flow-Desktop Chrome" >
+	<test name="Main Ticket Purchase Flow-Desktop Safari" >
 		<parameter name="operatingSystem" value="WINDOWS" />
 		<parameter name="mobileOSVersion" value="" />
-		<parameter name="deviceID" value="" />
+		<parameter name="deviceID" value="iPhone 6" />
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="grid" />
-		<parameter name="browserUnderTest" value="chrome" />
+		<parameter name="browserUnderTest" value="chrome_emulator" />
 		<classes>
 			<class name="com.amc.TicketPurchaseFlowNegative" />
 		</classes>

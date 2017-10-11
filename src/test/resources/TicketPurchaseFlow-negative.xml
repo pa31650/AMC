@@ -9,6 +9,18 @@
 	
 	<parameter name="browserVersion" value="" />
 
+ 	<test name="Main Ticket Purchase Flow-CE-iPhone 6" >
+		<parameter name="operatingSystem" value="WINDOWS" />
+		<parameter name="mobileOSVersion" value="" />
+		<parameter name="deviceID" value="iPhone 6" />
+		<parameter name="environment" value="prod" />
+		<parameter name="runLocation" value="grid" />
+		<parameter name="browserUnderTest" value="chrome_emulator" />
+		<classes>
+			<class name="com.amc.TicketPurchaseFlowNegative" />
+		</classes>
+	</test> 
+	
  	<test name="Main Ticket Purchase Flow-GALAXY_S4_02" >
 		<parameter name="operatingSystem" value="android" />
 		<parameter name="mobileOSVersion" value="4.2.2" />
@@ -52,6 +64,18 @@
 		<parameter name="environment" value="prod" />
 		<parameter name="runLocation" value="grid" />
 		<parameter name="browserUnderTest" value="firefox" />
+		<classes>
+			<class name="com.amc.TicketPurchaseFlowNegative" />
+		</classes>
+	</test>
+	
+	<test name="Main Ticket Purchase Flow-Desktop Safari" >
+		<parameter name="operatingSystem" value="EL CAPITAN" />
+		<parameter name="mobileOSVersion" value="" />
+		<parameter name="deviceID" value="" />
+		<parameter name="environment" value="sauce" />
+		<parameter name="runLocation" value="grid" />
+		<parameter name="browserUnderTest" value="safari" />
 		<classes>
 			<class name="com.amc.TicketPurchaseFlowNegative" />
 		</classes>

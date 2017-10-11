@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariOptions;
@@ -462,7 +463,8 @@ public class TestEnvironment {
             updates.put("passed", true);
         }
         SauceREST client = new SauceREST(authentication.getUsername(), authentication.getAccessKey());
-        client.updateJobInfo(driver.getSessionId(), updates);
+        client.updateJobInfo(getDriver().getSessionId(), updates);
+        
     }
 
     /**
@@ -602,6 +604,18 @@ public class TestEnvironment {
         DesiredCapabilities caps = new DesiredCapabilities();
         // Browser
         caps.setCapability(CapabilityType.BROWSER_NAME, browserUnderTest);
+        if (browserUnderTest.equalsIgnoreCase("chrome_emulator")){
+        	caps.setCapability(CapabilityType.BROWSER_NAME, "chrome");
+        	Map<String, String> mobileEmulation = new HashMap<String, String>();
+        	mobileEmulation.put("deviceName", "Nexus 5");
+
+        	Map<String, Object> chromeOptions = new HashMap<String, Object>();
+        	chromeOptions.put("mobileEmulation", mobileEmulation);
+        	//DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        	caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        	//WebDriver driver = new ChromeDriver(capabilities);
+        }
+        
         // Browser version
         if (!browserVersion.isEmpty()) {
             caps.setCapability(CapabilityType.VERSION, browserVersion);
@@ -640,7 +654,7 @@ public class TestEnvironment {
         try {
             setDriver(new OrasiDriver(caps, new URL(getRemoteURL())));
         } catch (MalformedURLException e) {
-            throw new AutomationException("Problem with creatting the remote web driver: ", e);
+            throw new AutomationException("Problem with creating the remote web driver: ", e);
 
         }
 
