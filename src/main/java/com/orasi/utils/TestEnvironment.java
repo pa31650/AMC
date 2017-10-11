@@ -732,7 +732,8 @@ public class TestEnvironment {
      */
     private Platform getGridPlatformByOS(String os) {
         switch (os.toLowerCase()) {
-            case "android":
+        	
+        	case "android":
                 return Platform.ANDROID;
             case "windows":
                 return Platform.WINDOWS;

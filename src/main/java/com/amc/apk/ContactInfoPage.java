@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.orasi.utils.dataHelpers.personFactory.Email;
+
 public class ContactInfoPage {
 
     private AndroidDriver<MobileElement> driver;
@@ -26,7 +28,11 @@ public class ContactInfoPage {
     public void EnterEmail() {
         WebDriverWait element = new WebDriverWait(driver, 10);
         element.until(ExpectedConditions.visibilityOf(page_header));
-        edit_email.sendKeys("gmail@gmail.com");
+        Email email = new Email();
+    	
+    	String strEmailAddress = email.getEmail();
+    	
+        edit_email.sendKeys(strEmailAddress);
         save_btn.click();
     }
 }
