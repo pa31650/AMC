@@ -11,6 +11,7 @@ public class Theatre {
 	@JsonIgnoreProperties(ignoreUnknown = true)
     private Integer id;
     private String longName;
+    private String secondaryLongName;
     private String name;
     private String showtimesPhoneNumber;
     private String guestServicesPhoneNumber;
@@ -236,4 +237,11 @@ public class Theatre {
         this.outageDescription = outageDescription;
     }
 
+    public String getSecondaryLongName() {
+        return secondaryLongName;
+    }
+
+    public void setSecondaryLongName(String secondaryLongName) {
+        this.secondaryLongName = secondaryLongName;
+    }
 }

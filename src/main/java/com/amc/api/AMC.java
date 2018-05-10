@@ -8,8 +8,9 @@ import com.amc.api.v2.theatres.showtimes.TheatreShowtimes;
 import com.amc.api.v2.common.objects.TicketPrice;
 
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class AMC {
+
     public final static String URL = "https://api.amctheatres.com/";
     public final static String URLv1 = URL + "v1/";
     public final static String URLv2 = URL + "v2/";

@@ -1,267 +1,276 @@
 package com.amc.api.v2.theatres.showtimes.objects;
 
-import java.util.List;
 import com.amc.api.v2.common.objects.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Showtime {
 
-private Integer id;
-private Integer internalReleaseNumber;
-private Integer performanceNumber;
-private Integer movieId;
-private String movieName;
-private String sortableMovieName;
-private String genre;
-private String showDateTimeUtc;
-private String showDateTimeLocal;
-private String sellUntilDateTimeUtc;
-private Boolean isSoldOut;
-private Boolean isAlmostSoldOut;
-private Boolean isCanceled;
-private String utcOffset;
-private Integer theatreId;
-private Integer auditorium;
-private Integer runTime;
-private String mpaaRating;
-private String premiumFormat;
-private String purchaseUrl;
-private String mobilePurchaseUrl;
-private String movieUrl;
-private Integer wwmReleaseNumber;
-private String lastUpdatedDateUtc;
-private List<Attribute> attributes = null;
-private List<TicketPrice> ticketPrices = null;
-private Media media;
-private Languages languages;
-@JsonProperty("_links")
-private Links links;
 
-public Integer getId() {
-return id;
-}
+    private Integer id;
+    private Integer internalReleaseNumber;
+    private Integer performanceNumber;
+    private Integer movieId;
+    private String movieName;
+    private String sortableMovieName;
+    private String genre;
+    private String showDateTimeUtc;
+    private String showDateTimeLocal;
+    private String sellUntilDateTimeUtc;
+    private Boolean isSoldOut;
+    private Boolean isAlmostSoldOut;
+    private Boolean isCanceled;
+    private String utcOffset;
+    private Integer theatreId;
+    private Integer auditorium;
+    private Integer runTime;
+    private String mpaaRating;
+    private String premiumFormat;
+    private String purchaseUrl;
+    private String mobilePurchaseUrl;
+    private String movieUrl;
+    private Integer wwmReleaseNumber;
+    private String lastUpdatedDateUtc;
+    private List<Attribute> attributes = null;
+    private List<TicketPrice> ticketPrices = null;
+    private Media media;
+    private Languages languages;
+    @JsonProperty("_links")
+    private Links links;
+    private String layoutId;
 
-public void setId(Integer id) {
-this.id = id;
-}
+    public Integer getId() {
+        return id;
+    }
 
-public Integer getInternalReleaseNumber() {
-return internalReleaseNumber;
-}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-public void setInternalReleaseNumber(Integer internalReleaseNumber) {
-this.internalReleaseNumber = internalReleaseNumber;
-}
+    public Integer getInternalReleaseNumber() {
+        return internalReleaseNumber;
+    }
 
-public Integer getPerformanceNumber() {
-return performanceNumber;
-}
+    public void setInternalReleaseNumber(Integer internalReleaseNumber) {
+        this.internalReleaseNumber = internalReleaseNumber;
+    }
 
-public void setPerformanceNumber(Integer performanceNumber) {
-this.performanceNumber = performanceNumber;
-}
+    public Integer getPerformanceNumber() {
+        return performanceNumber;
+    }
 
-public Integer getMovieId() {
-return movieId;
-}
+    public void setPerformanceNumber(Integer performanceNumber) {
+        this.performanceNumber = performanceNumber;
+    }
 
-public void setMovieId(Integer movieId) {
-this.movieId = movieId;
-}
+    public Integer getMovieId() {
+        return movieId;
+    }
 
-public String getMovieName() {
-return movieName;
-}
+    public void setMovieId(Integer movieId) {
+        this.movieId = movieId;
+    }
 
-public void setMovieName(String movieName) {
-this.movieName = movieName;
-}
+    public String getMovieName() {
+        return movieName;
+    }
 
-public String getSortableMovieName() {
-return sortableMovieName;
-}
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
-public void setSortableMovieName(String sortableMovieName) {
-this.sortableMovieName = sortableMovieName;
-}
+    public String getSortableMovieName() {
+        return sortableMovieName;
+    }
 
-public String getGenre() {
-return genre;
-}
+    public void setSortableMovieName(String sortableMovieName) {
+        this.sortableMovieName = sortableMovieName;
+    }
 
-public void setGenre(String genre) {
-this.genre = genre;
-}
+    public String getGenre() {
+        return genre;
+    }
 
-public String getShowDateTimeUtc() {
-return showDateTimeUtc;
-}
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
-public void setShowDateTimeUtc(String showDateTimeUtc) {
-this.showDateTimeUtc = showDateTimeUtc;
-}
+    public String getShowDateTimeUtc() {
+        return showDateTimeUtc;
+    }
 
-public String getShowDateTimeLocal() {
-return showDateTimeLocal;
-}
+    public void setShowDateTimeUtc(String showDateTimeUtc) {
+        this.showDateTimeUtc = showDateTimeUtc;
+    }
 
-public void setShowDateTimeLocal(String showDateTimeLocal) {
-this.showDateTimeLocal = showDateTimeLocal;
-}
+    public String getShowDateTimeLocal() {
+        return showDateTimeLocal;
+    }
 
-public String getSellUntilDateTimeUtc() {
-return sellUntilDateTimeUtc;
-}
+    public void setShowDateTimeLocal(String showDateTimeLocal) {
+        this.showDateTimeLocal = showDateTimeLocal;
+    }
 
-public void setSellUntilDateTimeUtc(String sellUntilDateTimeUtc) {
-this.sellUntilDateTimeUtc = sellUntilDateTimeUtc;
-}
+    public String getSellUntilDateTimeUtc() {
+        return sellUntilDateTimeUtc;
+    }
 
-public Boolean getIsSoldOut() {
-return isSoldOut;
-}
+    public void setSellUntilDateTimeUtc(String sellUntilDateTimeUtc) {
+        this.sellUntilDateTimeUtc = sellUntilDateTimeUtc;
+    }
 
-public void setIsSoldOut(Boolean isSoldOut) {
-this.isSoldOut = isSoldOut;
-}
+    public Boolean getIsSoldOut() {
+        return isSoldOut;
+    }
 
-public Boolean getIsAlmostSoldOut() {
-return isAlmostSoldOut;
-}
+    public void setIsSoldOut(Boolean isSoldOut) {
+        this.isSoldOut = isSoldOut;
+    }
 
-public void setIsAlmostSoldOut(Boolean isAlmostSoldOut) {
-this.isAlmostSoldOut = isAlmostSoldOut;
-}
+    public Boolean getIsAlmostSoldOut() {
+        return isAlmostSoldOut;
+    }
 
-public Boolean getIsCanceled() {
-return isCanceled;
-}
+    public void setIsAlmostSoldOut(Boolean isAlmostSoldOut) {
+        this.isAlmostSoldOut = isAlmostSoldOut;
+    }
 
-public void setIsCanceled(Boolean isCanceled) {
-this.isCanceled = isCanceled;
-}
+    public Boolean getIsCanceled() {
+        return isCanceled;
+    }
 
-public String getUtcOffset() {
-return utcOffset;
-}
+    public void setIsCanceled(Boolean isCanceled) {
+        this.isCanceled = isCanceled;
+    }
 
-public void setUtcOffset(String utcOffset) {
-this.utcOffset = utcOffset;
-}
+    public String getUtcOffset() {
+        return utcOffset;
+    }
 
-public Integer getTheatreId() {
-return theatreId;
-}
+    public void setUtcOffset(String utcOffset) {
+        this.utcOffset = utcOffset;
+    }
 
-public void setTheatreId(Integer theatreId) {
-this.theatreId = theatreId;
-}
+    public Integer getTheatreId() {
+        return theatreId;
+    }
 
-public Integer getAuditorium() {
-return auditorium;
-}
+    public void setTheatreId(Integer theatreId) {
+        this.theatreId = theatreId;
+    }
 
-public void setAuditorium(Integer auditorium) {
-this.auditorium = auditorium;
-}
+    public Integer getAuditorium() {
+        return auditorium;
+    }
 
-public Integer getRunTime() {
-return runTime;
-}
+    public void setAuditorium(Integer auditorium) {
+        this.auditorium = auditorium;
+    }
 
-public void setRunTime(Integer runTime) {
-this.runTime = runTime;
-}
+    public Integer getRunTime() {
+        return runTime;
+    }
 
-public String getMpaaRating() {
-return mpaaRating;
-}
+    public void setRunTime(Integer runTime) {
+        this.runTime = runTime;
+    }
 
-public void setMpaaRating(String mpaaRating) {
-this.mpaaRating = mpaaRating;
-}
+    public String getMpaaRating() {
+        return mpaaRating;
+    }
 
-public String getPremiumFormat() {
-return premiumFormat;
-}
+    public void setMpaaRating(String mpaaRating) {
+        this.mpaaRating = mpaaRating;
+    }
 
-public void setPremiumFormat(String premiumFormat) {
-this.premiumFormat = premiumFormat;
-}
+    public String getPremiumFormat() {
+        return premiumFormat;
+    }
 
-public String getPurchaseUrl() {
-return purchaseUrl;
-}
+    public void setPremiumFormat(String premiumFormat) {
+        this.premiumFormat = premiumFormat;
+    }
 
-public void setPurchaseUrl(String purchaseUrl) {
-this.purchaseUrl = purchaseUrl;
-}
+    public String getPurchaseUrl() {
+        return purchaseUrl;
+    }
 
-public String getMobilePurchaseUrl() {
-return mobilePurchaseUrl;
-}
+    public void setPurchaseUrl(String purchaseUrl) {
+        this.purchaseUrl = purchaseUrl;
+    }
 
-public void setMobilePurchaseUrl(String mobilePurchaseUrl) {
-this.mobilePurchaseUrl = mobilePurchaseUrl;
-}
+    public String getMobilePurchaseUrl() {
+        return mobilePurchaseUrl;
+    }
 
-public String getMovieUrl() {
-return movieUrl;
-}
+    public void setMobilePurchaseUrl(String mobilePurchaseUrl) {
+        this.mobilePurchaseUrl = mobilePurchaseUrl;
+    }
 
-public void setMovieUrl(String movieUrl) {
-this.movieUrl = movieUrl;
-}
+    public String getMovieUrl() {
+        return movieUrl;
+    }
 
-public Integer getWwmReleaseNumber() {
-return wwmReleaseNumber;
-}
+    public void setMovieUrl(String movieUrl) {
+        this.movieUrl = movieUrl;
+    }
 
-public void setWwmReleaseNumber(Integer wwmReleaseNumber) {
-this.wwmReleaseNumber = wwmReleaseNumber;
-}
+    public Integer getWwmReleaseNumber() {
+        return wwmReleaseNumber;
+    }
 
-public String getLastUpdatedDateUtc() {
-return lastUpdatedDateUtc;
-}
+    public void setWwmReleaseNumber(Integer wwmReleaseNumber) {
+        this.wwmReleaseNumber = wwmReleaseNumber;
+    }
 
-public void setLastUpdatedDateUtc(String lastUpdatedDateUtc) {
-this.lastUpdatedDateUtc = lastUpdatedDateUtc;
-}
+    public String getLastUpdatedDateUtc() {
+        return lastUpdatedDateUtc;
+    }
 
-public List<Attribute> getAttributes() {
-return attributes;
-}
+    public void setLastUpdatedDateUtc(String lastUpdatedDateUtc) {
+        this.lastUpdatedDateUtc = lastUpdatedDateUtc;
+    }
 
-public void setAttributes(List<Attribute> attributes) {
-this.attributes = attributes;
-}
+    public List<Attribute> getAttributes() {
+        return attributes;
+    }
 
-public List<TicketPrice> getTicketPrices() {
-return ticketPrices;
-}
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
+    }
 
-public void setTicketPrices(List<TicketPrice> ticketPrices) {
-this.ticketPrices = ticketPrices;
-}
+    public List<TicketPrice> getTicketPrices() {
+        return ticketPrices;
+    }
 
-public Media getMedia() {
-return media;
-}
+    public void setTicketPrices(List<TicketPrice> ticketPrices) {
+        this.ticketPrices = ticketPrices;
+    }
 
-public void setMedia(Media media) {
-this.media = media;
-}
+    public Media getMedia() {
+        return media;
+    }
 
-public Languages getLanguages() {
-return languages;
-}
+    public void setMedia(Media media) {
+        this.media = media;
+    }
 
-public void setLanguages(Languages languages) {
-this.languages = languages;
-}
+    public Languages getLanguages() {
+        return languages;
+    }
 
+    public void setLanguages(Languages languages) {
+        this.languages = languages;
+    }
 
+    public String getLayoutId() {
+        return layoutId;
+    }
+
+    public void setLayoutId(String layoutId) {
+        this.layoutId = layoutId;
+    }
 }
 

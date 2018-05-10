@@ -1,10 +1,12 @@
 package com.amc.api.v2.theatres.objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.amc.api.v2.common.objects.*;
 
 public class TheatreResponse {
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private Integer pageSize;
     private Integer pageNumber;
     private Integer count;
